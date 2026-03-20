@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sweta Swain</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+</head>
+<body>
+
+  <!-- ── Email Gate ─────────────────────────────────────────────────── -->
+  <div id="gate">
+    <div class="gate-inner">
+
+      <div class="gate-photo-wrapper">
+        <img
+          src="photo.jpg"
+          alt="Sweta Swain"
+          class="gate-photo"
+          onerror="this.style.display='none'; document.getElementById('gate-initials').style.display='flex';"
+        />
+        <div class="gate-initials" id="gate-initials">SS</div>
+      </div>
+
+      <h1 class="gate-name">Sweta Swain</h1>
+      <p class="gate-tagline">Product Engineer &middot; ADAS specialist &middot; Building what matters.</p>
+
+      <div class="gate-form">
+        <div class="gate-input-wrap">
+          <input
+            type="email"
+            id="gate-email"
+            placeholder="Enter your email address"
+            autocomplete="email"
+          />
+          <p class="gate-error" id="gate-error"></p>
+        </div>
+        <button id="gate-btn" class="gate-btn">View My Portfolio</button>
+        <p class="gate-trust">Your email is safe. No spam, ever.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ── Hero ────────────────────────────────────────────────────────── -->
+    <section class="hero">
+      <div class="hero-inner">
+
+        <div class="photo-wrapper">
+          <img
+            src="photo.jpg"
+            alt="Sweta Swain"
+            class="photo"
+            onerror="this.style.display='none'; document.getElementById('initials').style.display='flex';"
+          />
+          <div class="initials" id="initials">SS</div>
+        </div>
+
+        <div class="hero-text">
+          <p class="location">Frankfurt, Germany</p>
+          <h1 class="name">Sweta Swain</h1>
+          <p class="tagline">Building products at the intersection of engineering and empathy.</p>
+          <p class="intro">
+            Technical background in automotive ADAS. Now focused on solving the right problems and building impactful products, while continuously experimenting with AI to sharpen my product thinking.
+          </p>
+          <div class="tags">
+            <span class="tag">ADAS</span>
+            <span class="tag">AI Tools</span>
+            <span class="tag">Product Engineering</span>
+          </div>
+          <div class="btn-row">
+            <a href="#" class="btn btn-primary">Resume</a>
+            <a href="https://www.linkedin.com/in/sweta-swain-611a3a73/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.447 20.452H17.01v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.588V9h3.307v1.561h.046c.461-.873 1.588-1.794 3.268-1.794 3.495 0 4.141 2.301 4.141 5.293v6.392zM5.337 7.433a1.917 1.917 0 1 1 0-3.834 1.917 1.917 0 0 1 0 3.834zm1.658 13.019H3.678V9h3.317v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Sections ─────────────────────────────────────────────────────── -->
+    <div class="sections-container">
+
+    <!-- ── Case Studies ──────────────────────────────────────────────── -->
+    <section class="section fade-section" id="projects">
+      <h2 class="section-title">Case Studies</h2>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <h3 class="project-title">Micro-PM Residency Program</h3>
+          <p class="project-desc">Designed and shipped a platform connecting aspiring PMs with real startup product problems. Participants work in intentional teams over one weekend — conducting user interviews, synthesising insights, and pitching recommendations directly to the startup's PM. Deliverables include a portfolio-ready deck and written feedback from a practising PM.</p>
+          <div class="project-tags">
+            <span class="tag">Product Design</span>
+            <span class="tag">User Research</span>
+            <span class="tag">Vercel</span>
+            <span class="tag">Supabase</span>
+          </div>
+          <a href="https://pmresidencyprogram.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">View live site →</a>
+        </div>
+
+        <div class="project-card">
+          <h3 class="project-title">Hi-Drive HMI — Automated Lane Merging</h3>
+          <p class="project-desc">Led requirement analysis and HMI design for Honda R&amp;D's Hi-Drive automated driving concept. Ran three rounds of user research (internal + external surveys), processed multi-sensor data via RTMaps, and built Unity simulations to validate scenarios on European roads.</p>
+          <div class="project-tags">
+            <span class="tag">HMI Design</span>
+            <span class="tag">User Research</span>
+            <span class="tag">C#</span>
+            <span class="tag">Unity</span>
+            <span class="tag">ADAS</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Skills ────────────────────────────────────────────────────── -->
+    <section class="section fade-section" id="skills">
+      <h2 class="section-title">Skills &amp; Tools</h2>
+      <div class="skills-grid">
+
+        <div class="skill-group">
+          <p class="skill-group-label">Automotive &amp; ADAS</p>
+          <div class="skill-tags">
+            <span class="tag">C++</span>
+            <span class="tag">C</span>
+            <span class="tag">C#</span>
+            <span class="tag">ADAS</span>
+            <span class="tag">CAN</span>
+            <span class="tag">RTMaps</span>
+            <span class="tag">dSpace</span>
+            <span class="tag">Automated Driving</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <p class="skill-group-label">Software &amp; Full Stack</p>
+          <div class="skill-tags">
+            <span class="tag">Python</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">Vercel</span>
+            <span class="tag">HTML</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Unity</span>
+            <span class="tag">Git</span>
+            <span class="tag">Google Test</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <p class="skill-group-label">Product &amp; Methods</p>
+          <div class="skill-tags">
+            <span class="tag">HMI Design</span>
+            <span class="tag">User Research</span>
+            <span class="tag">Requirement Analysis</span>
+            <span class="tag">Scrum Master</span>
+            <span class="tag">Agile</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <p class="skill-group-label">AI &amp; Vibe Coding</p>
+          <div class="skill-tags">
+            <span class="tag">Claude Code</span>
+            <span class="tag">Lovable</span>
+            <span class="tag">Anigravity</span>
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag">AI-assisted Development</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── My Story ──────────────────────────────────────────────────── -->
+    <section class="section fade-section" id="story">
+      <h2 class="section-title">My Story</h2>
+      <div class="story-card">
+        <p class="story-quote">"I didn't set out to become a product manager. The path found me through curiosity."</p>
+        <div class="story-body">
+          <p>My career began in ADAS — building, testing, and shipping features for safety-critical automotive systems. Working at that level of consequence gave me something most product people don't start with: a visceral understanding of how software behaves when real users depend on it, in conditions where failure isn't an option.</p>
+          <p>But the more I shipped, the more I found myself drawn upstream. Why were we building this feature? What problem were we <em>actually</em> solving? Were we solving the right one? I started stepping into requirement discussions, trade-off conversations, and prioritization calls — especially when user safety and experience were at stake. I wasn't just executing anymore. I was questioning.</p>
+          <p>I discovered I was most engaged when bringing structure to ambiguous problems, aligning stakeholders around a shared direction, and ensuring the thing we were building was worth building. That's product management — and it's where my technical depth, user empathy, and instinct for decision-making finally found a home.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Work Experience ───────────────────────────────────────────── -->
+    <section class="section fade-section" id="experience">
+      <h2 class="section-title">Work Experience</h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-date">07/2023 — Present</div>
+          <div class="timeline-content">
+            <p class="timeline-role">Automotive Product Engineer</p>
+            <p class="timeline-org">FERCHAU (Honda R&amp;D · Offenbach) · Frankfurt, Germany</p>
+            <p class="timeline-desc">Leading requirement analysis for the Hi-Drive automated driving concept. Designed HMI through multi-round user surveys, processed multi-sensor data via RTMaps/UDP, and built Unity simulations in C# to drive scenario validation.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">11/2022 — 03/2023</div>
+          <div class="timeline-content">
+            <p class="timeline-role">Software Developer</p>
+            <p class="timeline-org">Luxoft (CARIAD client) · Munich, Germany</p>
+            <p class="timeline-desc">Feature enhancements and unit tests for middleware applications in in-vehicle infotainment systems, using C++, C, and the Google Test Framework.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">04/2021 — 10/2022</div>
+          <div class="timeline-content">
+            <p class="timeline-role">Software Developer (Werkstudent)</p>
+            <p class="timeline-org">Robert Bosch GmbH · Leonberg, Germany</p>
+            <p class="timeline-desc">Full-stack development of a web platform visualising AEB test scenario results. Built a FastAPI + SQL backend and a JavaScript/HTML frontend, adding features and maintaining performance throughout.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">09/2015 — 10/2020</div>
+          <div class="timeline-content">
+            <p class="timeline-role">Senior Software Engineer</p>
+            <p class="timeline-org">Robert Bosch Engineering &amp; Business Solutions · India</p>
+            <p class="timeline-desc">Delivered across three programmes: AEB safety systems (Honda, JLR), Location Input navigation (Renault, NDS standard), and HMINavServer middleware (GM, NISSAN, JAC, SUZUKI). Acted as Scrum Master, led knowledge transfer, and owned end-to-end feature delivery from requirement to unit test.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">09/2013 — 09/2015</div>
+          <div class="timeline-content">
+            <p class="timeline-role">Associate Software Engineer</p>
+            <p class="timeline-org">Wipro Technologies · India</p>
+            <p class="timeline-desc">Developed and enhanced the test environment for BMW navigation features. Worked on route calculation, traffic information APIs, bug fixing, and client interaction sessions.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Education ─────────────────────────────────────────────────── -->
+    <section class="section fade-section" id="education">
+      <h2 class="section-title">Education</h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-date">11/2020 — 10/2023</div>
+          <div class="timeline-content">
+            <p class="timeline-role">M.Sc. in Information Technology (Informatik)</p>
+            <p class="timeline-org">Frankfurt University of Applied Sciences · Frankfurt, Germany</p>
+            <p class="timeline-desc">Focus on Embedded Systems and Networking. Coursework included Image Processing, Machine Learning, Cloud Computing, Software Engineering, Networking, Embedded Systems, and IT Security.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">09/2009 — 06/2013</div>
+          <div class="timeline-content">
+            <p class="timeline-role">B.E. in Electrical and Electronics Engineering</p>
+            <p class="timeline-org">Silicon Institute of Technology · Bhubaneswar, India</p>
+            <p class="timeline-desc">Focus on Embedded System development.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Hobbies ────────────────────────────────────────────────────── -->
+    <section class="section fade-section" id="hobbies">
+      <h2 class="section-title">Beyond Work</h2>
+      <div class="hobbies-grid">
+        <div class="hobby-item"><span class="hobby-icon">🤖</span><span class="hobby-label">Tinkering with AI</span></div>
+        <div class="hobby-item"><span class="hobby-icon">📚</span><span class="hobby-label">Reading</span></div>
+        <div class="hobby-item"><span class="hobby-icon">✈️</span><span class="hobby-label">Travelling</span></div>
+        <div class="hobby-item"><span class="hobby-icon">🎨</span><span class="hobby-label">Design Exploration</span></div>
+        <div class="hobby-item"><span class="hobby-icon">🖌️</span><span class="hobby-label">Painting</span></div>
+        <div class="hobby-item"><span class="hobby-icon">🥾</span><span class="hobby-label">Hiking</span></div>
+      </div>
+    </section>
+
+    <!-- ── Contact ────────────────────────────────────────────────────── -->
+    <section class="section fade-section" id="contact">
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="contact-card">
+        <p class="contact-tagline">I'm always open to interesting conversations, collaborations, or just a good chat about product, engineering, or AI.</p>
+        <p class="contact-email">shwetaswain13november@gmail.com</p>
+        <div class="contact-links">
+          <a href="mailto:shwetaswain13november@gmail.com" class="btn btn-primary">Send an Email</a>
+          <a href="https://www.linkedin.com/in/sweta-swain-611a3a73/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.447 20.452H17.01v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.588V9h3.307v1.561h.046c.461-.873 1.588-1.794 3.268-1.794 3.495 0 4.141 2.301 4.141 5.293v6.392zM5.337 7.433a1.917 1.917 0 1 1 0-3.834 1.917 1.917 0 0 1 0 3.834zm1.658 13.019H3.678V9h3.317v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+
+    </div><!-- /sections-container -->
+
+  </main>
+
+  <footer>
+    <p>Made with care &amp; curiosity &mdash; Sweta Swain</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+
+</body>
+</html>
