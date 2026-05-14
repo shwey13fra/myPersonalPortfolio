@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Micro-PM Residency — Sweta Swain</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="cs-page">
+
+  <main>
+
+    <!-- ── Sticky back nav ─────────────────────────────────────────── -->
+    <header class="cs-header">
+      <a href="index.html" class="cs-back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+        </svg>
+        Sweta Swain
+      </a>
+    </header>
+
+    <!-- ── Case study hero ─────────────────────────────────────────── -->
+    <div class="cs-hero">
+      <div class="cs-hero-inner">
+
+        <div class="cs-hero-meta">
+          <span class="cs-status-badge">Live on Vercel</span>
+          <span class="cs-year">2024</span>
+        </div>
+
+        <h1 class="cs-title">Micro-PM Residency Program</h1>
+        <p class="cs-problem-statement">How do aspiring PMs get real practice without a PM job?</p>
+
+        <div class="cs-hero-tags">
+          <span class="tag">Product Design</span>
+          <span class="tag">User Research</span>
+          <span class="tag">Ship-first</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Vercel</span>
+        </div>
+
+        <a href="https://pmresidencyprogram.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="margin-top: 8px;">
+          View live site →
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ── Body: sticky nav + content ─────────────────────────────── -->
+    <div class="cs-body">
+
+      <!-- Sticky section nav -->
+      <nav class="cs-sidenav" aria-label="Case study sections">
+        <a href="#context"     class="cs-nav-link active" data-section="context">Context</a>
+        <a href="#problem"     class="cs-nav-link"        data-section="problem">Problem</a>
+        <a href="#approach"    class="cs-nav-link"        data-section="approach">My Approach</a>
+        <a href="#decisions"   class="cs-nav-link"        data-section="decisions">Key Decisions</a>
+        <a href="#signals"     class="cs-nav-link"        data-section="signals">Early Signals</a>
+        <a href="#reflections" class="cs-nav-link"        data-section="reflections">Reflections</a>
+      </nav>
+
+      <!-- Main content -->
+      <div class="cs-content">
+
+        <!-- 1. Context -->
+        <section class="cs-section fade-section" id="context">
+          <h2 class="cs-section-heading">Context</h2>
+          <p>[YOUR TEXT HERE — What was the situation when you started this project? Who was the audience? What was the broader context that made this problem worth solving? What were your constraints — time, team size, tools, prior knowledge?]</p>
+          <p>[Example: I started this while preparing to transition into PM roles. I had been going through PM resources and noticed a consistent complaint: aspiring PMs had no way to practice the actual craft without already being a PM. Bootcamps were expensive. Mock interviews didn't cover execution. I wanted to build something that addressed this gap directly.]</p>
+        </section>
+
+        <!-- 2. Problem -->
+        <section class="cs-section fade-section" id="problem">
+          <h2 class="cs-section-heading">Problem</h2>
+          <p>[YOUR TEXT HERE — What was the specific problem you were solving? Who experienced it? Why did it matter? What made it a hard or interesting problem? What had been tried before and why it hadn't worked?]</p>
+          <p>[Example: Aspiring PMs need portfolio-worthy, real-world work experience — but the market catch-22 is that most PM roles require prior PM experience. Existing programs either charged thousands of euros, focused on theory over practice, or didn't involve actual startup problems with real feedback loops.]</p>
+        </section>
+
+        <!-- 3. My Approach (featured — most visual weight) -->
+        <section class="cs-section cs-section-approach fade-section" id="approach">
+          <h2 class="cs-section-heading">My Approach</h2>
+          <p>[YOUR TEXT HERE — This is the most important section. Walk through how you thought about the problem. What was your process? What frameworks or instincts guided you? How did you decide what to build first? What did you validate before committing to a direction?]</p>
+          <p>[YOUR TEXT HERE — Be specific. Not "I did user research" but "I ran 6 conversations with aspiring PMs in PM communities on Slack and Reddit. I was testing whether the barrier was confidence, access, or practice. It turned out to be practice — they had plenty of resources but no place to do the actual work in a real context."]</p>
+          <p>[YOUR TEXT HERE — Walk through your design decisions in this section. What did the MVP include, and more importantly, what did you deliberately leave out? Why?]</p>
+        </section>
+
+        <!-- 4. Key Decisions & Tradeoffs -->
+        <section class="cs-section fade-section" id="decisions">
+          <h2 class="cs-section-heading">Key Decisions &amp; Tradeoffs</h2>
+
+          <div class="decision-cards">
+
+            <div class="decision-card">
+              <p class="decision-label">Decision 1</p>
+              <p class="decision-choice">[YOUR TEXT — State the decision clearly. E.g. "Weekend sprint format over a multi-week cohort"]</p>
+              <p class="decision-why"><strong>Why:</strong> [YOUR TEXT — The reasoning and what tradeoff you accepted. E.g. "A weekend creates urgency and removes the dropout risk of longer programmes. The tradeoff is less iteration time — participants can't run multiple rounds of user interviews. I accepted that because the core skill I wanted to teach was prioritisation under constraint, not exhaustive research."]</p>
+            </div>
+
+            <div class="decision-card">
+              <p class="decision-label">Decision 2</p>
+              <p class="decision-choice">[YOUR TEXT — E.g. "Real startup problems only, no simulated cases"]</p>
+              <p class="decision-why"><strong>Why:</strong> [YOUR TEXT — E.g. "Simulated cases have a known answer. Real problems have ambiguity, missing context, and stakeholders with opinions — which is the actual PM environment. The tradeoff was that finding willing startups was harder and less predictable than creating our own cases."]</p>
+            </div>
+
+            <div class="decision-card">
+              <p class="decision-label">Decision 3</p>
+              <p class="decision-choice">[YOUR TEXT — E.g. "Build and ship the platform myself rather than using a no-code tool"]</p>
+              <p class="decision-why"><strong>Why:</strong> [YOUR TEXT — E.g. "I wanted to own the registration flow, email collection, and participant matching logic. No-code tools would have required workarounds for the cohort management features I had in mind. The tradeoff was time spent building infrastructure instead of programme design."]</p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 5. Early Signals -->
+        <section class="cs-section fade-section" id="signals">
+          <h2 class="cs-section-heading">Early Signals</h2>
+          <div class="cs-mvp-badge">MVP Stage</div>
+          <p class="cs-signals-caveat">This is early-stage work. What follows are observations from the first weeks after launch — not proven outcomes.</p>
+          <p>[YOUR TEXT HERE — What did you observe early on? Signups, organic sharing, feedback, unexpected user behavior? Anything that validated or surprised you? Keep this honest — "X people signed up in the first week" is a signal, not a result. "A participant shared the link with their PM community without being asked" is a signal. Stay grounded.]</p>
+          <p>[YOUR TEXT HERE — If there were things that didn't work as expected, mention those too. It shows intellectual honesty and PM maturity.]</p>
+        </section>
+
+        <!-- 6. Reflections -->
+        <section class="cs-section fade-section" id="reflections">
+          <h2 class="cs-section-heading">Reflections</h2>
+          <p>[YOUR TEXT HERE — What would you do differently if you started today? What surprised you about this process? What did building and shipping this teach you about product thinking that you couldn't have learned any other way?]</p>
+          <p>[YOUR TEXT HERE — This is also a good place to say what you'd do next. Not as a roadmap, but as honest thinking about what the next meaningful question is.]</p>
+        </section>
+
+      </div><!-- /cs-content -->
+    </div><!-- /cs-body -->
+
+  </main>
+
+  <footer>
+    <p>Made with care &amp; curiosity &mdash; Sweta Swain</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+
+</body>
+</html>

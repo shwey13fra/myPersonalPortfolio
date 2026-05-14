@@ -1,29 +1,12 @@
 // ─── Supabase config ─────────────────────────────────────────────────
-// These are PUBLIC keys — safe to commit. The anon key only has the
-// permissions granted by your RLS policies (INSERT on subscribers only).
+// Public keys — safe to commit. RLS restricts to INSERT on subscribers only.
 const SUPABASE_URL      = 'https://vgvhekneuykkxnpotsvr.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZndmhla25ldXlra3hucG90c3ZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwMjc5MjMsImV4cCI6MjA4OTYwMzkyM30.VwGi34BZskgayGcOzcHb1AOuxqn-JzXw6OOFmr45TQg';
-
-// ─── Constants ───────────────────────────────────────────────────────
-const STORAGE_KEY = 'sweta_portfolio_access';
+const STORAGE_KEY       = 'sweta_portfolio_access';
 
 // ─── Helpers ─────────────────────────────────────────────────────────
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function revealPortfolio() {
-  const gate   = document.getElementById('gate');
-  const main   = document.querySelector('main');
-  const footer = document.querySelector('footer');
-
-  gate.classList.add('hiding');
-
-  setTimeout(() => {
-    gate.style.display = 'none';
-    main.classList.add('revealed');
-    footer.classList.add('revealed');
-  }, 650);
 }
 
 // ─── Scroll fade (Intersection Observer) ─────────────────────────────
@@ -37,21 +20,20 @@ function initScrollFade() {
   document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
 }
 
-// ─── Gate logic ───────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
+// ─── Inline email CTA ─────────────────────────────────────────────────
+function initEmailCTA() {
+  const ctaEl  = document.getElementById('email-cta');
+  if (!ctaEl) return;
 
-  // Returning visitor — skip gate immediately
+  // Hide for returning visitors who already submitted
   if (localStorage.getItem(STORAGE_KEY)) {
-    document.getElementById('gate').style.display = 'none';
-    document.querySelector('main').classList.add('revealed');
-    document.querySelector('footer').classList.add('revealed');
-    initScrollFade();
+    ctaEl.classList.add('hidden');
     return;
   }
 
-  const btn     = document.getElementById('gate-btn');
-  const input   = document.getElementById('gate-email');
-  const errorEl = document.getElementById('gate-error');
+  const btn     = document.getElementById('cta-btn');
+  const input   = document.getElementById('cta-email');
+  const errorEl = document.getElementById('cta-error');
 
   function showError(msg) {
     errorEl.textContent = msg;
@@ -82,23 +64,47 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const { createClient } = supabase;
       const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
       const { error } = await db.from('subscribers').insert({ email });
-
       // 23505 = unique_violation (duplicate email) — treat as success
       if (error && error.code !== '23505') throw error;
-
     } catch (err) {
-      // Non-blocking: log the error but always let the visitor through
       console.warn('Supabase unavailable (non-blocking):', err);
     }
 
     localStorage.setItem(STORAGE_KEY, '1');
-    btn.textContent = 'Welcome! ✦';
+    btn.textContent = 'You\'re in ✦';
 
     setTimeout(() => {
-      revealPortfolio();
-      initScrollFade();
-    }, 520);
+      ctaEl.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      ctaEl.style.opacity    = '0';
+      ctaEl.style.transform  = 'translateY(-8px)';
+      setTimeout(() => ctaEl.classList.add('hidden'), 400);
+    }, 900);
   });
+}
+
+// ─── Case study sticky nav active state ──────────────────────────────
+function initCSNav() {
+  const navLinks = document.querySelectorAll('.cs-nav-link');
+  const sections = document.querySelectorAll('.cs-section');
+  if (!navLinks.length || !sections.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector(`.cs-nav-link[data-section="${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.35, rootMargin: '-10% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initScrollFade();
+  initEmailCTA();
+  initCSNav();
 });
