@@ -23,13 +23,13 @@
       </a>
     </header>
 
-    <!-- ── Case study hero ─────────────────────────────────────────── -->
+    <!-- ── Case study hero (cream) ───────────────────────────────── -->
     <div class="cs-hero">
       <div class="cs-hero-inner">
 
         <div class="cs-hero-meta">
           <span class="cs-status-badge">Live on Vercel</span>
-          <span class="cs-year">2024</span>
+          <span class="cs-year">2026</span>
         </div>
 
         <h1 class="cs-title">Micro-PM Residency Program</h1>
@@ -39,6 +39,7 @@
           <span class="tag">Product Design</span>
           <span class="tag">User Research</span>
           <span class="tag">Ship-first</span>
+          <span class="tag">Next.js</span>
           <span class="tag">Supabase</span>
           <span class="tag">Vercel</span>
         </div>
@@ -69,23 +70,27 @@
         <!-- 1. Context -->
         <section class="cs-section fade-section" id="context">
           <h2 class="cs-section-heading">Context</h2>
-          <p>[YOUR TEXT HERE — What was the situation when you started this project? Who was the audience? What was the broader context that made this problem worth solving? What were your constraints — time, team size, tools, prior knowledge?]</p>
-          <p>[Example: I started this while preparing to transition into PM roles. I had been going through PM resources and noticed a consistent complaint: aspiring PMs had no way to practice the actual craft without already being a PM. Bootcamps were expensive. Mock interviews didn't cover execution. I wanted to build something that addressed this gap directly.]</p>
+          <p>I started this project in early 2026, while actively preparing to transition out of automotive engineering and into product management. I was spending a lot of time on PM prep — reading, taking courses, working through frameworks — and something kept bothering me: I was building knowledge, but I had nothing to show for it. No product I had worked on from the PM seat. No user I had interviewed as a PM. No decision I had owned.</p>
+          <p>The audience I was thinking about was people like me: career switchers from engineering, design, analytics, and operations backgrounds in India, plus fresh graduates — technically capable and genuinely motivated, but locked out of PM roles because they hadn't done PM work yet. The irony is impossible to miss.</p>
+          <p>My constraints were real: I was building solo, in my spare time, with zero budget. Everything would need to run on free tiers. The MVP had to be live and functional before I could test any of the core hypotheses. The result is the live platform at <a href="https://pmresidencyprogram.vercel.app/" target="_blank" rel="noopener noreferrer" style="color: var(--terra); text-decoration: none;">pmresidencyprogram.vercel.app</a> — currently at version 1.2, which added a full participant dashboard on top of the original application system.</p>
         </section>
 
         <!-- 2. Problem -->
         <section class="cs-section fade-section" id="problem">
           <h2 class="cs-section-heading">Problem</h2>
-          <p>[YOUR TEXT HERE — What was the specific problem you were solving? Who experienced it? Why did it matter? What made it a hard or interesting problem? What had been tried before and why it hadn't worked?]</p>
-          <p>[Example: Aspiring PMs need portfolio-worthy, real-world work experience — but the market catch-22 is that most PM roles require prior PM experience. Existing programs either charged thousands of euros, focused on theory over practice, or didn't involve actual startup problems with real feedback loops.]</p>
+          <p>The problem I was solving isn't about information. Aspiring PMs have access to plenty of resources — courses, bootcamps, communities, YouTube channels. The issue is structural: there is no legitimate, accessible on-ramp to real product work for someone who isn't already inside a product organisation.</p>
+          <p>I started with secondary research across 10 sources and found a statistic that anchored everything: research on 150 PMs at Meta, Google, and Amazon found that only 7% were hired into product roles with no prior experience. 93% had some form of applied experience first. This isn't a minor barrier — it's the bar. And the catch is the loop it creates: candidates need experience to get hired, but need to get hired to gain experience. Bootcamps advertise 80–90% placement rates, but former mentors at Springboard reported only 30–50% of graduates actually landing roles. Structured training cannot substitute for real product work.</p>
+          <p>I ran 7 user interviews (6 unique respondents) to validate this. Every single one — 7/7 — reported anxiety from the gap between doing courses and having no real product experience. Six out of seven said courses stopped helping once they reached the application stage. Four defined "real experience" as having built and shipped something real people actually used — a bar higher than any current programme sets. One quote from a software engineer transitioning to PM stayed with me: <em>"Even though I had taken up cohorts and worked on case studies — not having actual PM experience makes me feel anxious that I am not enough."</em></p>
+          <p>I mapped five competitors: Exponent builds interview polish but offers no real product exposure. NextLeap teaches frameworks through simulated challenges with no live users. Product School provides credentials without real work. Co.Lab gets closest — real cross-functional experience with an actual MVP — but costs $3,200+, is US-centric, and requires prior knowledge. APM Programs solve it fully but are accessible to fewer than 5% of candidates, with no India equivalent. The white space was clear: no solution gives a total beginner in India real, cross-functional product experience at an accessible price point. The market had built around the problem without solving it.</p>
         </section>
 
-        <!-- 3. My Approach (featured — most visual weight) -->
+        <!-- 3. My Approach — featured card, most visual weight -->
         <section class="cs-section cs-section-approach fade-section" id="approach">
           <h2 class="cs-section-heading">My Approach</h2>
-          <p>[YOUR TEXT HERE — This is the most important section. Walk through how you thought about the problem. What was your process? What frameworks or instincts guided you? How did you decide what to build first? What did you validate before committing to a direction?]</p>
-          <p>[YOUR TEXT HERE — Be specific. Not "I did user research" but "I ran 6 conversations with aspiring PMs in PM communities on Slack and Reddit. I was testing whether the barrier was confidence, access, or practice. It turned out to be practice — they had plenty of resources but no place to do the actual work in a real context."]</p>
-          <p>[YOUR TEXT HERE — Walk through your design decisions in this section. What did the MVP include, and more importantly, what did you deliberately leave out? Why?]</p>
+          <p>I ran three rounds of research before writing a single line of code. Secondary research across 10 sources to establish the structural reality of the problem. Competitor analysis of 5 players to map what existed and identify the white space. User interviews with 7 respondents to validate hypotheses and let users describe the solution they needed. Only after all three converged did I define what to build.</p>
+          <p>The synthesis produced a finding sharper than I expected. I had predicted that learning without application creates a gap. The user interviews revealed something more uncomfortable: more learning without real application actively makes the anxiety worse. Every new course someone takes without any real product work to apply it to increases their awareness of how unprepared they feel — not their actual readiness. That insight changed the shape of the solution. A half-real programme would make things worse, not better. It had to be fully real.</p>
+          <p>The solution I designed: a single online weekend product sprint where 15–20 aspiring PMs, in teams of 4, work on a real product problem from an Indian startup — with access to real users, structured PM frameworks, and live feedback from the startup's PM — and walk away with a portfolio-ready recommendation deck and written feedback. The weekend runs across roughly 13 hours: Friday evening (2 hrs) for the problem brief, a PM toolkit crash course, and team formation; Saturday (7–8 hrs) for user interviews, synthesis, and solution framing; Sunday morning (3–4 hrs) for deck building, presentations, and live PM feedback. The first cohort is free. No multi-week commitment required.</p>
+          <p>I chose to build a full platform rather than cobble together forms and email threads. The participant experience needed a purpose-built workspace: a dashboard with six tabs covering the problem brief and quick links, a kanban task board, the weekend schedule, a shared interview log with voice input, team and private notes, and a deliverables tab where participants submit their deck and receive written PM feedback. Building it myself also meant I owned the entire data model — applicant status, team assignment, task seeding, PM feedback delivery — on Supabase with row-level security and bcrypt-hashed passwords. Everything runs on free tiers: Supabase, Resend (3,000 emails/month), Vercel. Infrastructure cost for the first cohort: zero.</p>
         </section>
 
         <!-- 4. Key Decisions & Tradeoffs -->
@@ -95,40 +100,51 @@
           <div class="decision-cards">
 
             <div class="decision-card">
-              <p class="decision-label">Decision 1</p>
-              <p class="decision-choice">[YOUR TEXT — State the decision clearly. E.g. "Weekend sprint format over a multi-week cohort"]</p>
-              <p class="decision-why"><strong>Why:</strong> [YOUR TEXT — The reasoning and what tradeoff you accepted. E.g. "A weekend creates urgency and removes the dropout risk of longer programmes. The tradeoff is less iteration time — participants can't run multiple rounds of user interviews. I accepted that because the core skill I wanted to teach was prioritisation under constraint, not exhaustive research."]</p>
+              <p class="decision-label">Decision 01</p>
+              <p class="decision-choice">Weekend sprint format over a multi-week programme</p>
+              <p class="decision-why"><strong>Why:</strong> Every competitor requires 8–12 weeks. The weekend format compresses real product experience into the smallest viable time investment. Urgency is a design tool — when participants have 13 hours across three days to interview users, synthesise insights, and pitch a recommendation, they can't overthink or wait for perfect information. That constraint is the PM skill being practised. Multi-week programmes also carry compounding dropout risk. The tradeoff is less iteration time: participants can't run multiple rounds of user interviews. I accepted that because prioritisation under constraint is the core thing I want them to experience, not exhaustive research.</p>
             </div>
 
             <div class="decision-card">
-              <p class="decision-label">Decision 2</p>
-              <p class="decision-choice">[YOUR TEXT — E.g. "Real startup problems only, no simulated cases"]</p>
-              <p class="decision-why"><strong>Why:</strong> [YOUR TEXT — E.g. "Simulated cases have a known answer. Real problems have ambiguity, missing context, and stakeholders with opinions — which is the actual PM environment. The tradeoff was that finding willing startups was harder and less predictable than creating our own cases."]</p>
+              <p class="decision-label">Decision 02</p>
+              <p class="decision-choice">Real startup problems only — no simulated cases</p>
+              <p class="decision-why"><strong>Why:</strong> Simulated cases have a known answer, or at least a correct framework. Real problems have ambiguity, missing context, and stakeholders who actually care about the outcome. The startup's PM shows up on Friday, checks in on Saturday, and gives developmental feedback on Sunday. Participants are accountable to a real person with real opinions — a dynamic impossible to manufacture. User interviews confirmed this directly: 4/7 respondents defined "real experience" as having built or worked on something real people actually used. The tradeoff was operational: finding and onboarding willing startups is harder and less predictable than creating our own cases. I chose the harder path because the whole point is the real constraint.</p>
             </div>
 
             <div class="decision-card">
-              <p class="decision-label">Decision 3</p>
-              <p class="decision-choice">[YOUR TEXT — E.g. "Build and ship the platform myself rather than using a no-code tool"]</p>
-              <p class="decision-why"><strong>Why:</strong> [YOUR TEXT — E.g. "I wanted to own the registration flow, email collection, and participant matching logic. No-code tools would have required workarounds for the cohort management features I had in mind. The tradeoff was time spent building infrastructure instead of programme design."]</p>
+              <p class="decision-label">Decision 03</p>
+              <p class="decision-choice">Build the full platform rather than use a no-code solution</p>
+              <p class="decision-why"><strong>Why:</strong> A no-code solution would have handled applications but not the participant experience I had in mind. The dashboard — kanban board, shared interview log with voice input, team notes, deliverables tab with PM feedback — required a data model I needed to own and compose. The application flow, status checks, team assignment, and PM feedback delivery all needed to work as one system with proper ownership enforcement (server-side delete protection on interview entries, bcrypt-hashed passwords). No-code tools would have required workarounds at every seam. The tradeoff was time: a meaningful portion of the build was infrastructure, not programme design. Still the right call — but slower than expected.</p>
             </div>
 
           </div>
         </section>
 
-        <!-- 5. Early Signals -->
+        <!-- 5. Early Signals — framed as MVP observations, not proven results -->
         <section class="cs-section fade-section" id="signals">
           <h2 class="cs-section-heading">Early Signals</h2>
+
+          <div class="cs-mvp-callout">
+            <strong>MVP stage — not outcomes</strong>
+            <p>The platform is live and the first cohort is approaching. What follows are observations about the platform's state and the success criteria I've defined — not evidence of impact. I'm sharing them because intellectual honesty about where a product actually stands is part of good PM thinking.</p>
+          </div>
+
           <div class="cs-mvp-badge">MVP Stage</div>
-          <p class="cs-signals-caveat">This is early-stage work. What follows are observations from the first weeks after launch — not proven outcomes.</p>
-          <p>[YOUR TEXT HERE — What did you observe early on? Signups, organic sharing, feedback, unexpected user behavior? Anything that validated or surprised you? Keep this honest — "X people signed up in the first week" is a signal, not a result. "A participant shared the link with their PM community without being asked" is a signal. Stay grounded.]</p>
-          <p>[YOUR TEXT HERE — If there were things that didn't work as expected, mention those too. It shows intellectual honesty and PM maturity.]</p>
+          <p class="cs-signals-caveat">These are pre-cohort observations. The signals below reflect the platform's build state and defined metrics — not measured outcomes from a running programme.</p>
+
+          <p>The platform has already iterated once in a meaningful way. Version 1.0 shipped the landing page and application system. Version 1.2 — the current state — added the full participant dashboard: six tabs, bcrypt-authenticated access, a drag-and-drop kanban board, a shared interview log with voice input using the browser's native Web Speech API, team and private notes, and a deliverables tab where participants submit their deck and receive written PM feedback from the startup's PM. That iteration wasn't planned from the start — it was driven by a real question: what does a participant actually need during the weekend itself, and where does the experience fall apart without a dedicated workspace?</p>
+
+          <p>The success criteria are defined and instrumented before the first cohort runs. That is itself a choice worth noting: I want to know whether this works before building cohort 2. The five metrics are: whether participants leave with one real, interview-ready narrative (post-residency survey + 30-day follow-up); whether they feel more capable rather than just more knowledgeable (pre/post self-assessment on a 1–10 scale); whether at least 80% rate the experience as meaningfully different from a case study or hackathon; whether demand exists at the target ratio (40 applications for 20 spots, &lt;15% no-show); and whether the dashboard gets used during the weekend (login count, tasks moved, interviews logged, deck links submitted — all tracked in Supabase).</p>
+
+          <p>What is deliberately not measured yet: placement outcomes, long-term career impact, and willingness to pay. Those require time horizons and sample sizes a single cohort cannot provide. The first cohort is an experiment. Its purpose is to answer one question: does compressing real product experience into a structured weekend — supported by a purpose-built participant workspace — produce something meaningfully different from what already exists?</p>
         </section>
 
-        <!-- 6. Reflections -->
-        <section class="cs-section fade-section" id="reflections">
+        <!-- 6. Reflections — synthesis, given equal visual weight to Approach -->
+        <section class="cs-section cs-section-reflections fade-section" id="reflections">
           <h2 class="cs-section-heading">Reflections</h2>
-          <p>[YOUR TEXT HERE — What would you do differently if you started today? What surprised you about this process? What did building and shipping this teach you about product thinking that you couldn't have learned any other way?]</p>
-          <p>[YOUR TEXT HERE — This is also a good place to say what you'd do next. Not as a roadmap, but as honest thinking about what the next meaningful question is.]</p>
+          <p>The most useful thing I learned from the research phase was not what I expected to find. I went in expecting to confirm that learning without application creates a gap. The user interviews revealed something more uncomfortable: more learning, without real application, actively makes the anxiety worse. Candidates aren't building towards readiness — they're building towards a clearer awareness of how unprepared they feel. That insight is the reason the weekend format has to be complete and real. Half-real would make things worse.</p>
+          <p>The participant dashboard ended up being a significantly larger build than I planned. I justified it as essential to the participant experience — and I still believe it is. But I also built the Resources API (backend fully functional; admin can create global or team-specific content) before I had any content to put in it or any evidence that participants would need it. The UI is deferred. That is a classic over-build pattern: I solved for a future state before validating the present one. If I were starting again, I'd leave the Resources backend out of v1 entirely and add it when participants tell me what they actually want there.</p>
+          <p>The constraint I'm most uncertain about is startup sourcing. Getting Indian startups to commit a weekend, make their PM available for three structured touchpoints, and then write per-team feedback within 48 hours is a significant operational ask. I designed the programme carefully to make that ask as clear and bounded as possible. Whether it works repeatedly and predictably as the programme grows — cohort after cohort — is the open question I won't have an answer to until it either does or doesn't. That is the thing I'd stress-test hardest in cohort 2: not the technology, not the participant experience, but the supply side.</p>
         </section>
 
       </div><!-- /cs-content -->
@@ -136,6 +152,7 @@
 
   </main>
 
+  <!-- ── Footer (charcoal) ─────────────────────────────────────────────── -->
   <footer>
     <p>Made with care &amp; curiosity &mdash; Sweta Swain</p>
   </footer>

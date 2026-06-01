@@ -9,6 +9,14 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+async function submitEmailToSupabase(email) {
+  const { createClient } = supabase;
+  const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const { error } = await db.from('subscribers').insert({ email });
+  // 23505 = unique_violation (duplicate email) — treat as success
+  if (error && error.code !== '23505') throw error;
+}
+
 // ─── Scroll fade (Intersection Observer) ─────────────────────────────
 function initScrollFade() {
   const observer = new IntersectionObserver((entries) => {
@@ -22,12 +30,13 @@ function initScrollFade() {
 
 // ─── Inline email CTA ─────────────────────────────────────────────────
 function initEmailCTA() {
-  const ctaEl  = document.getElementById('email-cta');
+  const ctaEl = document.getElementById('email-cta');
   if (!ctaEl) return;
 
-  // Hide for returning visitors who already submitted
   if (localStorage.getItem(STORAGE_KEY)) {
     ctaEl.classList.add('hidden');
+    const ctaBand = ctaEl.closest('.page-section--cta');
+    if (ctaBand) ctaBand.style.display = 'none';
     return;
   }
 
@@ -51,22 +60,14 @@ function initEmailCTA() {
 
   btn.addEventListener('click', async () => {
     const email = input.value.trim();
-
-    if (!isValidEmail(email)) {
-      showError('Please enter a valid email address.');
-      return;
-    }
+    if (!isValidEmail(email)) { showError('Please enter a valid email address.'); return; }
 
     btn.disabled    = true;
     btn.textContent = 'Just a moment…';
     clearError();
 
     try {
-      const { createClient } = supabase;
-      const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      const { error } = await db.from('subscribers').insert({ email });
-      // 23505 = unique_violation (duplicate email) — treat as success
-      if (error && error.code !== '23505') throw error;
+      await submitEmailToSupabase(email);
     } catch (err) {
       console.warn('Supabase unavailable (non-blocking):', err);
     }
@@ -78,7 +79,81 @@ function initEmailCTA() {
       ctaEl.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
       ctaEl.style.opacity    = '0';
       ctaEl.style.transform  = 'translateY(-8px)';
+      setTimeout(() => {
+        ctaEl.classList.add('hidden');
+        const ctaBand = ctaEl.closest('.page-section--cta');
+        if (ctaBand) ctaBand.style.display = 'none';
+      }, 400);
+    }, 900);
+  });
+}
+
+// ─── Contact section email capture ───────────────────────────────────
+function initContactCapture() {
+  const captureEl = document.getElementById('contact-capture');
+  const dividerEl = document.getElementById('contact-divider');
+  if (!captureEl) return;
+
+  if (localStorage.getItem(STORAGE_KEY)) {
+    captureEl.style.display = 'none';
+    if (dividerEl) dividerEl.style.display = 'none';
+    return;
+  }
+
+  const btn     = document.getElementById('contact-email-btn');
+  const input   = document.getElementById('contact-email-input');
+  const errorEl = document.getElementById('contact-email-error');
+
+  function showError(msg) {
+    errorEl.textContent = msg;
+    input.classList.add('input-error');
+    input.focus();
+  }
+
+  function clearError() {
+    errorEl.textContent = '';
+    input.classList.remove('input-error');
+  }
+
+  input.addEventListener('input', clearError);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') btn.click(); });
+
+  btn.addEventListener('click', async () => {
+    const email = input.value.trim();
+    if (!isValidEmail(email)) { showError('Please enter a valid email address.'); return; }
+
+    btn.disabled    = true;
+    btn.textContent = 'Just a moment…';
+    clearError();
+
+    try {
+      await submitEmailToSupabase(email);
+    } catch (err) {
+      console.warn('Supabase unavailable (non-blocking):', err);
+    }
+
+    localStorage.setItem(STORAGE_KEY, '1');
+    btn.textContent = 'You\'re in ✦';
+
+    // Also hide the hero CTA if it's still showing
+    const ctaEl = document.getElementById('email-cta');
+    if (ctaEl && !ctaEl.classList.contains('hidden')) {
+      ctaEl.style.opacity   = '0';
+      ctaEl.style.transform = 'translateY(-8px)';
       setTimeout(() => ctaEl.classList.add('hidden'), 400);
+    }
+
+    setTimeout(() => {
+      captureEl.style.transition = 'opacity 0.4s ease';
+      captureEl.style.opacity    = '0';
+      if (dividerEl) {
+        dividerEl.style.transition = 'opacity 0.4s ease';
+        dividerEl.style.opacity    = '0';
+      }
+      setTimeout(() => {
+        captureEl.style.display = 'none';
+        if (dividerEl) dividerEl.style.display = 'none';
+      }, 400);
     }, 900);
   });
 }
@@ -106,5 +181,6 @@ function initCSNav() {
 document.addEventListener('DOMContentLoaded', () => {
   initScrollFade();
   initEmailCTA();
+  initContactCapture();
   initCSNav();
 });

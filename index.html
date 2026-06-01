@@ -14,7 +14,7 @@
 
   <main>
 
-    <!-- ── Hero ──────────────────────────────────────────────────────── -->
+    <!-- ── Hero (charcoal) ───────────────────────────────────────────── -->
     <section class="hero">
       <div class="hero-inner">
 
@@ -41,7 +41,9 @@
             <span class="tag">Product Engineering</span>
           </div>
           <div class="btn-row">
-            <a href="#" class="btn btn-primary">Resume</a>
+            <!-- Resume: re-add once PDF is ready →
+            <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Resume</a>
+            -->
             <a href="https://www.linkedin.com/in/sweta-swain-611a3a73/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M20.447 20.452H17.01v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.588V9h3.307v1.561h.046c.461-.873 1.588-1.794 3.268-1.794 3.495 0 4.141 2.301 4.141 5.293v6.392zM5.337 7.433a1.917 1.917 0 1 1 0-3.834 1.917 1.917 0 0 1 0 3.834zm1.658 13.019H3.678V9h3.317v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -54,31 +56,57 @@
       </div>
     </section>
 
-    <!-- ── Sections ───────────────────────────────────────────────────── -->
-    <div class="sections-container">
-
-      <!-- ── Email CTA ─────────────────────────────────────────────── -->
-      <div class="email-cta fade-section" id="email-cta">
-        <p class="email-cta-text">Building something interesting — drop your email and I'll keep you in the loop.</p>
-        <div class="email-cta-form">
-          <input
-            type="email"
-            id="cta-email"
-            placeholder="your@email.com"
-            autocomplete="email"
-          />
-          <button id="cta-btn" class="btn btn-primary">Stay in the loop</button>
+    <!-- ── Email CTA strip (white) ───────────────────────────────────── -->
+    <div class="page-section page-section--white page-section--cta">
+      <div class="section-inner">
+        <div class="email-cta fade-section" id="email-cta">
+          <p class="email-cta-text">I'm building in the open — drop your email and I'll keep you in the loop.</p>
+          <div class="email-cta-form">
+            <input
+              type="email"
+              id="cta-email"
+              placeholder="your@email.com"
+              autocomplete="email"
+            />
+            <button id="cta-btn" class="btn btn-primary">Stay in the loop</button>
+          </div>
+          <p class="email-cta-error" id="cta-error"></p>
         </div>
-        <p class="email-cta-error" id="cta-error"></p>
       </div>
+    </div>
 
-      <!-- ── Case Studies ──────────────────────────────────────────── -->
-      <section class="section section--wide fade-section" id="projects">
-        <h2 class="section-title">Case Studies</h2>
+    <!-- ── Case Studies (cream) ──────────────────────────────────────── -->
+    <section class="page-section page-section--cream" id="projects">
+      <div class="section-inner section-inner--wide fade-section">
+        <p class="section-eye">Case Studies</p>
+        <h2 class="section-heading">Work that shows how I think</h2>
+
+        <!--
+          CASE STUDY SYSTEM — how to add more studies:
+
+          Current state (1 study): single featured card below, full-width.
+
+          When you add a 2nd study, replace the .case-study-featured div with:
+            <div class="cs-list cs-list--two">
+              <div class="case-study-featured cs-card--primary">…first study…</div>
+              <div class="case-study-card cs-card--secondary">…second study…</div>
+            </div>
+
+          For 3 or more studies, keep the featured card on top and add:
+            <div class="cs-grid">
+              <div class="case-study-card">…</div>
+              <div class="case-study-card">…</div>
+            </div>
+
+          Each study card needs: cs-meta, cs-featured-title (h3), cs-featured-problem,
+          cs-featured-tags, cs-featured-desc, cs-featured-actions.
+          Create a new HTML file per study following case-study-micro-pm.html as the template.
+        -->
 
         <div class="case-study-featured">
           <div class="cs-meta">
             <span class="cs-status">Live on Vercel</span>
+            <span class="cs-year-badge">2026</span>
           </div>
           <h3 class="cs-featured-title">Micro-PM Residency Program</h3>
           <p class="cs-featured-problem">How do aspiring PMs get real practice without a PM job?</p>
@@ -86,6 +114,7 @@
             <span class="tag">Product Design</span>
             <span class="tag">User Research</span>
             <span class="tag">Ship-first</span>
+            <span class="tag">Next.js</span>
             <span class="tag">Supabase</span>
             <span class="tag">Vercel</span>
           </div>
@@ -96,15 +125,21 @@
           </div>
         </div>
 
-      </section>
+      </div>
+    </section>
 
-      <!-- ── Skills & Tools ────────────────────────────────────────── -->
-      <section class="section section--wide fade-section" id="skills">
-        <h2 class="section-title">Skills &amp; Tools</h2>
+    <!-- ── Skills & Tools (white) ────────────────────────────────────── -->
+    <section class="page-section page-section--white" id="skills">
+      <div class="section-inner section-inner--wide fade-section">
+        <p class="section-eye">Skills &amp; Tools</p>
+        <h2 class="section-heading">What I bring</h2>
         <div class="skills-grid">
 
           <div class="skill-group">
-            <p class="skill-group-label">Automotive &amp; ADAS</p>
+            <div class="skill-group-header">
+              <p class="skill-group-label">Automotive &amp; ADAS</p>
+              <span class="skill-depth">10 years</span>
+            </div>
             <div class="skill-tier">
               <span class="skill-tier-label">Core</span>
               <div class="skill-tags skill-core">
@@ -126,7 +161,10 @@
           </div>
 
           <div class="skill-group">
-            <p class="skill-group-label">Software &amp; Full Stack</p>
+            <div class="skill-group-header">
+              <p class="skill-group-label">Software &amp; Full Stack</p>
+              <span class="skill-depth">Active</span>
+            </div>
             <div class="skill-tier">
               <span class="skill-tier-label">Core</span>
               <div class="skill-tags skill-core">
@@ -150,7 +188,10 @@
           </div>
 
           <div class="skill-group">
-            <p class="skill-group-label">Product &amp; Methods</p>
+            <div class="skill-group-header">
+              <p class="skill-group-label">Product &amp; Methods</p>
+              <span class="skill-depth">Transitioning</span>
+            </div>
             <div class="skill-tier">
               <span class="skill-tier-label">Core</span>
               <div class="skill-tags skill-core">
@@ -160,7 +201,7 @@
               </div>
             </div>
             <div class="skill-tier">
-              <span class="skill-tier-label">Tools</span>
+              <span class="skill-tier-label">Methods</span>
               <div class="skill-tags">
                 <span class="tag tag-tool">Agile</span>
                 <span class="tag tag-tool">Scrum Master</span>
@@ -169,7 +210,10 @@
           </div>
 
           <div class="skill-group">
-            <p class="skill-group-label">AI &amp; Vibe Coding</p>
+            <div class="skill-group-header">
+              <p class="skill-group-label">AI &amp; Vibe Coding</p>
+              <span class="skill-depth">Now</span>
+            </div>
             <div class="skill-tier">
               <span class="skill-tier-label">Core</span>
               <div class="skill-tags skill-core">
@@ -188,29 +232,47 @@
           </div>
 
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- ── My Story ───────────────────────────────────────────────── -->
-      <section class="section fade-section" id="story">
-        <h2 class="section-title">My Story</h2>
+    <!-- ── My Story (cream) ──────────────────────────────────────────── -->
+    <section class="page-section page-section--cream" id="story">
+      <div class="section-inner fade-section">
+        <p class="section-eye">My Story</p>
+        <h2 class="section-heading">Engineering → Product</h2>
         <div class="story-card">
 
           <p class="story-quote">"I didn't set out to become a product manager. The path found me through curiosity."</p>
 
           <div class="story-arc" aria-hidden="true">
-            <div class="arc-node">
+            <div class="arc-phase">
               <div class="arc-dot"></div>
-              <span class="arc-label">Safety-critical<br>engineering</span>
+              <span class="arc-year">2013</span>
+              <span class="arc-label">Embedded<br>systems</span>
             </div>
             <div class="arc-connector"></div>
-            <div class="arc-node">
+            <div class="arc-phase">
               <div class="arc-dot"></div>
-              <span class="arc-label">Shipping<br>user products</span>
+              <span class="arc-year">2015</span>
+              <span class="arc-label">Safety-critical<br>ADAS</span>
             </div>
             <div class="arc-connector"></div>
-            <div class="arc-node arc-node-active">
+            <div class="arc-phase">
               <div class="arc-dot"></div>
-              <span class="arc-label">PM<br>thinking</span>
+              <span class="arc-year">2020</span>
+              <span class="arc-label">Full-stack<br>shipping</span>
+            </div>
+            <div class="arc-connector"></div>
+            <div class="arc-phase">
+              <div class="arc-dot"></div>
+              <span class="arc-year">2023</span>
+              <span class="arc-label">HMI &amp;<br>research</span>
+            </div>
+            <div class="arc-connector"></div>
+            <div class="arc-phase arc-phase--active">
+              <div class="arc-dot"></div>
+              <span class="arc-year">Now</span>
+              <span class="arc-label">PM<br>practice</span>
             </div>
           </div>
 
@@ -221,11 +283,14 @@
           </div>
 
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- ── Work Experience ────────────────────────────────────────── -->
-      <section class="section section--wide fade-section" id="experience">
-        <h2 class="section-title">Work Experience</h2>
+    <!-- ── Work Experience (white) ───────────────────────────────────── -->
+    <section class="page-section page-section--white" id="experience">
+      <div class="section-inner section-inner--wide fade-section">
+        <p class="section-eye">Work Experience</p>
+        <h2 class="section-heading">A decade of shipping</h2>
         <div class="timeline">
 
           <div class="timeline-item timeline-current">
@@ -274,11 +339,14 @@
           </div>
 
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- ── Education ──────────────────────────────────────────────── -->
-      <section class="section section--wide fade-section" id="education">
-        <h2 class="section-title">Education</h2>
+    <!-- ── Education (cream) ─────────────────────────────────────────── -->
+    <section class="page-section page-section--cream" id="education">
+      <div class="section-inner section-inner--wide fade-section">
+        <p class="section-eye">Education</p>
+        <h2 class="section-heading">Formal foundations</h2>
         <div class="timeline">
 
           <div class="timeline-item">
@@ -300,11 +368,14 @@
           </div>
 
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- ── Beyond Work ────────────────────────────────────────────── -->
-      <section class="section fade-section" id="hobbies">
-        <h2 class="section-title">Beyond Work</h2>
+    <!-- ── Beyond Work (white) ───────────────────────────────────────── -->
+    <section class="page-section page-section--white" id="hobbies">
+      <div class="section-inner fade-section">
+        <p class="section-eye">Beyond Work</p>
+        <h2 class="section-heading">Outside the screen</h2>
         <div class="hobbies-grid">
           <div class="hobby-item"><span class="hobby-icon">🤖</span><span class="hobby-label">Tinkering with AI</span></div>
           <div class="hobby-item"><span class="hobby-icon">📚</span><span class="hobby-label">Reading</span></div>
@@ -313,14 +384,28 @@
           <div class="hobby-item"><span class="hobby-icon">🖌️</span><span class="hobby-label">Painting</span></div>
           <div class="hobby-item"><span class="hobby-icon">🥾</span><span class="hobby-label">Hiking</span></div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- ── Get in Touch ───────────────────────────────────────────── -->
-      <section class="section fade-section" id="contact">
-        <h2 class="section-title">Get in Touch</h2>
+    <!-- ── Get in Touch (cream) ──────────────────────────────────────── -->
+    <section class="page-section page-section--cream" id="contact">
+      <div class="section-inner fade-section">
+        <p class="section-eye">Get in Touch</p>
+        <h2 class="section-heading">Let's talk</h2>
         <div class="contact-card">
           <p class="contact-tagline">I'm always open to interesting conversations, collaborations, or just a good chat about product, engineering, or AI.</p>
-          <p class="contact-email">shwetaswain13november@gmail.com</p>
+
+          <div class="contact-capture" id="contact-capture">
+            <div class="contact-input-row">
+              <input type="email" id="contact-email-input" placeholder="your@email.com" autocomplete="email" />
+              <button id="contact-email-btn" class="btn btn-primary">Stay in the loop</button>
+            </div>
+            <p class="contact-input-error" id="contact-email-error"></p>
+          </div>
+
+          <div class="contact-divider" id="contact-divider"><span>or reach me directly</span></div>
+
+          <p class="contact-email-addr">shwetaswain13november@gmail.com</p>
           <div class="contact-links">
             <a href="mailto:shwetaswain13november@gmail.com" class="btn btn-primary">Send an Email</a>
             <a href="https://www.linkedin.com/in/sweta-swain-611a3a73/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
@@ -331,12 +416,12 @@
             </a>
           </div>
         </div>
-      </section>
-
-    </div><!-- /sections-container -->
+      </div>
+    </section>
 
   </main>
 
+  <!-- ── Footer (charcoal) ─────────────────────────────────────────────── -->
   <footer>
     <p>Made with care &amp; curiosity &mdash; Sweta Swain</p>
   </footer>
