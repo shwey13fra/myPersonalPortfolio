@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TripSync — Sweta Swain</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="cs-page">
+
+  <main>
+
+    <!-- ── Sticky back nav ─────────────────────────────────────────── -->
+    <header class="cs-header">
+      <a href="index.html" class="cs-back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+        </svg>
+        Sweta Swain
+      </a>
+    </header>
+
+    <!-- ── Case study hero (cream) ───────────────────────────────── -->
+    <div class="cs-hero">
+      <div class="cs-hero-inner">
+
+        <div class="cs-hero-meta">
+          <span class="cs-status-badge">Shipped — Live MVP</span>
+          <span class="cs-year">2026</span>
+        </div>
+
+        <h1 class="cs-title">TripSync</h1>
+        <p class="cs-problem-statement">Group travel is broken because the coordination layer doesn't exist.</p>
+
+        <div class="cs-hero-tags">
+          <span class="tag">Product Design</span>
+          <span class="tag">User Research</span>
+          <span class="tag">Ship-first</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Claude API</span>
+          <span class="tag">Vercel</span>
+        </div>
+
+        <a href="https://group-travel-plan-407gkmcib-shwey13fras-projects.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="margin-top: 8px;">
+          View live site →
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ── Body: sticky nav + content ─────────────────────────────── -->
+    <div class="cs-body">
+
+      <!-- Sticky section nav -->
+      <nav class="cs-sidenav" aria-label="Case study sections">
+        <a href="#context"     class="cs-nav-link active" data-section="context">Context</a>
+        <a href="#problem"     class="cs-nav-link"        data-section="problem">Problem</a>
+        <a href="#approach"    class="cs-nav-link"        data-section="approach">My Approach</a>
+        <a href="#decisions"   class="cs-nav-link"        data-section="decisions">Key Decisions</a>
+        <a href="#signals"     class="cs-nav-link"        data-section="signals">Early Signals</a>
+        <a href="#reflections" class="cs-nav-link"        data-section="reflections">Reflections</a>
+      </nav>
+
+      <!-- Main content -->
+      <div class="cs-content">
+
+        <!-- 1. Context -->
+        <section class="cs-section fade-section" id="context">
+          <h2 class="cs-section-heading">Context</h2>
+          <p>TripSync was my Week 7 project in the Rethink Systems PM programme — Cohort 7. The brief was to design and ship a product that solved a real coordination problem. I chose group travel because I already lived the friction: helping plan a multi-person trip involved a WhatsApp group, a shared Google Sheet that stopped being updated on day two, Splitwise for settlement, and several weeks of unresolved balances after the trip ended. The brief confirmed the problem was structural, not personal.</p>
+          <p>The constraint — seven days from PRD to deployed MVP — shaped every decision. I couldn't build speculatively. Every feature had to trace directly to a validated pain point, and every technical choice had to favour speed without sacrificing the participant experience. The product is live at <a href="https://group-travel-plan-407gkmcib-shwey13fras-projects.vercel.app" target="_blank" rel="noopener noreferrer" style="color: var(--terra); text-decoration: none;">its Vercel URL</a>, built on Next.js 14, Supabase, and the Claude API.</p>
+          <p>Discovery drew from three independent methods that converged on the same conclusion: a case study brief for market context, competitor analysis of five existing tools, and five primary user interviews via a structured 12-question survey across real friend and family group trips covering Goa, Thailand, Italy, Japan, Alibaug, and a domestic resort destination.</p>
+        </section>
+
+        <!-- 2. Problem -->
+        <section class="cs-section fade-section" id="problem">
+          <h2 class="cs-section-heading">Problem</h2>
+          <p>Every single interview respondent used WhatsApp as a base layer. But 4 of 5 layered additional tools on top — Google Sheets, Splitwise, Wanderlog, or Notes apps. The average was 2.4 tools per group. Even the most digitally organised group — the Japan trip using four tools — took over a month to settle expenses. Fragmentation wasn't a marginal problem; it was universal and persistent.</p>
+          <p>Four findings held across the full sample. Budget conversations never happened upfront: 4 of 5 respondents said budget only surfaced when specific bookings came up — zero had a firm number agreed at the start. Planning was structurally unequal: 4 of 5 said one or two people did most or all of the work, with a fairness score of 3.2 out of 5. And expense settlement dragged — 0 of 5 had clean, immediate settlement after returning home.</p>
+          <p>The finding that surprised me most wasn't a pain point — it was the stress score. The average was 2.6 out of 5. Not dramatically painful. Users hadn't stopped planning trips; they'd accepted poor coordination as a fixed cost of the activity. They weren't actively seeking solutions because they assumed the problem was unsolvable. One respondent, when asked what would improve the experience, described the missing product unprompted: <em>"Involvement of all people in planning, maybe in different tasks."</em></p>
+          <p>The competitive gap was equally clear. Wanderlog and TripIt own the itinerary. Splitwise owns post-trip settlement. WhatsApp handles chat. Booking platforms are individual-first. No product runs the full lifecycle — decision → planning → trip → settlement — in one shared space. The market had built around the problem without solving it.</p>
+        </section>
+
+        <!-- 3. My Approach — featured card, most visual weight -->
+        <section class="cs-section cs-section-approach fade-section" id="approach">
+          <h2 class="cs-section-heading">My Approach</h2>
+          <p>I ran three rounds of discovery before touching any design tool. Secondary research through the case study brief to establish the market reality. Competitor analysis of five tools to map what existed and identify the genuine white space. Five user interviews to validate hypotheses and let users describe the missing product in their own words. Only when all three methods converged did I define what to build — and the synthesis produced a sharper problem statement than I expected.</p>
+          <p>I'd gone in expecting to confirm that tool fragmentation creates coordination friction. The interviews revealed something more structural: fragmentation isn't an accident — it's what happens when no product owns the full coordination lifecycle. Adding another tool to the stack doesn't reduce friction; it adds a new integration seam. The solution had to replace the stack entirely, not extend it.</p>
+          <p>The feature-to-pain-point mapping was disciplined. Every feature required a direct line back to a specific finding and, where possible, a specific user quote. No-signup join for passive members came from the fairness score and the insight that passive engagement fails when the barrier to entry is a password. The trip-level budget set at creation came from the 80% who never had an upfront budget conversation. AI destination suggestions came from the decision paralysis pattern — groups generating twelve random suggestions instead of three filtered options. Nothing was built speculatively.</p>
+          <p>The build compressed into seven days: Next.js 14 with App Router, Supabase for database, auth, and real-time subscriptions, and the Claude API for destination suggestions, itinerary generation, and proactive nudges. AI handled the heaviest cognitive loads deliberately — destination research and day-by-day itinerary planning take hours manually and ten seconds with the model. The organizer gets structured output they can edit and present for group voting; the group votes on alternatives rather than debating in freeform chat. That design choice came directly from the passive participation pattern: structured voting is faster and lower-friction than open-ended discussion in a WhatsApp thread.</p>
+        </section>
+
+        <!-- 4. Key Decisions & Tradeoffs -->
+        <section class="cs-section fade-section" id="decisions">
+          <h2 class="cs-section-heading">Key Decisions &amp; Tradeoffs</h2>
+
+          <div class="decision-cards">
+
+            <div class="decision-card">
+              <p class="decision-label">Decision 01</p>
+              <p class="decision-choice">Mobile-first, not desktop-first with a responsive layer</p>
+              <p class="decision-why"><strong>Why:</strong> The brief noted that 70% of group travel planning happens on phones. But more specifically, the passive member problem is a mobile problem. If a passive member receives a join link, they'll open it on their phone. If that experience is a desktop layout squeezed into a small screen, they won't engage. The bottom navigation, glassmorphism tab bar, and one-tap vote interactions were all designed specifically for mobile — not backported from desktop. The tradeoff was real: building mobile-first with a fixed bottom nav added layout complexity. Every component had to account for safe areas and thumb reach zones. But the passive member engagement problem is only solvable if the passive member experience is genuinely frictionless — and frictionless on the device they'll actually use.</p>
+            </div>
+
+            <div class="decision-card">
+              <p class="decision-label">Decision 02</p>
+              <p class="decision-choice">No-signup join for passive members via 6-character code</p>
+              <p class="decision-why"><strong>Why:</strong> The organizer tax problem — where 1–2 people carry the entire planning load — is partly a product design failure. When joining a trip requires creating an account, setting a password, and verifying an email, passive members drop off before they start. The 6-character join code requires only a name and an emoji avatar. Under 30 seconds. No email, no password, no friction. Organizer uses magic-link authentication for full access. Guests get trip membership on Supabase with RLS scoped to their join session. The tradeoff is that guest sessions are ephemeral — if a guest loses their session, they rejoin with the code rather than logging back in. I accepted that because the core passive member use case is a single trip, not a persistent account relationship. Recurring users will use the organizer flow.</p>
+            </div>
+
+            <div class="decision-card">
+              <p class="decision-label">Decision 03</p>
+              <p class="decision-choice">Claude API for destination suggestions, itinerary generation, and proactive nudges</p>
+              <p class="decision-why"><strong>Why:</strong> Three of the heaviest cognitive loads in group trip planning are: deciding where to go (decision paralysis with no structured options), building a day-by-day itinerary (research-heavy, time-consuming), and knowing when the group is stuck (no one is watching the state of the entire trip). All three are problems the model is now genuinely good at — structured JSON output, context-aware reasoning, and proactive surfacing. Zod validation on every Claude response prevents malformed output from reaching the UI. Rate limiting at 1 nudge per 5 minutes per trip prevents API cost explosion during active sessions. The tradeoff: every AI call is a latency event and a cost. I designed the flows to batch context correctly and to only call Claude when a trigger warrants it — not on every page load.</p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 5. Early Signals -->
+        <section class="cs-section fade-section" id="signals">
+          <h2 class="cs-section-heading">Early Signals</h2>
+
+          <div class="cs-mvp-callout">
+            <strong>MVP stage — not outcomes</strong>
+            <p>The platform is live and has been validated end-to-end by three testers. What follows are observations about the build state and the success criteria defined before any real cohort runs — not measured outcomes from live groups using it over time.</p>
+          </div>
+
+          <div class="cs-mvp-badge">MVP Stage</div>
+          <p class="cs-signals-caveat">Three testers joined a trip simultaneously on mobile, voted on a destination, generated an itinerary, added expenses, and marked balances as settled. All flows worked end-to-end.</p>
+
+          <p>The technical surface is complete. The five-tab trip dashboard is live — Overview, Itinerary, Tasks, Expenses, and Vault — each corresponding to a specific pain point from discovery. Real-time subscriptions via Supabase mean destination vote counts update instantly across all connected members without a page refresh. The AI nudge system fires contextually on trigger events (votes, joins, task updates, expense adds), aggregates trip state server-side, and surfaces a dismissible banner — not a push notification, not an email, not an interruption.</p>
+
+          <p>The success metrics are defined and instrumented before any real group tests the product. That choice matters: I want to know what works and what doesn't before building iteration two. The five metrics are: whether 70% of trips reach a confirmed destination within 48 hours (currently untested at scale); whether 80% of trips have a budget set before the first booking is added (a behaviour shift from the current 20%); whether three or more members per group contribute actively rather than the typical one or two; whether expense settlement completes within 48 hours post-trip rather than weeks; and whether organizer stress scores drop below 2.0 from the interview baseline of 2.6.</p>
+
+          <p>What is deliberately not measured yet: retention across multiple trips, willingness to pay, and long-term settlement behaviour. Those require time horizons and sample sizes a single MVP validation cannot provide. The first real test is to put TripSync in front of an actual planning group — not testers running through flows, but people with a real trip to plan — and watch what happens.</p>
+        </section>
+
+        <!-- 6. Reflections -->
+        <section class="cs-section cs-section-reflections fade-section" id="reflections">
+          <h2 class="cs-section-heading">Reflections</h2>
+          <p>The most useful insight from discovery was not the one I set out to find. I went in expecting to confirm that tool fragmentation causes coordination friction. The stress score changed the question entirely. At 2.6 out of 5, users aren't in active pain — they've normalised the problem. That's harder to solve than acute pain, because it means there's no moment of frustration prompting someone to search for a solution. TripSync has to be good enough that someone recommends it to their group organiser, not good enough that the organiser discovers it themselves mid-crisis.</p>
+          <p>The structured swap voting feature — where an organiser proposes itinerary alternatives and members vote yes/no with auto-resolution on majority — is the part of the build I'm most uncertain about. It's technically clean and solves a real problem. But I built it before validating whether groups actually experience itinerary swap voting as a structured decision or as a casual "let's just change it" conversation. If it's the latter, the UI adds friction rather than removing it. I'd validate that interaction pattern specifically with a real group before committing to its current form.</p>
+          <p>The seven-day constraint was the best design decision I didn't make deliberately. It forced ruthless prioritisation at every step — if a feature couldn't be traced back to a discovery finding, it didn't ship. The Trip Vault, per-vibe theming, and AI nudge system all made the cut. A full chat layer didn't. Neither did in-app payments. Not because they're bad ideas — but because the validated problems didn't require them, and WhatsApp already handles chat well enough. The constraint is the reason the product is coherent. More time might have made it more complicated.</p>
+        </section>
+
+      </div><!-- /cs-content -->
+    </div><!-- /cs-body -->
+
+  </main>
+
+  <!-- ── Footer (charcoal) ─────────────────────────────────────────────── -->
+  <footer>
+    <p>Made with care &amp; curiosity &mdash; Sweta Swain</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+
+</body>
+</html>

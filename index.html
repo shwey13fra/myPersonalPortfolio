@@ -82,47 +82,57 @@
         <h2 class="section-heading">Work that shows how I think</h2>
 
         <!--
-          CASE STUDY SYSTEM — how to add more studies:
-
-          Current state (1 study): single featured card below, full-width.
-
-          When you add a 2nd study, replace the .case-study-featured div with:
-            <div class="cs-list cs-list--two">
-              <div class="case-study-featured cs-card--primary">…first study…</div>
-              <div class="case-study-card cs-card--secondary">…second study…</div>
-            </div>
-
-          For 3 or more studies, keep the featured card on top and add:
-            <div class="cs-grid">
-              <div class="case-study-card">…</div>
-              <div class="case-study-card">…</div>
-            </div>
-
-          Each study card needs: cs-meta, cs-featured-title (h3), cs-featured-problem,
-          cs-featured-tags, cs-featured-desc, cs-featured-actions.
-          Create a new HTML file per study following case-study-micro-pm.html as the template.
+          Current state (2 studies): cs-list--two grid.
+          For 3+ studies, add a cs-grid below the two-card row with additional case-study-card elements.
+          Each study needs its own HTML file following case-study-micro-pm.html as the template.
         -->
 
-        <div class="case-study-featured">
-          <div class="cs-meta">
-            <span class="cs-status">Live on Vercel</span>
-            <span class="cs-year-badge">2026</span>
+        <div class="cs-list cs-list--two">
+
+          <div class="case-study-featured">
+            <div class="cs-meta">
+              <span class="cs-status">Live on Vercel</span>
+              <span class="cs-year-badge">2026</span>
+            </div>
+            <h3 class="cs-featured-title">Micro-PM Residency Program</h3>
+            <p class="cs-featured-problem">How do aspiring PMs get real practice without a PM job?</p>
+            <div class="cs-featured-tags">
+              <span class="tag">Product Design</span>
+              <span class="tag">User Research</span>
+              <span class="tag">Ship-first</span>
+              <span class="tag">Next.js</span>
+              <span class="tag">Supabase</span>
+              <span class="tag">Vercel</span>
+            </div>
+            <p class="cs-featured-desc">Designed and shipped a platform connecting aspiring PMs with real startup product problems. Participants work in intentional teams over one weekend — conducting user interviews, synthesising insights, and pitching recommendations directly to the startup's PM.</p>
+            <div class="cs-featured-actions">
+              <a href="case-study-micro-pm.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
+              <a href="https://pmresidencyprogram.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View live site</a>
+            </div>
           </div>
-          <h3 class="cs-featured-title">Micro-PM Residency Program</h3>
-          <p class="cs-featured-problem">How do aspiring PMs get real practice without a PM job?</p>
-          <div class="cs-featured-tags">
-            <span class="tag">Product Design</span>
-            <span class="tag">User Research</span>
-            <span class="tag">Ship-first</span>
-            <span class="tag">Next.js</span>
-            <span class="tag">Supabase</span>
-            <span class="tag">Vercel</span>
+
+          <div class="case-study-card">
+            <div class="cs-meta">
+              <span class="cs-status">Shipped — Live MVP</span>
+              <span class="cs-year-badge">2026</span>
+            </div>
+            <h3 class="cs-featured-title">TripSync</h3>
+            <p class="cs-featured-problem">Group travel is broken because the coordination layer doesn't exist.</p>
+            <div class="cs-featured-tags">
+              <span class="tag">Product Design</span>
+              <span class="tag">User Research</span>
+              <span class="tag">Ship-first</span>
+              <span class="tag">Next.js</span>
+              <span class="tag">Supabase</span>
+              <span class="tag">Claude API</span>
+            </div>
+            <p class="cs-featured-desc">Designed and shipped a mobile-first group travel platform replacing the WhatsApp + Sheets + Splitwise + Wanderlog stack. Discovery across 5 user interviews. Built in 7 days with AI-powered destination suggestions, itinerary generation, and proactive nudges.</p>
+            <div class="cs-featured-actions">
+              <a href="case-study-tripsync.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
+              <a href="https://group-travel-plan-407gkmcib-shwey13fras-projects.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View live site</a>
+            </div>
           </div>
-          <p class="cs-featured-desc">Designed and shipped a platform connecting aspiring PMs with real startup product problems. Participants work in intentional teams over one weekend — conducting user interviews, synthesising insights, and pitching recommendations directly to the startup's PM. Deliverables include a portfolio-ready deck and written feedback from a practising PM.</p>
-          <div class="cs-featured-actions">
-            <a href="case-study-micro-pm.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
-            <a href="https://pmresidencyprogram.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View live site</a>
-          </div>
+
         </div>
 
       </div>

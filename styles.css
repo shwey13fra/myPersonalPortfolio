@@ -562,6 +562,33 @@ main {
   transform: translateX(4px);
 }
 
+/* ─── Case Study two-card grid ───────────────────────────────────────── */
+.cs-list--two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-6);
+  align-items: start;
+}
+
+.case-study-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(28, 25, 23, 0.07);
+  border-left: 4px solid var(--terra);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: var(--sp-8) var(--sp-10);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.case-study-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.cs-list--two .case-study-featured {
+  padding: var(--sp-8) var(--sp-10);
+}
+
 /* ─── Skills ─────────────────────────────────────────────────────────── */
 .skills-grid {
   display: grid;
@@ -1388,6 +1415,15 @@ footer {
   .email-cta-form .btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .cs-list--two {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-list--two .case-study-featured,
+  .case-study-card {
+    padding: var(--sp-6);
   }
 
   .case-study-featured {
