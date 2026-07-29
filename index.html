@@ -83,12 +83,36 @@
         <h2 class="section-heading">Work that shows how I think</h2>
 
         <!--
-          Current state (2 studies): cs-list--two grid.
-          For 3+ studies, add a cs-grid below the two-card row with additional case-study-card elements.
-          Each study needs its own HTML file following case-study-micro-pm.html as the template.
+          Current state (3 studies): a full-width lead card (.cs-lead) followed by a
+          .cs-list--two row for the remaining two studies.
+          Each study has its own HTML file following case-study-micro-pm.html as the template.
         -->
 
-        <div class="cs-list cs-list--two">
+        <div class="cs-list">
+
+          <div class="case-study-featured cs-lead">
+            <div class="cs-meta">
+              <span class="cs-status">Live on Vercel</span>
+              <span class="cs-year-badge">2026</span>
+            </div>
+            <h3 class="cs-featured-title">Product Compass</h3>
+            <p class="cs-featured-problem">PMs don't fail on capability — they fail on positioning, signal, and feedback.</p>
+            <div class="cs-featured-tags">
+              <span class="tag">Product Discovery</span>
+              <span class="tag">User Research</span>
+              <span class="tag">Competitive Analysis</span>
+              <span class="tag">Next.js</span>
+              <span class="tag">Supabase</span>
+              <span class="tag">Vercel</span>
+            </div>
+            <p class="cs-featured-desc">A contextual opportunity ecosystem for product managers — matching candidates to genuinely-PM roles by team context, not job title. Grounded in 3 in-depth user interviews, a 12-point pain register, and an 8-competitor teardown that isolated the one unowned problem: contextual positioning.</p>
+            <div class="cs-featured-actions">
+              <a href="case-study-product-compass.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
+              <a href="https://product-compass-two.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View live site</a>
+            </div>
+          </div>
+
+          <div class="cs-list--two">
 
           <div class="case-study-featured">
             <div class="cs-meta">
@@ -133,6 +157,8 @@
               <a href="https://group-travel-plan-407gkmcib-shwey13fras-projects.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View live site</a>
             </div>
           </div>
+
+          </div><!-- /cs-list--two -->
 
         </div>
 

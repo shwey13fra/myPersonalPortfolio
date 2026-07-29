@@ -562,6 +562,17 @@ main {
   transform: translateX(4px);
 }
 
+/* ─── Case Study list (full-width lead + two-card row) ───────────────── */
+.cs-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.cs-lead .cs-featured-desc {
+  max-width: 760px;
+}
+
 /* ─── Case Study two-card grid ───────────────────────────────────────── */
 .cs-list--two {
   display: grid;
