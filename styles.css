@@ -1507,3 +1507,366 @@ footer {
     padding: var(--sp-3) var(--sp-5);
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   NurtureDE case study — components
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Homepage: three-card row (below the lead) ───────────────────────── */
+.cs-list--three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-6);
+  align-items: stretch;              /* equal-height cards */
+}
+
+.cs-list--three .case-study-featured,
+.cs-list--three .case-study-card {
+  padding: var(--sp-8);
+  display: flex;
+  flex-direction: column;
+}
+
+.cs-list--three .cs-featured-title { font-size: var(--text-xl); }
+.cs-list--three .cs-featured-problem { font-size: var(--text-base); }
+.cs-list--three .cs-featured-desc {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  margin-bottom: var(--sp-6);
+}
+
+/* Actions pinned to the card bottom, stacked full-width — keeps buttons
+   clear of the rounded corner + accent edge and aligns them across the row */
+.cs-list--three .cs-featured-actions {
+  margin-top: auto;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--sp-3);
+}
+
+.cs-list--three .cs-featured-actions .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ─── Hero: primary/highlighted + ghost buttons ──────────────────────── */
+.cs-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  align-items: center;
+  margin-top: var(--sp-2);
+}
+
+.btn-terra {
+  background: var(--terra);
+  color: #fff;
+}
+
+.btn-terra:hover {
+  background: #a95d3f;
+  box-shadow: 0 6px 24px rgba(194, 113, 79, 0.32);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--sage);
+  border: 1.5px solid transparent;
+}
+
+.btn-ghost:hover {
+  color: var(--navy);
+  border-color: rgba(28, 25, 23, 0.18);
+}
+
+.cs-disclaimer {
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: var(--sp-5);
+  max-width: 560px;
+}
+
+/* ─── Pull quote ─────────────────────────────────────────────────────── */
+.cs-quote {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-style: italic;
+  color: var(--navy);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  padding-left: var(--sp-6);
+  border-left: 3px solid var(--terra);
+  margin-bottom: var(--sp-6);
+}
+
+.cs-quote-line {
+  display: block;
+  margin-top: var(--sp-4);
+}
+
+/* ─── Inline callout ─────────────────────────────────────────────────── */
+.cs-callout {
+  background: var(--terra-soft);
+  border: 1px solid rgba(194, 113, 79, 0.2);
+  border-left: 3px solid var(--terra);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-5) var(--sp-6);
+  margin: var(--sp-6) 0;
+}
+
+.cs-callout p { margin: 0; }
+
+/* ─── Data tables ────────────────────────────────────────────────────── */
+.cs-table-wrap {
+  overflow-x: auto;
+  margin: var(--sp-6) 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(28, 25, 23, 0.09);
+}
+
+.cs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.cs-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--navy);
+  background: var(--bg-cream);
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid rgba(28, 25, 23, 0.12);
+  white-space: nowrap;
+}
+
+.cs-table td {
+  padding: var(--sp-3) var(--sp-4);
+  color: var(--text-body);
+  line-height: 1.55;
+  border-bottom: 1px solid rgba(28, 25, 23, 0.06);
+  vertical-align: top;
+}
+
+.cs-table tr:last-child td { border-bottom: none; }
+
+.cs-table code {
+  font-size: 0.85em;
+  background: rgba(28, 25, 23, 0.05);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* Phase table: emphasized rows */
+.cs-table--phases td:first-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.cs-table--phases .cs-star td {
+  background: var(--terra-soft);
+  font-weight: 500;
+  color: var(--navy);
+}
+
+.cs-table--phases .cs-star td:first-child { color: var(--terra); }
+
+/* ─── Architecture flow chips ────────────────────────────────────────── */
+.cs-flow-wrap {
+  overflow-x: auto;
+  margin: var(--sp-6) 0;
+  padding-bottom: var(--sp-2);
+}
+
+.cs-flow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: min-content;
+}
+
+.cs-flow-node {
+  flex-shrink: 0;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--bg-card);
+  border: 1px solid rgba(28, 25, 23, 0.12);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-3) var(--sp-4);
+  box-shadow: var(--shadow-sm);
+  line-height: 1.35;
+  max-width: 150px;
+}
+
+.cs-flow-node--accent {
+  border-color: var(--terra);
+  background: var(--terra-soft);
+  color: var(--terra);
+}
+
+.cs-flow-arrow {
+  flex-shrink: 0;
+  color: var(--terra);
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+/* ─── Mono figure blocks ─────────────────────────────────────────────── */
+.cs-figure {
+  overflow-x: auto;
+  background: #1c1a17;
+  border: 1px solid rgba(28, 25, 23, 0.2);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-5) var(--sp-6);
+  margin: var(--sp-6) 0;
+}
+
+.cs-figure pre {
+  margin: 0;
+  font-family: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: #d8d2c8;
+  white-space: pre;
+}
+
+.cs-figure--workflow { background: var(--bg-cream); border-color: rgba(28, 25, 23, 0.1); }
+.cs-figure--workflow pre { color: var(--text-body); }
+
+.cs-fig-hit {
+  color: #f0a982;
+  font-weight: 600;
+}
+
+.cs-fig-cut {
+  color: #8a8278;
+}
+
+.cs-figure--results pre { font-size: 0.85rem; }
+
+/* ─── Stack chips ────────────────────────────────────────────────────── */
+.cs-stack-label {
+  font-size: var(--text-xs) !important;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin: var(--sp-6) 0 var(--sp-3) !important;
+}
+
+.cs-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.cs-chip {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-body);
+  background: var(--bg-cream);
+  border: 1px solid rgba(28, 25, 23, 0.1);
+  border-radius: 100px;
+  padding: 5px 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Findings ───────────────────────────────────────────────────────── */
+.cs-findings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  margin-top: var(--sp-6);
+}
+
+.cs-finding {
+  background: var(--bg-card);
+  border: 1px solid rgba(28, 25, 23, 0.08);
+  border-left: 4px solid var(--terra);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-6) var(--sp-8);
+  box-shadow: var(--shadow-sm);
+}
+
+.cs-metric-chip {
+  display: inline-block;
+  font-family: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--terra);
+  background: var(--terra-soft);
+  border-radius: 6px;
+  padding: 4px 10px;
+  margin-bottom: var(--sp-3);
+}
+
+.cs-finding-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: var(--text-lg);
+  color: var(--navy);
+  line-height: 1.25;
+  margin-bottom: var(--sp-3);
+}
+
+.cs-finding p { margin-bottom: var(--sp-4); }
+.cs-finding p:last-child { margin-bottom: 0; }
+.cs-finding code {
+  font-size: 0.85em;
+  background: rgba(28, 25, 23, 0.05);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* ─── Findings section wrapper ───────────────────────────────────────── */
+.cs-section-findings {
+  border-bottom: none;
+}
+
+/* ─── Limitations list ───────────────────────────────────────────────── */
+.cs-limits {
+  list-style: none;
+  padding-left: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.cs-limits li {
+  position: relative;
+  padding-left: var(--sp-6);
+  margin-bottom: 0 !important;
+}
+
+.cs-limits li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--navy);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .cs-list--three {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-list--three .case-study-featured,
+  .cs-list--three .case-study-card {
+    padding: var(--sp-6);
+  }
+
+  .cs-list--three .cs-featured-title { font-size: var(--text-2xl); }
+  .cs-list--three .cs-featured-desc { font-size: var(--text-base); }
+}
+
+@media (max-width: 767px) {
+  .cs-finding { padding: var(--sp-5) var(--sp-5); }
+  .cs-hero-actions { width: 100%; }
+  .cs-hero-actions .btn { flex: 1 1 auto; justify-content: center; }
+  .cs-figure { padding: var(--sp-4); }
+  .cs-figure pre { font-size: 0.72rem; }
+}

@@ -83,14 +83,38 @@
         <h2 class="section-heading">Work that shows how I think</h2>
 
         <!--
-          Current state (3 studies): a full-width lead card (.cs-lead) followed by a
-          .cs-list--two row for the remaining two studies.
+          Current state (4 studies): a full-width lead card (.cs-lead — NurtureDE) followed by a
+          .cs-list--three row for Product Compass, Micro-PM, and TripSync.
           Each study has its own HTML file following case-study-micro-pm.html as the template.
         -->
 
         <div class="cs-list">
 
           <div class="case-study-featured cs-lead">
+            <div class="cs-meta">
+              <span class="cs-status">Live on HF Spaces</span>
+              <span class="cs-year-badge">2026</span>
+            </div>
+            <h3 class="cs-featured-title">NurtureDE</h3>
+            <p class="cs-featured-problem">The information officially exists — expats just can't find it, or don't know the German word for it.</p>
+            <div class="cs-featured-tags">
+              <span class="tag">RAG</span>
+              <span class="tag">Hybrid Retrieval</span>
+              <span class="tag">LangGraph</span>
+              <span class="tag">Evaluation</span>
+              <span class="tag">Python</span>
+              <span class="tag">Anthropic API</span>
+            </div>
+            <p class="cs-featured-desc">A cited, source-grounded assistant for pregnancy, Mutterschutz, and family benefits in Germany. Hybrid retrieval over 22 official sources, evaluated on 56 cases — recall@5 improved 0.75 → 0.90, every figure traceable to a file. Built as a bounded workflow, not an autonomous agent, because a wrong answer means a missed benefit deadline.</p>
+            <div class="cs-featured-actions">
+              <a href="case-study-nurture-de.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
+              <a href="https://huggingface.co/spaces/Shwey13/nurture-de" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Try it live</a>
+            </div>
+          </div>
+
+          <div class="cs-list--three">
+
+          <div class="case-study-featured">
             <div class="cs-meta">
               <span class="cs-status">Live on Vercel</span>
               <span class="cs-year-badge">2026</span>
@@ -102,17 +126,13 @@
               <span class="tag">User Research</span>
               <span class="tag">Competitive Analysis</span>
               <span class="tag">Next.js</span>
-              <span class="tag">Supabase</span>
-              <span class="tag">Vercel</span>
             </div>
-            <p class="cs-featured-desc">A contextual opportunity ecosystem for product managers — matching candidates to genuinely-PM roles by team context, not job title. Grounded in 3 in-depth user interviews, a 12-point pain register, and an 8-competitor teardown that isolated the one unowned problem: contextual positioning.</p>
+            <p class="cs-featured-desc">A contextual opportunity ecosystem for product managers — matching candidates to genuinely-PM roles by team context, not job title. Grounded in 3 user interviews, a 12-point pain register, and an 8-competitor teardown.</p>
             <div class="cs-featured-actions">
               <a href="case-study-product-compass.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
               <a href="https://product-compass-two.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View live site</a>
             </div>
           </div>
-
-          <div class="cs-list--two">
 
           <div class="case-study-featured">
             <div class="cs-meta">
@@ -126,8 +146,6 @@
               <span class="tag">User Research</span>
               <span class="tag">Ship-first</span>
               <span class="tag">Next.js</span>
-              <span class="tag">Supabase</span>
-              <span class="tag">Vercel</span>
             </div>
             <p class="cs-featured-desc">Designed and shipped a platform connecting aspiring PMs with real startup product problems. Participants work in intentional teams over one weekend — conducting user interviews, synthesising insights, and pitching recommendations directly to the startup's PM.</p>
             <div class="cs-featured-actions">
@@ -147,8 +165,6 @@
               <span class="tag">Product Design</span>
               <span class="tag">User Research</span>
               <span class="tag">Ship-first</span>
-              <span class="tag">Next.js</span>
-              <span class="tag">Supabase</span>
               <span class="tag">Claude API</span>
             </div>
             <p class="cs-featured-desc">Designed and shipped a mobile-first group travel platform replacing the WhatsApp + Sheets + Splitwise + Wanderlog stack. Discovery across 5 user interviews. Built in 7 days with AI-powered destination suggestions, itinerary generation, and proactive nudges.</p>
@@ -158,7 +174,7 @@
             </div>
           </div>
 
-          </div><!-- /cs-list--two -->
+          </div><!-- /cs-list--three -->
 
         </div>
 
