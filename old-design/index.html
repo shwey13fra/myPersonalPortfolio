@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sweta Swain — Product Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <!-- Set theme before first paint to avoid a flash. Dark is the default. -->
+  <script>
+    try {
+      if (localStorage.getItem('sweta_theme') === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body>
+
+  <!-- ── Theme toggle (dark ⇄ light) ───────────────────────────────────── -->
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+    </svg>
+  </button>
+
+  <main>
+
+    <!-- ── Hero (charcoal) ───────────────────────────────────────────── -->
+    <section class="hero">
+      <div class="hero-inner">
+
+        <div class="photo-wrapper">
+          <img
+            src="../photo.jpg"
+            alt="Sweta Swain"
+            class="photo"
+            onerror="this.style.display='none'; document.getElementById('initials').style.display='flex';"
+          />
+          <div class="initials" id="initials">SS</div>
+        </div>
+
+        <div class="hero-text">
+          <p class="location">Frankfurt, Germany</p>
+          <h1 class="name">Sweta Swain</h1>
+          <p class="tagline">Building products at the intersection of engineering and empathy.</p>
+          <p class="intro">
+            Product Engineer with a foundation in safety-critical automotive systems. I turn ambiguous problems into validated requirements, research-backed decisions, and shipped products — now with AI woven into how I work.
+          </p>
+          <div class="btn-row">
+            <!-- Resume: re-add once PDF is ready →
+            <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Resume</a>
+            -->
+            <a href="https://www.linkedin.com/in/sweta-swain-611a3a73/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.447 20.452H17.01v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.588V9h3.307v1.561h.046c.461-.873 1.588-1.794 3.268-1.794 3.495 0 4.141 2.301 4.141 5.293v6.392zM5.337 7.433a1.917 1.917 0 1 1 0-3.834 1.917 1.917 0 0 1 0 3.834zm1.658 13.019H3.678V9h3.317v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Email CTA strip (white) ───────────────────────────────────── -->
+    <div class="page-section page-section--white page-section--cta">
+      <div class="section-inner">
+        <div class="email-cta fade-section" id="email-cta">
+          <p class="email-cta-text">I'm building in the open — drop your email and I'll keep you in the loop.</p>
+          <div class="email-cta-form">
+            <input
+              type="email"
+              id="cta-email"
+              placeholder="your@email.com"
+              autocomplete="email"
+            />
+            <button id="cta-btn" class="btn btn-primary">Stay in the loop</button>
+          </div>
+          <p class="email-cta-error" id="cta-error"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Case Studies (cream) ──────────────────────────────────────── -->
+    <section class="page-section page-section--cream" id="projects">
+      <div class="section-inner section-inner--wide fade-section">
+        <p class="section-eye">Case Studies</p>
+        <h2 class="section-heading">Work that shows how I think</h2>
+
+        <!--
+          Current state (4 studies): a full-width lead card (.cs-lead — NurtureDE) followed by a
+          .cs-list--three row for Product Compass, Micro-PM, and TripSync.
+          Each study has its own HTML file following case-study-micro-pm.html as the template.
+        -->
+
+        <div class="cs-list">
+
+          <div class="case-study-featured cs-lead">
+            <div class="cs-meta">
+              <span class="cs-status">Live on HF Spaces</span>
+              <span class="cs-year-badge">2026</span>
+            </div>
+            <h3 class="cs-featured-title">NurtureDE</h3>
+            <p class="cs-featured-problem">The information officially exists — expats just can't find it, or don't know the German word for it.</p>
+            <div class="cs-featured-tags">
+              <span class="tag">RAG</span>
+              <span class="tag">Hybrid Retrieval</span>
+              <span class="tag">LangGraph</span>
+              <span class="tag">Evaluation</span>
+              <span class="tag">Python</span>
+              <span class="tag">Anthropic API</span>
+            </div>
+            <p class="cs-featured-desc">A cited, source-grounded assistant for pregnancy, Mutterschutz, and family benefits in Germany. Hybrid retrieval over 22 official sources, evaluated on 56 cases — recall@5 improved 0.75 → 0.90, every figure traceable to a file. Built as a bounded workflow, not an autonomous agent, because a wrong answer means a missed benefit deadline.</p>
+            <div class="cs-featured-actions">
+              <a href="../case-study-nurture-de.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
+              <a href="https://huggingface.co/spaces/Shwey13/nurture-de" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Try it live</a>
+            </div>
+          </div>
+
+          <div class="cs-list--three">
+
+          <div class="case-study-featured">
+            <div class="cs-meta">
+              <span class="cs-status">Live on Vercel</span>
+              <span class="cs-year-badge">2026</span>
+            </div>
+            <h3 class="cs-featured-title">Product Compass</h3>
+            <p class="cs-featured-problem">PMs don't fail on capability — they fail on positioning, signal, and feedback.</p>
+            <div class="cs-featured-tags">
+              <span class="tag">Product Discovery</span>
+              <span class="tag">User Research</span>
+              <span class="tag">Competitive Analysis</span>
+              <span class="tag">Next.js</span>
+            </div>
+            <p class="cs-featured-desc">A contextual opportunity ecosystem for product managers — matching candidates to genuinely-PM roles by team context, not job title. Grounded in 3 user interviews, a 12-point pain register, and an 8-competitor teardown.</p>
+            <div class="cs-featured-actions">
+              <a href="../case-study-product-compass.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
+              <a href="https://product-compass-two.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View live site</a>
+            </div>
+          </div>
+
+          <div class="case-study-featured">
+            <div class="cs-meta">
+              <span class="cs-status">Live on Vercel</span>
+              <span class="cs-year-badge">2026</span>
+            </div>
+            <h3 class="cs-featured-title">Micro-PM Residency Program</h3>
+            <p class="cs-featured-problem">How do aspiring PMs get real practice without a PM job?</p>
+            <div class="cs-featured-tags">
+              <span class="tag">Product Design</span>
+              <span class="tag">User Research</span>
+              <span class="tag">Ship-first</span>
+              <span class="tag">Next.js</span>
+            </div>
+            <p class="cs-featured-desc">Designed and shipped a platform connecting aspiring PMs with real startup product problems. Participants work in intentional teams over one weekend — conducting user interviews, synthesising insights, and pitching recommendations directly to the startup's PM.</p>
+            <div class="cs-featured-actions">
+              <a href="../case-study-micro-pm.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
+              <a href="https://pmresidencyprogram.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View live site</a>
+            </div>
+          </div>
+
+          <div class="case-study-card">
+            <div class="cs-meta">
+              <span class="cs-status">Shipped — Live MVP</span>
+              <span class="cs-year-badge">2026</span>
+            </div>
+            <h3 class="cs-featured-title">TripSync</h3>
+            <p class="cs-featured-problem">Group travel is broken because the coordination layer doesn't exist.</p>
+            <div class="cs-featured-tags">
+              <span class="tag">Product Design</span>
+              <span class="tag">User Research</span>
+              <span class="tag">Ship-first</span>
+              <span class="tag">Claude API</span>
+            </div>
+            <p class="cs-featured-desc">Designed and shipped a mobile-first group travel platform replacing the WhatsApp + Sheets + Splitwise + Wanderlog stack. Discovery across 5 user interviews. Built in 7 days with AI-powered destination suggestions, itinerary generation, and proactive nudges.</p>
+            <div class="cs-featured-actions">
+              <a href="../case-study-tripsync.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
+              <a href="https://group-travel-plan-407gkmcib-shwey13fras-projects.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View live site</a>
+            </div>
+          </div>
+
+          </div><!-- /cs-list--three -->
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Skills & Tools (white) ────────────────────────────────────── -->
+    <section class="page-section page-section--white" id="skills">
+      <div class="section-inner section-inner--wide fade-section">
+        <p class="section-eye">Skills &amp; Tools</p>
+        <h2 class="section-heading">What I bring</h2>
+        <div class="skills-grid">
+
+          <div class="skill-group">
+            <div class="skill-group-header">
+              <p class="skill-group-label">Product &amp; Process</p>
+              <span class="skill-depth">Core</span>
+            </div>
+            <div class="skill-tier">
+              <span class="skill-tier-label">Core</span>
+              <div class="skill-tags skill-core">
+                <span class="tag">Product Management</span>
+                <span class="tag">Technical Product Management</span>
+                <span class="tag">Product Strategy</span>
+                <span class="tag">Product Discovery</span>
+                <span class="tag">Product Requirements</span>
+                <span class="tag">Requirements Engineering</span>
+                <span class="tag">User Research</span>
+                <span class="tag">Stakeholder Management</span>
+                <span class="tag">Backlog Management</span>
+                <span class="tag">Agile Product Development</span>
+              </div>
+            </div>
+            <div class="skill-tier">
+              <span class="skill-tier-label">Methods &amp; Tools</span>
+              <div class="skill-tags">
+                <span class="tag tag-tool">Agile / Scrum</span>
+                <span class="tag tag-tool">Kanban</span>
+                <span class="tag tag-tool">Scrum Master</span>
+                <span class="tag tag-tool">JIRA</span>
+                <span class="tag tag-tool">Confluence</span>
+                <span class="tag tag-tool">Azure DevOps</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-header">
+              <p class="skill-group-label">AI &amp; Prototyping</p>
+              <span class="skill-depth">Now</span>
+            </div>
+            <div class="skill-tier">
+              <span class="skill-tier-label">Core</span>
+              <div class="skill-tags skill-core">
+                <span class="tag">Artificial Intelligence (AI)</span>
+                <span class="tag">Claude Code</span>
+                <span class="tag">Prompt Engineering</span>
+                <span class="tag">LLMs &amp; AI Agents</span>
+              </div>
+            </div>
+            <div class="skill-tier">
+              <span class="skill-tier-label">Tools</span>
+              <div class="skill-tags">
+                <span class="tag tag-tool">RAG Pipelines</span>
+                <span class="tag tag-tool">Vercel</span>
+                <span class="tag tag-tool">Supabase</span>
+                <span class="tag tag-tool">4 live prototypes shipped</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-header">
+              <p class="skill-group-label">Software &amp; Full Stack</p>
+              <span class="skill-depth">Active</span>
+            </div>
+            <div class="skill-tier">
+              <span class="skill-tier-label">Core</span>
+              <div class="skill-tags skill-core">
+                <span class="tag">Software Engineering</span>
+                <span class="tag">Python</span>
+                <span class="tag">SQL</span>
+                <span class="tag">FastAPI</span>
+              </div>
+            </div>
+            <div class="skill-tier">
+              <span class="skill-tier-label">Tools</span>
+              <div class="skill-tags">
+                <span class="tag tag-tool">C++</span>
+                <span class="tag tag-tool">JavaScript</span>
+                <span class="tag tag-tool">HTML</span>
+                <span class="tag tag-tool">Git</span>
+                <span class="tag tag-tool">Docker</span>
+                <span class="tag tag-tool">Azure</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-header">
+              <p class="skill-group-label">Automotive Domain</p>
+              <span class="skill-depth">10 years</span>
+            </div>
+            <div class="skill-tier">
+              <span class="skill-tier-label">Core</span>
+              <div class="skill-tags skill-core">
+                <span class="tag">Automotive Software</span>
+                <span class="tag">ADAS</span>
+                <span class="tag">AEB</span>
+                <span class="tag">HMI</span>
+              </div>
+            </div>
+            <div class="skill-tier">
+              <span class="skill-tier-label">Tools</span>
+              <div class="skill-tags">
+                <span class="tag tag-tool">ISO 26262</span>
+                <span class="tag tag-tool">CAN Bus</span>
+                <span class="tag tag-tool">Navigation (NDS)</span>
+                <span class="tag tag-tool">RTMaps (dSpace)</span>
+                <span class="tag tag-tool">MATLAB</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── My Story (cream) ──────────────────────────────────────────── -->
+    <section class="page-section page-section--cream" id="story">
+      <div class="section-inner fade-section">
+        <p class="section-eye">My Story</p>
+        <h2 class="section-heading">Engineering → Product</h2>
+        <div class="story-card">
+
+          <p class="story-quote">"I didn't set out to become a product manager. The path found me through curiosity."</p>
+
+          <div class="story-arc" aria-hidden="true">
+            <div class="arc-phase">
+              <div class="arc-dot"></div>
+              <span class="arc-year">2013</span>
+              <span class="arc-label">Embedded<br>systems</span>
+            </div>
+            <div class="arc-connector"></div>
+            <div class="arc-phase">
+              <div class="arc-dot"></div>
+              <span class="arc-year">2015</span>
+              <span class="arc-label">Safety-critical<br>ADAS</span>
+            </div>
+            <div class="arc-connector"></div>
+            <div class="arc-phase">
+              <div class="arc-dot"></div>
+              <span class="arc-year">2020</span>
+              <span class="arc-label">Full-stack<br>shipping</span>
+            </div>
+            <div class="arc-connector"></div>
+            <div class="arc-phase">
+              <div class="arc-dot"></div>
+              <span class="arc-year">2023</span>
+              <span class="arc-label">HMI &amp;<br>research</span>
+            </div>
+            <div class="arc-connector"></div>
+            <div class="arc-phase arc-phase--active">
+              <div class="arc-dot"></div>
+              <span class="arc-year">Now</span>
+              <span class="arc-label">PM<br>practice</span>
+            </div>
+          </div>
+
+          <div class="story-body">
+            <p>My career began in safety-critical automotive systems — building, testing, and shipping ADAS features where failure isn't an option. Working at that level of consequence gave me something most product people don't start with: a visceral understanding of how software behaves when real users depend on it.</p>
+            <p>But the more I shipped, the more I found myself drawn upstream. Why were we building this feature? What problem were we <em>actually</em> solving? Were we solving the right one? I started stepping into requirement discussions, trade-off conversations, and prioritization calls — especially when user safety and experience were at stake. I wasn't just executing anymore. I was questioning.</p>
+            <p>I discovered I was most engaged when bringing structure to ambiguous problems, aligning stakeholders around a shared direction, and ensuring the thing we were building was worth building. That's product management — and it's where my technical depth, user empathy, and instinct for decision-making finally found a home.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Work Experience (white) ───────────────────────────────────── -->
+    <section class="page-section page-section--white" id="experience">
+      <div class="section-inner section-inner--wide fade-section">
+        <p class="section-eye">Work Experience</p>
+        <h2 class="section-heading">A decade of shipping</h2>
+        <div class="timeline">
+
+          <div class="timeline-item timeline-current">
+            <div class="timeline-header">
+              <p class="timeline-role">Product Engineer</p>
+              <span class="timeline-date">07/2023 — Present</span>
+            </div>
+            <p class="timeline-org">FERCHAU · Honda R&amp;D Europe · Frankfurt, Germany</p>
+            <p class="timeline-desc">Led end-to-end product discovery for Honda's Hi-Drive automated lane-merging concept — translating OEM expectations, user needs and EU regulation into structured requirements, feature specs and acceptance criteria. Ran a 3-phase user research programme that fed prioritised features to the design team, and drove iterative validation in an Agile delivery loop.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <p class="timeline-role">Project Engineer</p>
+              <span class="timeline-date">11/2022 — 03/2023</span>
+            </div>
+            <p class="timeline-org">Luxoft · CARIAD (VW Group) · Munich, Germany</p>
+            <p class="timeline-desc">Worked alongside CARIAD product managers and owners in backlog refinement — clarifying change requests for the IVI middleware layer and translating business intent into well-scoped, development-ready work items shipped to VW Group platforms.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <p class="timeline-role">Software Developer (Working Student)</p>
+              <span class="timeline-date">04/2021 — 10/2022</span>
+            </div>
+            <p class="timeline-org">Robert Bosch GmbH · AEB Safety Systems · Leonberg, Germany</p>
+            <p class="timeline-desc">Spotted a gap in AEB test-result visibility, then owned it end-to-end — gathering requirements from engineers, writing user stories, and shipping a full-stack web tool (FastAPI + JS + SQL) that removed manual reporting bottlenecks.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <p class="timeline-role">Senior Software Engineer</p>
+              <span class="timeline-date">09/2015 — 10/2020</span>
+            </div>
+            <p class="timeline-org">Robert Bosch Engineering &amp; Business Solutions · Bengaluru, India</p>
+            <p class="timeline-desc">Drove requirement analysis and feature estimation across 6 OEM programmes (Honda, JLR, Renault, GM, Nissan, Suzuki), owning scope and delivery commitments. Served as Scrum Master — running sprint planning, reviews and retros to improve delivery predictability — and built reusable knowledge assets that cut onboarding time and recurring defects.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <p class="timeline-role">Associate Software Engineer</p>
+              <span class="timeline-date">09/2013 — 09/2015</span>
+            </div>
+            <p class="timeline-org">Wipro Technologies · BMW Automobiles · Bengaluru, India</p>
+            <p class="timeline-desc">Supported BMW navigation feature validation; first exposure to client-facing review sessions and shipped feature cycles with direct stakeholder interaction.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Education (cream) ─────────────────────────────────────────── -->
+    <section class="page-section page-section--cream" id="education">
+      <div class="section-inner section-inner--wide fade-section">
+        <p class="section-eye">Education</p>
+        <h2 class="section-heading">Formal foundations</h2>
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <p class="timeline-role">M.Sc. in Information Technology (Informatik)</p>
+              <span class="timeline-date">11/2020 — 10/2023</span>
+            </div>
+            <p class="timeline-org">Frankfurt University of Applied Sciences · Frankfurt, Germany</p>
+            <p class="timeline-desc">Embedded Systems and Networking focus. Coursework: Machine Learning, Cloud Computing, Image Processing, Software Engineering, IT Security. Master thesis: comparative analysis of OpenAI model architectures, training methods and NLP performance across chatbot, content-generation and translation use cases.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <p class="timeline-role">B.E. in Electrical and Electronics Engineering</p>
+              <span class="timeline-date">09/2009 — 06/2013</span>
+            </div>
+            <p class="timeline-org">Silicon Institute of Technology · Bhubaneswar, India</p>
+            <p class="timeline-desc">Focus on Embedded System development.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Beyond Work (white) ───────────────────────────────────────── -->
+    <section class="page-section page-section--white" id="hobbies">
+      <div class="section-inner fade-section">
+        <p class="section-eye">Beyond Work</p>
+        <h2 class="section-heading">Outside the screen</h2>
+        <div class="hobbies-grid">
+          <div class="hobby-item"><span class="hobby-icon">🤖</span><span class="hobby-label">Tinkering with AI</span></div>
+          <div class="hobby-item"><span class="hobby-icon">📚</span><span class="hobby-label">Reading</span></div>
+          <div class="hobby-item"><span class="hobby-icon">✈️</span><span class="hobby-label">Travelling</span></div>
+          <div class="hobby-item"><span class="hobby-icon">🎨</span><span class="hobby-label">Design Exploration</span></div>
+          <div class="hobby-item"><span class="hobby-icon">🖌️</span><span class="hobby-label">Painting</span></div>
+          <div class="hobby-item"><span class="hobby-icon">🥾</span><span class="hobby-label">Hiking</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Get in Touch (cream) ──────────────────────────────────────── -->
+    <section class="page-section page-section--cream" id="contact">
+      <div class="section-inner fade-section">
+        <p class="section-eye">Get in Touch</p>
+        <h2 class="section-heading">Let's talk</h2>
+        <div class="contact-card">
+          <p class="contact-tagline">I'm always open to interesting conversations, collaborations, or just a good chat about product, engineering, or AI.</p>
+
+          <div class="contact-capture" id="contact-capture">
+            <div class="contact-input-row">
+              <input type="email" id="contact-email-input" placeholder="your@email.com" autocomplete="email" />
+              <button id="contact-email-btn" class="btn btn-primary">Stay in the loop</button>
+            </div>
+            <p class="contact-input-error" id="contact-email-error"></p>
+          </div>
+
+          <div class="contact-divider" id="contact-divider"><span>or reach me directly</span></div>
+
+          <p class="contact-email-addr">shwetaswain13november@gmail.com</p>
+          <div class="contact-links">
+            <a href="mailto:shwetaswain13november@gmail.com" class="btn btn-primary">Send an Email</a>
+            <a href="https://www.linkedin.com/in/sweta-swain-611a3a73/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.447 20.452H17.01v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.588V9h3.307v1.561h.046c.461-.873 1.588-1.794 3.268-1.794 3.495 0 4.141 2.301 4.141 5.293v6.392zM5.337 7.433a1.917 1.917 0 1 1 0-3.834 1.917 1.917 0 0 1 0 3.834zm1.658 13.019H3.678V9h3.317v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer (charcoal) ─────────────────────────────────────────────── -->
+  <footer>
+    <p>Made with care &amp; curiosity &mdash; Sweta Swain</p>
+  </footer>
+
+  <script src="../script.js" defer></script>
+
+</body>
+</html>

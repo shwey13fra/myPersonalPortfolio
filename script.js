@@ -177,10 +177,38 @@ function initCSNav() {
   sections.forEach(s => observer.observe(s));
 }
 
+// ─── Theme toggle (dark ⇄ light) ─────────────────────────────────────
+function initThemeToggle() {
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+
+  const THEME_KEY = 'sweta_theme';
+
+  function apply(theme) {
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+    btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+  }
+
+  // Sync with whatever the inline head script already applied
+  const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  apply(current);
+
+  btn.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    apply(next);
+    try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+  });
+}
+
 // ─── Init ─────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initScrollFade();
   initEmailCTA();
   initContactCapture();
   initCSNav();
+  initThemeToggle();
 });

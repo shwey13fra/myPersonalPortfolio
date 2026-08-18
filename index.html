@@ -3,488 +3,797 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sweta Swain — Product Engineer</title>
+  <title>Redesign Preview — Sweta Swain</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <!-- Set theme before first paint to avoid a flash. Dark is the default. -->
+  <script>
+    try {
+      if (localStorage.getItem('sweta_preview_theme') === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    } catch (e) {}
+  </script>
+
+  <style>
+    :root {
+      --nav-hero:#262a3a; --nav-deep:#1b1e2a; --nav-card:#20232f; --nav-card-2:#242836;
+      --ink:#edeef2; --ink-soft:rgba(237,238,242,0.66); --ink-mute:rgba(237,238,242,0.4);
+      --terra:#c2714f; --terra-lt:#d98a63; --line:rgba(237,238,242,0.1);
+      --serif:'DM Serif Display',Georgia,serif;
+      /* Theme toggle chip (dark defaults) */
+      --toggle-bg:rgba(237,238,242,0.08); --toggle-fg:#edeef2; --toggle-border:rgba(237,238,242,0.16);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',sans-serif; background:var(--nav-deep); color:var(--ink); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+    a { color:inherit; }
+    ::selection { background:rgba(194,113,79,0.35); }
+
+    /* ── Top nav ── */
+    .topnav { position:sticky; top:0; z-index:60; display:flex; align-items:center; justify-content:space-between;
+      max-width:1180px; margin:0 auto; padding:22px 32px; }
+    .topnav::before { content:''; position:absolute; inset:0; z-index:-1; background:rgba(27,30,42,0.72);
+      backdrop-filter:blur(14px); border-bottom:1px solid var(--line); opacity:0; transition:opacity .3s; }
+    .topnav.stuck::before { opacity:1; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:600; letter-spacing:0.02em; text-decoration:none; }
+    .brand-dot { width:30px; height:30px; border-radius:50% 50% 50% 4px;
+      background:linear-gradient(135deg,var(--terra-lt),var(--terra)); box-shadow:0 6px 20px rgba(194,113,79,0.45); }
+    .navlinks { display:flex; gap:28px; font-size:14px; }
+    .navlinks a { color:var(--ink-mute); text-decoration:none; transition:color .2s; position:relative; }
+    .navlinks a:hover, .navlinks a.active { color:var(--ink); }
+    .navlinks a.active::after { content:''; position:absolute; left:50%; bottom:-9px; transform:translateX(-50%);
+      width:5px; height:5px; border-radius:50%; background:var(--terra); }
+
+    /* ── Shared section chrome ── */
+    .wrap { max-width:1180px; margin:0 auto; padding:0 32px; }
+    .eyebrow { font-size:12px; letter-spacing:0.28em; text-transform:uppercase; color:var(--terra-lt); margin-bottom:16px; }
+    .eyebrow::before { content:'—  '; }
+    .sec-title { font-size:clamp(1.5rem,2.6vw,2.1rem); font-weight:600; line-height:1.3; letter-spacing:-0.01em; }
+    .muted { color:var(--ink-soft); line-height:1.75; }
+    .sec-head { max-width:560px; margin-bottom:46px; }
+
+    /* ══ HERO ══ */
+    .hero { position:relative; overflow:hidden; background:var(--nav-hero); padding:16px 0 84px; }
+    .hero::before { content:''; position:absolute; inset:-10% -10% 0; z-index:0; pointer-events:none;
+      background:
+        radial-gradient(34% 40% at 30% 32%, rgba(194,113,79,0.26) 0%, transparent 60%),
+        radial-gradient(30% 36% at 74% 44%, rgba(217,138,99,0.16) 0%, transparent 62%),
+        radial-gradient(42% 46% at 52% 96%, rgba(194,113,79,0.12) 0%, transparent 66%);
+      animation:drift 24s ease-in-out infinite alternate; }
+    @keyframes drift { 0%{transform:translate3d(0,0,0);} 100%{transform:translate3d(1.5%,-1.5%,0) scale(1.04);} }
+
+    .hero-inner { position:relative; z-index:2; max-width:1180px; margin:0 auto; padding:40px 32px 0;
+      display:grid; grid-template-columns:0.85fr 1.15fr; align-items:center; gap:56px; min-height:72vh; }
+
+    /* Circular, uncropped portrait */
+    .portrait-wrap { position:relative; justify-self:center; width:clamp(240px,30vw,340px); aspect-ratio:1; }
+    .portrait-wrap::before { content:''; position:absolute; inset:-14%; border-radius:50%;
+      background:radial-gradient(circle, rgba(194,113,79,0.55) 0%, transparent 66%); filter:blur(30px);
+      z-index:0; animation:glow 6s ease-in-out infinite; }
+    @keyframes glow { 0%,100%{opacity:.8;} 50%{opacity:1;} }
+    .portrait { position:relative; z-index:1; width:100%; height:100%; border-radius:50%; object-fit:cover; object-position:center 20%;
+      border:2px solid rgba(237,238,242,0.14); box-shadow:0 30px 70px rgba(0,0,0,0.55), inset 0 0 0 6px rgba(27,30,42,0.5);
+      background:var(--nav-card); }
+    .portrait-ring { position:absolute; inset:-5%; border-radius:50%; border:1px solid rgba(194,113,79,0.35); z-index:1;
+      animation:spin 26s linear infinite; }
+    .portrait-ring::after { content:''; position:absolute; top:-4px; left:50%; width:8px; height:8px; border-radius:50%;
+      background:var(--terra-lt); box-shadow:0 0 14px 2px rgba(217,138,99,0.8); transform:translateX(-50%); }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    .lead { position:relative; }
+    .location { display:inline-flex; align-items:center; gap:8px; font-size:13px; letter-spacing:0.04em;
+      color:var(--ink-soft); margin-bottom:20px; }
+    .location .pin { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 10px 1px rgba(194,113,79,0.7); }
+    .name { font-weight:700; font-size:clamp(2.6rem,6vw,4.6rem); line-height:0.98; letter-spacing:-0.03em; color:var(--ink); }
+    .name .dot { color:var(--terra); }
+    .name-underline { width:64px; height:5px; border-radius:3px; background:var(--terra); margin:22px 0 26px; transform-origin:left; }
+    /* Hero social row (icons + email) */
+    .hero-social { display:flex; align-items:center; flex-wrap:wrap; gap:16px; margin-top:6px; }
+    .soc { width:46px; height:46px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
+      color:var(--ink-soft); border:1px solid var(--line); background:rgba(237,238,242,0.04); backdrop-filter:blur(6px);
+      text-decoration:none; transition:all .22s; }
+    .soc:hover { color:#fff; border-color:var(--terra); background:rgba(194,113,79,0.9);
+      transform:translateY(-3px); box-shadow:0 10px 24px rgba(194,113,79,0.4); }
+    .hero-email { display:inline-flex; align-items:center; gap:9px; font-size:14.5px; font-weight:500;
+      color:var(--ink-soft); text-decoration:none; transition:color .22s; }
+    .hero-email:hover { color:var(--terra-lt); }
+    .hero-email svg { color:var(--terra); flex-shrink:0; }
+    .role { font-size:clamp(1.15rem,2vw,1.5rem); font-weight:600; line-height:1.32; letter-spacing:-0.01em; margin-bottom:16px; max-width:30ch; }
+    .role em { color:var(--terra-lt); font-style:normal; }
+    .blurb { font-size:15px; line-height:1.75; color:var(--ink-soft); margin-bottom:24px; max-width:56ch; }
+    .htags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; }
+    .htag { font-size:11.5px; font-weight:500; padding:6px 14px; border-radius:100px;
+      background:rgba(237,238,242,0.06); border:1px solid var(--line); color:var(--ink-soft); }
+    .hero-btns { display:flex; flex-wrap:wrap; gap:14px; }
+    .btn { display:inline-flex; align-items:center; gap:9px; font-size:14px; font-weight:600; padding:13px 22px;
+      border-radius:100px; text-decoration:none; cursor:pointer; border:1px solid transparent; transition:all .22s; font-family:inherit; }
+    .btn-primary { background:linear-gradient(135deg,var(--terra-lt),var(--terra)); color:#fff; box-shadow:0 10px 26px rgba(194,113,79,0.35); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 16px 34px rgba(194,113,79,0.45); }
+    .btn-outline { background:rgba(237,238,242,0.04); border-color:var(--line); color:var(--ink); }
+    .btn-outline:hover { border-color:var(--terra); background:rgba(194,113,79,0.12); transform:translateY(-2px); }
+
+    /* ══ Section bands (alternating dark tones) ══ */
+    .band { padding:92px 0; }
+    .band--deep { background:var(--nav-deep); }
+    .band--hero { background:var(--nav-hero); }
+
+    /* ══ WORK — timeline ══ */
+    .timeline { position:relative; margin-top:8px; padding-left:30px; }
+    .timeline::before { content:''; position:absolute; left:7px; top:6px; bottom:6px; width:2px;
+      background:linear-gradient(var(--terra) 0%, rgba(194,113,79,0.15) 100%); }
+    .tl-item { position:relative; padding:0 0 40px 8px; }
+    .tl-item:last-child { padding-bottom:0; }
+    .tl-item::before { content:''; position:absolute; left:-30px; top:5px; width:16px; height:16px; border-radius:50%;
+      background:var(--nav-deep); border:3px solid var(--terra); transition:all .25s; }
+    .tl-item--current::before { background:var(--terra); box-shadow:0 0 0 5px rgba(194,113,79,0.2); }
+    .tl-head { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:6px; }
+    .tl-role { font-size:1.15rem; font-weight:600; letter-spacing:-0.01em; }
+    .tl-date { font-size:12.5px; font-weight:500; letter-spacing:0.04em; color:var(--terra-lt); white-space:nowrap; }
+    .tl-org { font-size:13.5px; color:var(--ink-mute); margin-bottom:10px; }
+    .tl-desc { font-size:14.5px; line-height:1.7; color:var(--ink-soft); max-width:70ch; }
+
+    /* ══ CASE STUDIES ══ */
+    .cs-list { display:flex; flex-direction:column; gap:22px; }
+    .cs-three { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+    .ccard { position:relative; display:flex; flex-direction:column; padding:30px; border-radius:18px;
+      background:var(--nav-card); border:1px solid var(--line); overflow:hidden;
+      transition:transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s, border-color .3s, background-color .5s ease, color .5s ease; }
+    .ccard:hover { transform:translateY(-6px); box-shadow:0 30px 60px rgba(0,0,0,0.45); border-color:rgba(194,113,79,0.4); }
+    .ccard--lead { background:linear-gradient(140deg, rgba(194,113,79,0.16), var(--nav-card)); border-color:rgba(194,113,79,0.35); }
+    .cs-meta { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+    .cs-status { font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--terra-lt);
+      background:rgba(194,113,79,0.14); padding:4px 12px; border-radius:100px; }
+    .cs-year { font-size:12px; color:var(--ink-mute); }
+    .cs-title { font-size:1.5rem; font-weight:600; letter-spacing:-0.02em; margin-bottom:10px; }
+    .ccard--lead .cs-title { font-size:1.9rem; }
+    .cs-problem { font-size:14.5px; font-style:italic; color:var(--ink); line-height:1.55; margin-bottom:14px; }
+    .cs-desc { font-size:13.5px; line-height:1.65; color:var(--ink-soft); margin-bottom:16px; }
+    .ccard--lead .cs-desc { font-size:14.5px; max-width:64ch; }
+    .cs-tags { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:20px; }
+    .ctag { font-size:11px; padding:5px 12px; border-radius:100px; background:rgba(237,238,242,0.05); border:1px solid var(--line); color:var(--ink-soft); }
+    .cs-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:auto; }
+    .btn-sm { font-size:13px; padding:10px 18px; }
+
+    /* ══ SKILLS ══ */
+    .skills-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+    .skill-card { padding:28px; border-radius:18px; background:var(--nav-card); border:1px solid var(--line);
+      transition:transform .25s, border-color .25s, box-shadow .25s, background-color .5s ease, color .5s ease; }
+    .skill-card:hover { transform:translateY(-4px); border-color:rgba(194,113,79,0.35); box-shadow:0 22px 44px rgba(0,0,0,0.4); }
+    .skill-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+    .skill-label { font-size:1.15rem; font-weight:600; letter-spacing:-0.01em; }
+    .skill-depth { font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--terra-lt);
+      background:rgba(194,113,79,0.14); padding:4px 11px; border-radius:100px; }
+    .skill-tier { margin-bottom:16px; } .skill-tier:last-child { margin-bottom:0; }
+    .tier-label { display:block; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:9px; }
+    .skill-tags { display:flex; flex-wrap:wrap; gap:7px; }
+    .stag { font-size:12px; padding:6px 13px; border-radius:100px; background:rgba(237,238,242,0.05); border:1px solid var(--line); color:var(--ink-soft); }
+    .stag--core { background:rgba(194,113,79,0.14); border-color:rgba(194,113,79,0.3); color:var(--ink); font-weight:500; }
+
+    /* ══ STORY ══ */
+    .story-card { padding:44px; border-radius:22px; background:var(--nav-card);
+      border:1px solid var(--line); box-shadow:0 24px 60px rgba(0,0,0,0.3); }
+    .story-quote { font-family:var(--serif); font-size:clamp(1.4rem,2.6vw,2rem); line-height:1.4; letter-spacing:-0.01em;
+      color:var(--ink); margin-bottom:34px; position:relative; padding-left:26px; }
+    .story-quote::before { content:''; position:absolute; left:0; top:6px; bottom:6px; width:4px; border-radius:3px; background:var(--terra); }
+    .story-arc { display:flex; align-items:flex-start; justify-content:space-between; gap:6px; margin-bottom:36px; flex-wrap:wrap; }
+    .arc-phase { display:flex; flex-direction:column; align-items:center; text-align:center; flex:1; min-width:70px; position:relative; }
+    .arc-dot { width:13px; height:13px; border-radius:50%; background:var(--nav-card); border:3px solid var(--terra); margin-bottom:12px; }
+    .arc-phase--active .arc-dot { background:var(--terra); box-shadow:0 0 0 5px rgba(194,113,79,0.2); }
+    .arc-year { font-size:12px; font-weight:600; color:var(--terra-lt); margin-bottom:5px; }
+    .arc-label { font-size:11.5px; line-height:1.35; color:var(--ink-soft); }
+    .arc-connector { flex:0 0 auto; align-self:flex-start; margin-top:6px; height:2px; width:100%; max-width:60px;
+      background:linear-gradient(90deg, var(--terra), rgba(194,113,79,0.2)); }
+    .story-body p { font-size:15px; line-height:1.8; color:var(--ink-soft); margin-bottom:16px; }
+    .story-body p:last-child { margin-bottom:0; }
+    .story-body em { color:var(--terra-lt); font-style:italic; }
+
+    /* ══ EDUCATION (reuses timeline) ══ */
+
+    /* ══ BEYOND WORK ══ */
+    .hobbies-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .hobby { display:flex; align-items:center; gap:14px; padding:20px 22px; border-radius:14px;
+      background:var(--nav-card); border:1px solid var(--line); transition:transform .22s, border-color .22s, background-color .5s ease, color .5s ease; }
+    .hobby:hover { transform:translateY(-3px); border-color:rgba(194,113,79,0.35); }
+    .hobby-icon { font-size:1.5rem; line-height:1; }
+    .hobby-label { font-size:14px; font-weight:500; }
+
+    /* ══ CONTACT ══ */
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+    .contact-title { font-size:clamp(1.8rem,3.2vw,2.6rem); font-weight:600; line-height:1.2; letter-spacing:-0.02em; margin-bottom:18px; }
+    .contact-mail { display:inline-flex; align-items:center; gap:12px; font-size:1.1rem; font-weight:600; color:var(--terra-lt); text-decoration:none; margin-top:14px; }
+    .contact-mail .arrow { width:34px; height:34px; border-radius:50%; border:1px solid var(--terra); display:flex; align-items:center; justify-content:center; transition:all .22s; }
+    .contact-mail:hover .arrow { background:var(--terra); color:#fff; transform:translateX(4px); }
+
+    .capture { padding:30px; border-radius:18px; background:var(--nav-card); border:1px solid var(--line); }
+    .capture-label { font-size:14px; font-weight:600; margin-bottom:6px; }
+    .capture-sub { font-size:13px; color:var(--ink-soft); line-height:1.6; margin-bottom:18px; }
+    .capture-row { display:flex; gap:10px; }
+    .capture-row input { flex:1; min-width:0; font-family:inherit; font-size:14px; padding:13px 16px; border-radius:100px;
+      background:rgba(237,238,242,0.05); border:1px solid var(--line); color:var(--ink); outline:none; transition:border-color .2s; }
+    .capture-row input::placeholder { color:var(--ink-mute); }
+    .capture-row input:focus { border-color:var(--terra); }
+    .capture-row input.input-error { border-color:#e0785f; }
+    .capture-error { font-size:12.5px; color:#e79b86; margin-top:10px; min-height:1em; }
+    .capture-divider { display:flex; align-items:center; gap:14px; margin:24px 0; color:var(--ink-mute); font-size:12px; letter-spacing:0.04em; }
+    .capture-divider::before, .capture-divider::after { content:''; flex:1; height:1px; background:var(--line); }
+    .cbtns { display:flex; flex-direction:column; gap:12px; }
+    .cbtn { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-radius:14px;
+      background:rgba(237,238,242,0.04); border:1px solid var(--line); text-decoration:none; transition:all .22s; }
+    .cbtn:hover { border-color:var(--terra); background:rgba(194,113,79,0.12); transform:translateY(-2px); }
+    .cbtn-label { font-weight:600; font-size:14.5px; } .cbtn-sub { font-size:12.5px; color:var(--ink-soft); margin-top:2px; }
+
+    /* ══ FOOTER ══ */
+    footer { background:var(--nav-deep); padding:60px 0 48px; text-align:center; border-top:1px solid var(--line); }
+    .foot-dot { width:40px; height:40px; border-radius:50% 50% 50% 6px; margin:0 auto 18px;
+      background:linear-gradient(135deg,var(--terra-lt),var(--terra)); box-shadow:0 8px 24px rgba(194,113,79,0.4); }
+    .foot-note { font-size:14px; color:var(--ink-soft); } .foot-note b { color:var(--ink); }
+    .foot-socials { display:flex; gap:16px; justify-content:center; margin-top:22px; }
+    .foot-socials a { color:var(--ink-mute); transition:color .2s; } .foot-socials a:hover { color:var(--terra-lt); }
+
+    /* ══ Hero load-reveal ══ */
+    /* Photo: fade + scale in, then hold static */
+    .an-photo { opacity:0; transform:scale(.92); animation:photoIn .9s cubic-bezier(.22,.61,.36,1) .15s both; }
+    @keyframes photoIn { to { opacity:1; transform:scale(1); } }
+    /* Name: slides in from the LEFT */
+    .an-left { opacity:0; transform:translateX(-46px); animation:fromLeft .8s cubic-bezier(.22,.61,.36,1) .35s both; }
+    @keyframes fromLeft { to { opacity:1; transform:translateX(0); } }
+    /* Underline grows after name */
+    .an-line { transform:scaleX(0); transform-origin:left; animation:growLine .7s cubic-bezier(.22,.61,.36,1) .7s both; }
+    @keyframes growLine { to { transform:scaleX(1); } }
+    /* Name + everything: stagger-slide in from the RIGHT (pronounced glide) */
+    .an-right { opacity:0; transform:translateX(110px); animation:fromRight .9s cubic-bezier(.22,.61,.36,1) both; }
+    @keyframes fromRight {
+      0%   { opacity:0; transform:translateX(110px); }
+      55%  { opacity:1; }
+      100% { opacity:1; transform:translateX(0); }
+    }
+    .r0{animation-delay:.15s;} .r1{animation-delay:.30s;} .r2{animation-delay:.48s;}
+    .r3{animation-delay:.64s;} .r4{animation-delay:.80s;} .r5{animation-delay:.96s;}
+    /* Nav fades in */
+    .an-fade { opacity:0; animation:justFade .7s ease .05s both; }
+    @keyframes justFade { to { opacity:1; } }
+
+    /* ══ Scroll behavior: dim → colour on entry, vanish on exit ══ */
+    @supports (animation-timeline: view()) {
+      .sv { animation:svFade linear both; animation-timeline:view(); animation-range:entry 2% exit 94%; }
+      @keyframes svFade {
+        0%   { opacity:0; transform:translateY(46px) scale(.99); filter:saturate(.55) brightness(.85); }
+        16%  { opacity:1; transform:translateY(0) scale(1); filter:saturate(1) brightness(1); }
+        82%  { opacity:1; transform:translateY(0) scale(1); filter:saturate(1) brightness(1); }
+        100% { opacity:0; transform:translateY(-42px) scale(.99); filter:saturate(.6) brightness(.85); }
+      }
+      /* Reveal-only: fade IN, then hold (bottom sections never get stuck hidden) */
+      .rv { animation:rvFade linear both; animation-timeline:view(); animation-range:entry 2% entry 44%; }
+      @keyframes rvFade {
+        0%   { opacity:0; transform:translateY(40px); filter:saturate(.55) brightness(.85); }
+        100% { opacity:1; transform:translateY(0); filter:saturate(1) brightness(1); }
+      }
+    }
+
+    /* Whole hero slowly fades + drifts away as you scroll toward the next section */
+    @supports (animation-timeline: scroll()) {
+      .hero-inner { animation:heroVanish linear both; animation-timeline:scroll(root); animation-range:0 82vh; }
+      @keyframes heroVanish {
+        0%   { opacity:1; transform:translateY(0) scale(1); }
+        100% { opacity:0; transform:translateY(-70px) scale(.97); }
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation:none !important; }
+      .an-photo,.an-left,.an-right,.an-fade { opacity:1 !important; transform:none !important; }
+      .an-line { transform:none !important; }
+      .sv,.rv,.hero-inner { opacity:1 !important; transform:none !important; filter:none !important; }
+      .portrait-ring { display:none; }
+    }
+
+    @media (max-width:900px) {
+      .hero-inner { grid-template-columns:1fr; gap:34px; text-align:center; min-height:auto; padding-top:24px; }
+      .portrait-wrap { order:-1; }
+      .name-underline { margin-left:auto; margin-right:auto; }
+      .role, .blurb { max-width:100%; }
+      .htags, .hero-social, .location { justify-content:center; }
+      .location { display:inline-flex; }
+      .eyebrow::before { content:''; }
+      .navlinks { display:none; }
+      .cs-three, .skills-grid, .hobbies-grid, .contact-grid { grid-template-columns:1fr; }
+      .band { padding:64px 0; }
+    }
+    @media (max-width:560px) {
+      .hobbies-grid { grid-template-columns:1fr 1fr; }
+      .story-card { padding:28px; }
+      .arc-connector { display:none; }
+      .story-arc { gap:14px 10px; }
+      .arc-phase { min-width:26%; }
+      .capture-row { flex-direction:column; }
+      .capture-row .btn { justify-content:center; }
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       THEME TOGGLE + LIGHT MODE
+       Dark is the default (no [data-theme]). Light mode swaps the token
+       palette from navy → warm off-white and re-tints the glass surfaces.
+       ══════════════════════════════════════════════════════════════════ */
+
+    /* Smooth cross-theme fade on the big surfaces that have no own transition */
+    body, .hero, .band, footer, .story-card, .capture,
+    .capture-row input, .htag, .ctag, .stag, .soc, .btn, .cbtn,
+    .name, .role, .blurb, .tl-desc, .cs-desc, .arc-label, .muted, .story-body p {
+      transition: background-color .5s ease, color .5s ease, border-color .5s ease;
+    }
+
+    /* Toggle chip — floats bottom-right, clear of the sticky top nav */
+    .theme-toggle {
+      position:fixed; bottom:22px; right:22px; z-index:90;
+      width:46px; height:46px; border-radius:50%; padding:0;
+      display:inline-flex; align-items:center; justify-content:center;
+      background:var(--toggle-bg); color:var(--toggle-fg); border:1px solid var(--toggle-border);
+      box-shadow:0 8px 24px rgba(0,0,0,0.32); cursor:pointer;
+      -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+      transition:background .3s ease, color .3s ease, border-color .3s ease, transform .25s ease, box-shadow .3s ease;
+    }
+    .theme-toggle:hover { transform:scale(1.08) rotate(-10deg); border-color:var(--terra);
+      box-shadow:0 12px 30px rgba(194,113,79,0.4); }
+    .theme-toggle svg { width:19px; height:19px; display:block; }
+    .theme-toggle .icon-sun { display:none; }
+    :root[data-theme="light"] .theme-toggle .icon-sun  { display:block; }
+    :root[data-theme="light"] .theme-toggle .icon-moon { display:none; }
+
+    /* ── Light palette ── */
+    :root[data-theme="light"] {
+      --nav-hero:#f7f5f1; --nav-deep:#efeae2; --nav-card:#ffffff; --nav-card-2:#f7f4ef;
+      --ink:#23262f; --ink-soft:rgba(35,38,47,0.68); --ink-mute:rgba(35,38,47,0.46);
+      --terra:#c2714f; --terra-lt:#b05c37; --line:rgba(35,38,47,0.12);
+      --toggle-bg:rgba(255,255,255,0.82); --toggle-fg:#23262f; --toggle-border:rgba(35,38,47,0.14);
+    }
+
+    /* ── Light: re-tint glass surfaces (light-on-dark → dark-on-light) ── */
+    :root[data-theme="light"] .soc,
+    :root[data-theme="light"] .btn-outline,
+    :root[data-theme="light"] .cbtn      { background:rgba(35,38,47,0.04); }
+    :root[data-theme="light"] .htag,
+    :root[data-theme="light"] .ctag,
+    :root[data-theme="light"] .stag,
+    :root[data-theme="light"] .capture-row input { background:rgba(35,38,47,0.05); }
+
+    :root[data-theme="light"] .topnav::before { background:rgba(247,245,241,0.82); }
+
+    /* Portrait: swap the dark ring/shadow for a soft light one */
+    :root[data-theme="light"] .portrait {
+      border-color:rgba(35,38,47,0.12);
+      box-shadow:0 24px 56px rgba(35,38,47,0.16), inset 0 0 0 6px rgba(255,255,255,0.55);
+    }
+
+    /* Soften the heavy black drop shadows on light */
+    :root[data-theme="light"] .story-card { box-shadow:0 24px 60px rgba(35,38,47,0.12); }
+    :root[data-theme="light"] .ccard:hover { box-shadow:0 30px 60px rgba(35,38,47,0.16); }
+    :root[data-theme="light"] .skill-card:hover { box-shadow:0 22px 44px rgba(35,38,47,0.14); }
+
+    @media (max-width:560px) {
+      .theme-toggle { bottom:16px; right:16px; }
+    }
+  </style>
 </head>
 <body>
 
-  <main>
+  <!-- ── Theme toggle (dark ⇄ light) ───────────────────────────────────── -->
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+    </svg>
+  </button>
 
-    <!-- ── Hero (charcoal) ───────────────────────────────────────────── -->
-    <section class="hero">
-      <div class="hero-inner">
+  <nav class="topnav" id="topnav">
+    <a href="#top" class="brand an-fade"><span class="brand-dot"></span> Sweta Swain</a>
+    <div class="navlinks an-fade">
+      <a href="#top" class="active">Home</a>
+      <a href="#work">Work</a>
+      <a href="#case-studies">Case Studies</a>
+      <a href="#skills">Skills</a>
+      <a href="#story">Story</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
 
-        <div class="photo-wrapper">
-          <img
-            src="photo.jpg"
-            alt="Sweta Swain"
-            class="photo"
-            onerror="this.style.display='none'; document.getElementById('initials').style.display='flex';"
-          />
-          <div class="initials" id="initials">SS</div>
-        </div>
+  <!-- ══ HERO ══ -->
+  <header class="hero" id="top">
+    <div class="hero-inner">
 
-        <div class="hero-text">
-          <p class="location">Frankfurt, Germany</p>
-          <h1 class="name">Sweta Swain</h1>
-          <p class="tagline">Building products at the intersection of engineering and empathy.</p>
-          <p class="intro">
-            Product Engineer with a foundation in safety-critical automotive systems. I turn ambiguous problems into validated requirements, research-backed decisions, and shipped products — now with AI woven into how I work.
-          </p>
-          <div class="tags">
-            <span class="tag">Product Discovery</span>
-            <span class="tag">User Research</span>
-            <span class="tag">ADAS</span>
-            <span class="tag">AI-Powered Delivery</span>
-          </div>
-          <div class="btn-row">
-            <!-- Resume: re-add once PDF is ready →
-            <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Resume</a>
-            -->
-            <a href="https://www.linkedin.com/in/sweta-swain-611a3a73/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M20.447 20.452H17.01v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.588V9h3.307v1.561h.046c.461-.873 1.588-1.794 3.268-1.794 3.495 0 4.141 2.301 4.141 5.293v6.392zM5.337 7.433a1.917 1.917 0 1 1 0-3.834 1.917 1.917 0 0 1 0 3.834zm1.658 13.019H3.678V9h3.317v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-              LinkedIn
-            </a>
-          </div>
-        </div>
-
+      <div class="portrait-wrap an-photo">
+        <div class="portrait-ring"></div>
+        <img src="photo.jpg" alt="Sweta Swain" class="portrait"
+             onerror="this.style.display='none';" />
       </div>
-    </section>
 
-    <!-- ── Email CTA strip (white) ───────────────────────────────────── -->
-    <div class="page-section page-section--white page-section--cta">
-      <div class="section-inner">
-        <div class="email-cta fade-section" id="email-cta">
-          <p class="email-cta-text">I'm building in the open — drop your email and I'll keep you in the loop.</p>
-          <div class="email-cta-form">
-            <input
-              type="email"
-              id="cta-email"
-              placeholder="your@email.com"
-              autocomplete="email"
-            />
-            <button id="cta-btn" class="btn btn-primary">Stay in the loop</button>
-          </div>
-          <p class="email-cta-error" id="cta-error"></p>
+      <div class="lead">
+        <p class="location an-right r0"><span class="pin"></span> Frankfurt, Germany</p>
+        <h1 class="name an-right r1">Sweta Swain<span class="dot">.</span></h1>
+        <div class="name-underline an-line"></div>
+        <h2 class="role an-right r2">Product Engineer building at the intersection of <em>engineering and empathy</em>.</h2>
+        <p class="blurb an-right r3">A foundation in safety-critical automotive systems. I turn ambiguous problems into validated requirements, research-backed decisions, and shipped products — now with AI woven into how I work.</p>
+        <div class="hero-social an-right r4">
+          <a class="soc" href="https://www.linkedin.com/in/sweta-swain-611a3a73/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          </a>
+          <a class="soc" href="https://github.com/shwey13fra" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.29 0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg>
+          </a>
         </div>
       </div>
     </div>
+  </header>
 
-    <!-- ── Case Studies (cream) ──────────────────────────────────────── -->
-    <section class="page-section page-section--cream" id="projects">
-      <div class="section-inner section-inner--wide fade-section">
-        <p class="section-eye">Case Studies</p>
-        <h2 class="section-heading">Work that shows how I think</h2>
+  <!-- ══ WORK — employer timeline ══ -->
+  <section class="band band--deep sv" id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Work Experience</p>
+        <h3 class="sec-title">A decade of shipping — ADAS to product.</h3>
+      </div>
+      <div class="timeline">
 
-        <!--
-          Current state (4 studies): a full-width lead card (.cs-lead — NurtureDE) followed by a
-          .cs-list--three row for Product Compass, Micro-PM, and TripSync.
-          Each study has its own HTML file following case-study-micro-pm.html as the template.
-        -->
+        <div class="tl-item tl-item--current">
+          <div class="tl-head"><p class="tl-role">Product Engineer</p><span class="tl-date">07/2023 — Present</span></div>
+          <p class="tl-org">FERCHAU · Honda R&amp;D Europe · Frankfurt, Germany</p>
+          <p class="tl-desc">Led end-to-end product discovery for Honda's Hi-Drive automated lane-merging concept — translating OEM expectations, user needs and EU regulation into structured requirements, feature specs and acceptance criteria. Ran a 3-phase user research programme that fed prioritised features to the design team, and drove iterative validation in an Agile delivery loop.</p>
+        </div>
 
-        <div class="cs-list">
+        <div class="tl-item">
+          <div class="tl-head"><p class="tl-role">Project Engineer</p><span class="tl-date">11/2022 — 03/2023</span></div>
+          <p class="tl-org">Luxoft · CARIAD (VW Group) · Munich, Germany</p>
+          <p class="tl-desc">Worked alongside CARIAD product managers and owners in backlog refinement — clarifying change requests for the IVI middleware layer and translating business intent into well-scoped, development-ready work items shipped to VW Group platforms.</p>
+        </div>
 
-          <div class="case-study-featured cs-lead">
-            <div class="cs-meta">
-              <span class="cs-status">Live on HF Spaces</span>
-              <span class="cs-year-badge">2026</span>
-            </div>
-            <h3 class="cs-featured-title">NurtureDE</h3>
-            <p class="cs-featured-problem">The information officially exists — expats just can't find it, or don't know the German word for it.</p>
-            <div class="cs-featured-tags">
-              <span class="tag">RAG</span>
-              <span class="tag">Hybrid Retrieval</span>
-              <span class="tag">LangGraph</span>
-              <span class="tag">Evaluation</span>
-              <span class="tag">Python</span>
-              <span class="tag">Anthropic API</span>
-            </div>
-            <p class="cs-featured-desc">A cited, source-grounded assistant for pregnancy, Mutterschutz, and family benefits in Germany. Hybrid retrieval over 22 official sources, evaluated on 56 cases — recall@5 improved 0.75 → 0.90, every figure traceable to a file. Built as a bounded workflow, not an autonomous agent, because a wrong answer means a missed benefit deadline.</p>
-            <div class="cs-featured-actions">
-              <a href="case-study-nurture-de.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
-              <a href="https://huggingface.co/spaces/Shwey13/nurture-de" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Try it live</a>
-            </div>
-          </div>
+        <div class="tl-item">
+          <div class="tl-head"><p class="tl-role">Software Developer (Working Student)</p><span class="tl-date">04/2021 — 10/2022</span></div>
+          <p class="tl-org">Robert Bosch GmbH · AEB Safety Systems · Leonberg, Germany</p>
+          <p class="tl-desc">Spotted a gap in AEB test-result visibility, then owned it end-to-end — gathering requirements from engineers, writing user stories, and shipping a full-stack web tool (FastAPI + JS + SQL) that removed manual reporting bottlenecks.</p>
+        </div>
 
-          <div class="cs-list--three">
+        <div class="tl-item">
+          <div class="tl-head"><p class="tl-role">Senior Software Engineer</p><span class="tl-date">09/2015 — 10/2020</span></div>
+          <p class="tl-org">Robert Bosch Engineering &amp; Business Solutions · Bengaluru, India</p>
+          <p class="tl-desc">Drove requirement analysis and feature estimation across 6 OEM programmes (Honda, JLR, Renault, GM, Nissan, Suzuki), owning scope and delivery commitments. Served as Scrum Master — running sprint planning, reviews and retros to improve delivery predictability — and built reusable knowledge assets that cut onboarding time and recurring defects.</p>
+        </div>
 
-          <div class="case-study-featured">
-            <div class="cs-meta">
-              <span class="cs-status">Live on Vercel</span>
-              <span class="cs-year-badge">2026</span>
-            </div>
-            <h3 class="cs-featured-title">Product Compass</h3>
-            <p class="cs-featured-problem">PMs don't fail on capability — they fail on positioning, signal, and feedback.</p>
-            <div class="cs-featured-tags">
-              <span class="tag">Product Discovery</span>
-              <span class="tag">User Research</span>
-              <span class="tag">Competitive Analysis</span>
-              <span class="tag">Next.js</span>
-            </div>
-            <p class="cs-featured-desc">A contextual opportunity ecosystem for product managers — matching candidates to genuinely-PM roles by team context, not job title. Grounded in 3 user interviews, a 12-point pain register, and an 8-competitor teardown.</p>
-            <div class="cs-featured-actions">
-              <a href="case-study-product-compass.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
-              <a href="https://product-compass-two.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View live site</a>
-            </div>
-          </div>
-
-          <div class="case-study-featured">
-            <div class="cs-meta">
-              <span class="cs-status">Live on Vercel</span>
-              <span class="cs-year-badge">2026</span>
-            </div>
-            <h3 class="cs-featured-title">Micro-PM Residency Program</h3>
-            <p class="cs-featured-problem">How do aspiring PMs get real practice without a PM job?</p>
-            <div class="cs-featured-tags">
-              <span class="tag">Product Design</span>
-              <span class="tag">User Research</span>
-              <span class="tag">Ship-first</span>
-              <span class="tag">Next.js</span>
-            </div>
-            <p class="cs-featured-desc">Designed and shipped a platform connecting aspiring PMs with real startup product problems. Participants work in intentional teams over one weekend — conducting user interviews, synthesising insights, and pitching recommendations directly to the startup's PM.</p>
-            <div class="cs-featured-actions">
-              <a href="case-study-micro-pm.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
-              <a href="https://pmresidencyprogram.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View live site</a>
-            </div>
-          </div>
-
-          <div class="case-study-card">
-            <div class="cs-meta">
-              <span class="cs-status">Shipped — Live MVP</span>
-              <span class="cs-year-badge">2026</span>
-            </div>
-            <h3 class="cs-featured-title">TripSync</h3>
-            <p class="cs-featured-problem">Group travel is broken because the coordination layer doesn't exist.</p>
-            <div class="cs-featured-tags">
-              <span class="tag">Product Design</span>
-              <span class="tag">User Research</span>
-              <span class="tag">Ship-first</span>
-              <span class="tag">Claude API</span>
-            </div>
-            <p class="cs-featured-desc">Designed and shipped a mobile-first group travel platform replacing the WhatsApp + Sheets + Splitwise + Wanderlog stack. Discovery across 5 user interviews. Built in 7 days with AI-powered destination suggestions, itinerary generation, and proactive nudges.</p>
-            <div class="cs-featured-actions">
-              <a href="case-study-tripsync.html" class="btn btn-primary cs-read-btn">Read the case study <span class="cs-arrow">→</span></a>
-              <a href="https://group-travel-plan-407gkmcib-shwey13fras-projects.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View live site</a>
-            </div>
-          </div>
-
-          </div><!-- /cs-list--three -->
-
+        <div class="tl-item">
+          <div class="tl-head"><p class="tl-role">Associate Software Engineer</p><span class="tl-date">09/2013 — 09/2015</span></div>
+          <p class="tl-org">Wipro Technologies · BMW Automobiles · Bengaluru, India</p>
+          <p class="tl-desc">Supported BMW navigation feature validation; first exposure to client-facing review sessions and shipped feature cycles with direct stakeholder interaction.</p>
         </div>
 
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ── Skills & Tools (white) ────────────────────────────────────── -->
-    <section class="page-section page-section--white" id="skills">
-      <div class="section-inner section-inner--wide fade-section">
-        <p class="section-eye">Skills &amp; Tools</p>
-        <h2 class="section-heading">What I bring</h2>
-        <div class="skills-grid">
+  <!-- ══ CASE STUDIES ══ -->
+  <section class="band band--hero sv" id="case-studies">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Case Studies</p>
+        <h3 class="sec-title">Work that shows how I think — discovery to shipped.</h3>
+      </div>
 
-          <div class="skill-group">
-            <div class="skill-group-header">
-              <p class="skill-group-label">Product &amp; Process</p>
-              <span class="skill-depth">Core</span>
-            </div>
-            <div class="skill-tier">
-              <span class="skill-tier-label">Core</span>
-              <div class="skill-tags skill-core">
-                <span class="tag">Requirements Engineering</span>
-                <span class="tag">User Research</span>
-                <span class="tag">Backlog Management</span>
-              </div>
-            </div>
-            <div class="skill-tier">
-              <span class="skill-tier-label">Methods &amp; Tools</span>
-              <div class="skill-tags">
-                <span class="tag tag-tool">Agile / Scrum</span>
-                <span class="tag tag-tool">Kanban</span>
-                <span class="tag tag-tool">Scrum Master</span>
-                <span class="tag tag-tool">JIRA</span>
-                <span class="tag tag-tool">Confluence</span>
-                <span class="tag tag-tool">Azure DevOps</span>
-              </div>
+      <div class="cs-list">
+
+        <div class="ccard ccard--lead">
+          <div class="cs-meta"><span class="cs-status">Live on HF Spaces</span><span class="cs-year">2026</span></div>
+          <h4 class="cs-title">NurtureDE</h4>
+          <p class="cs-problem">The information officially exists — expats just can't find it, or don't know the German word for it.</p>
+          <p class="cs-desc">A cited, source-grounded assistant for pregnancy, Mutterschutz, and family benefits in Germany. Hybrid retrieval over 22 official sources, evaluated on 56 cases — recall@5 improved 0.75 → 0.90, every figure traceable to a file. Built as a bounded workflow, not an autonomous agent, because a wrong answer means a missed benefit deadline.</p>
+          <div class="cs-tags"><span class="ctag">RAG</span><span class="ctag">Hybrid Retrieval</span><span class="ctag">LangGraph</span><span class="ctag">Evaluation</span><span class="ctag">Python</span><span class="ctag">Anthropic API</span></div>
+          <div class="cs-actions">
+            <a href="case-study-nurture-de.html" class="btn btn-primary btn-sm">Read the case study
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            <a href="https://huggingface.co/spaces/Shwey13/nurture-de" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Try it live</a>
+          </div>
+        </div>
+
+        <div class="cs-three">
+
+          <div class="ccard">
+            <div class="cs-meta"><span class="cs-status">Live on Vercel</span><span class="cs-year">2026</span></div>
+            <h4 class="cs-title">Product Compass</h4>
+            <p class="cs-problem">PMs don't fail on capability — they fail on positioning, signal, and feedback.</p>
+            <p class="cs-desc">A contextual opportunity ecosystem for product managers — matching candidates to genuinely-PM roles by team context, not job title. Grounded in 3 user interviews, a 12-point pain register, and an 8-competitor teardown.</p>
+            <div class="cs-tags"><span class="ctag">Discovery</span><span class="ctag">User Research</span><span class="ctag">Next.js</span></div>
+            <div class="cs-actions">
+              <a href="case-study-product-compass.html" class="btn btn-primary btn-sm">Read case study
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <a href="https://product-compass-two.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Live</a>
             </div>
           </div>
 
-          <div class="skill-group">
-            <div class="skill-group-header">
-              <p class="skill-group-label">AI &amp; Prototyping</p>
-              <span class="skill-depth">Now</span>
-            </div>
-            <div class="skill-tier">
-              <span class="skill-tier-label">Core</span>
-              <div class="skill-tags skill-core">
-                <span class="tag">Claude Code</span>
-                <span class="tag">Prompt Engineering</span>
-                <span class="tag">LLMs &amp; AI Agents</span>
-              </div>
-            </div>
-            <div class="skill-tier">
-              <span class="skill-tier-label">Tools</span>
-              <div class="skill-tags">
-                <span class="tag tag-tool">RAG Pipelines</span>
-                <span class="tag tag-tool">Vercel</span>
-                <span class="tag tag-tool">Supabase</span>
-                <span class="tag tag-tool">2 live prototypes shipped</span>
-              </div>
+          <div class="ccard">
+            <div class="cs-meta"><span class="cs-status">Live on Vercel</span><span class="cs-year">2026</span></div>
+            <h4 class="cs-title">Micro-PM Residency</h4>
+            <p class="cs-problem">How do aspiring PMs get real practice without a PM job?</p>
+            <p class="cs-desc">A platform connecting aspiring PMs with real startup product problems. Teams work over one weekend — user interviews, synthesis, and pitching recommendations directly to the startup's PM.</p>
+            <div class="cs-tags"><span class="ctag">Product Design</span><span class="ctag">Ship-first</span><span class="ctag">Next.js</span></div>
+            <div class="cs-actions">
+              <a href="case-study-micro-pm.html" class="btn btn-primary btn-sm">Read case study
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <a href="https://pmresidencyprogram.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Live</a>
             </div>
           </div>
 
-          <div class="skill-group">
-            <div class="skill-group-header">
-              <p class="skill-group-label">Software &amp; Full Stack</p>
-              <span class="skill-depth">Active</span>
-            </div>
-            <div class="skill-tier">
-              <span class="skill-tier-label">Core</span>
-              <div class="skill-tags skill-core">
-                <span class="tag">Python</span>
-                <span class="tag">SQL</span>
-                <span class="tag">FastAPI</span>
-              </div>
-            </div>
-            <div class="skill-tier">
-              <span class="skill-tier-label">Tools</span>
-              <div class="skill-tags">
-                <span class="tag tag-tool">C++</span>
-                <span class="tag tag-tool">JavaScript</span>
-                <span class="tag tag-tool">HTML</span>
-                <span class="tag tag-tool">Git</span>
-                <span class="tag tag-tool">Docker</span>
-                <span class="tag tag-tool">Azure</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-group">
-            <div class="skill-group-header">
-              <p class="skill-group-label">Automotive Domain</p>
-              <span class="skill-depth">10 years</span>
-            </div>
-            <div class="skill-tier">
-              <span class="skill-tier-label">Core</span>
-              <div class="skill-tags skill-core">
-                <span class="tag">ADAS</span>
-                <span class="tag">AEB</span>
-                <span class="tag">HMI</span>
-              </div>
-            </div>
-            <div class="skill-tier">
-              <span class="skill-tier-label">Tools</span>
-              <div class="skill-tags">
-                <span class="tag tag-tool">ISO 26262</span>
-                <span class="tag tag-tool">CAN Bus</span>
-                <span class="tag tag-tool">Navigation (NDS)</span>
-                <span class="tag tag-tool">RTMaps (dSpace)</span>
-                <span class="tag tag-tool">MATLAB</span>
-              </div>
+          <div class="ccard">
+            <div class="cs-meta"><span class="cs-status">Shipped — MVP</span><span class="cs-year">2026</span></div>
+            <h4 class="cs-title">TripSync</h4>
+            <p class="cs-problem">Group travel is broken because the coordination layer doesn't exist.</p>
+            <p class="cs-desc">A mobile-first group-travel platform replacing the WhatsApp + Sheets + Splitwise + Wanderlog stack. Discovery across 5 interviews; built in 7 days with AI-powered suggestions, itinerary generation, and proactive nudges.</p>
+            <div class="cs-tags"><span class="ctag">Product Design</span><span class="ctag">User Research</span><span class="ctag">Claude API</span></div>
+            <div class="cs-actions">
+              <a href="case-study-tripsync.html" class="btn btn-primary btn-sm">Read case study
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <a href="https://group-travel-plan-407gkmcib-shwey13fras-projects.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Live</a>
             </div>
           </div>
 
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ── My Story (cream) ──────────────────────────────────────────── -->
-    <section class="page-section page-section--cream" id="story">
-      <div class="section-inner fade-section">
-        <p class="section-eye">My Story</p>
-        <h2 class="section-heading">Engineering → Product</h2>
-        <div class="story-card">
+  <!-- ══ SKILLS ══ -->
+  <section class="band band--deep sv" id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Skills &amp; Tools</p>
+        <h3 class="sec-title">What I bring — product thinking, grounded in engineering rigour.</h3>
+      </div>
+      <div class="skills-grid">
 
-          <p class="story-quote">"I didn't set out to become a product manager. The path found me through curiosity."</p>
+        <div class="skill-card">
+          <div class="skill-top"><span class="skill-label">Product &amp; Process</span><span class="skill-depth">Core</span></div>
+          <div class="skill-tier"><span class="tier-label">Core</span><div class="skill-tags">
+            <span class="stag stag--core">Product Management</span><span class="stag stag--core">Technical Product Management</span><span class="stag stag--core">Product Strategy</span><span class="stag stag--core">Product Discovery</span><span class="stag stag--core">Product Requirements</span><span class="stag stag--core">Requirements Engineering</span><span class="stag stag--core">User Research</span><span class="stag stag--core">Stakeholder Management</span><span class="stag stag--core">Backlog Management</span><span class="stag stag--core">Agile Product Development</span>
+          </div></div>
+          <div class="skill-tier"><span class="tier-label">Methods &amp; Tools</span><div class="skill-tags">
+            <span class="stag">Agile / Scrum</span><span class="stag">Kanban</span><span class="stag">Scrum Master</span><span class="stag">JIRA</span><span class="stag">Confluence</span><span class="stag">Azure DevOps</span>
+          </div></div>
+        </div>
 
-          <div class="story-arc" aria-hidden="true">
-            <div class="arc-phase">
-              <div class="arc-dot"></div>
-              <span class="arc-year">2013</span>
-              <span class="arc-label">Embedded<br>systems</span>
-            </div>
-            <div class="arc-connector"></div>
-            <div class="arc-phase">
-              <div class="arc-dot"></div>
-              <span class="arc-year">2015</span>
-              <span class="arc-label">Safety-critical<br>ADAS</span>
-            </div>
-            <div class="arc-connector"></div>
-            <div class="arc-phase">
-              <div class="arc-dot"></div>
-              <span class="arc-year">2020</span>
-              <span class="arc-label">Full-stack<br>shipping</span>
-            </div>
-            <div class="arc-connector"></div>
-            <div class="arc-phase">
-              <div class="arc-dot"></div>
-              <span class="arc-year">2023</span>
-              <span class="arc-label">HMI &amp;<br>research</span>
-            </div>
-            <div class="arc-connector"></div>
-            <div class="arc-phase arc-phase--active">
-              <div class="arc-dot"></div>
-              <span class="arc-year">Now</span>
-              <span class="arc-label">PM<br>practice</span>
-            </div>
-          </div>
+        <div class="skill-card">
+          <div class="skill-top"><span class="skill-label">AI &amp; Prototyping</span><span class="skill-depth">Now</span></div>
+          <div class="skill-tier"><span class="tier-label">Core</span><div class="skill-tags">
+            <span class="stag stag--core">Artificial Intelligence (AI)</span><span class="stag stag--core">Claude Code</span><span class="stag stag--core">Prompt Engineering</span><span class="stag stag--core">LLMs &amp; AI Agents</span>
+          </div></div>
+          <div class="skill-tier"><span class="tier-label">Tools</span><div class="skill-tags">
+            <span class="stag">RAG Pipelines</span><span class="stag">Vercel</span><span class="stag">Supabase</span><span class="stag">4 live prototypes shipped</span>
+          </div></div>
+        </div>
 
-          <div class="story-body">
-            <p>My career began in safety-critical automotive systems — building, testing, and shipping ADAS features where failure isn't an option. Working at that level of consequence gave me something most product people don't start with: a visceral understanding of how software behaves when real users depend on it.</p>
-            <p>But the more I shipped, the more I found myself drawn upstream. Why were we building this feature? What problem were we <em>actually</em> solving? Were we solving the right one? I started stepping into requirement discussions, trade-off conversations, and prioritization calls — especially when user safety and experience were at stake. I wasn't just executing anymore. I was questioning.</p>
-            <p>I discovered I was most engaged when bringing structure to ambiguous problems, aligning stakeholders around a shared direction, and ensuring the thing we were building was worth building. That's product management — and it's where my technical depth, user empathy, and instinct for decision-making finally found a home.</p>
-          </div>
+        <div class="skill-card">
+          <div class="skill-top"><span class="skill-label">Software &amp; Full Stack</span><span class="skill-depth">Active</span></div>
+          <div class="skill-tier"><span class="tier-label">Core</span><div class="skill-tags">
+            <span class="stag stag--core">Software Engineering</span><span class="stag stag--core">Python</span><span class="stag stag--core">SQL</span><span class="stag stag--core">FastAPI</span>
+          </div></div>
+          <div class="skill-tier"><span class="tier-label">Tools</span><div class="skill-tags">
+            <span class="stag">C++</span><span class="stag">JavaScript</span><span class="stag">HTML</span><span class="stag">Git</span><span class="stag">Docker</span><span class="stag">Azure</span>
+          </div></div>
+        </div>
 
+        <div class="skill-card">
+          <div class="skill-top"><span class="skill-label">Automotive Domain</span><span class="skill-depth">10 years</span></div>
+          <div class="skill-tier"><span class="tier-label">Core</span><div class="skill-tags">
+            <span class="stag stag--core">Automotive Software</span><span class="stag stag--core">ADAS</span><span class="stag stag--core">AEB</span><span class="stag stag--core">HMI</span>
+          </div></div>
+          <div class="skill-tier"><span class="tier-label">Tools</span><div class="skill-tags">
+            <span class="stag">ISO 26262</span><span class="stag">CAN Bus</span><span class="stag">Navigation (NDS)</span><span class="stag">RTMaps (dSpace)</span><span class="stag">MATLAB</span>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STORY ══ -->
+  <section class="band band--hero sv" id="story">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">My Story</p>
+        <h3 class="sec-title">Engineering → Product</h3>
+      </div>
+      <div class="story-card">
+        <p class="story-quote">"I didn't set out to become a product manager. The path found me through curiosity."</p>
+
+        <div class="story-arc" aria-hidden="true">
+          <div class="arc-phase"><div class="arc-dot"></div><span class="arc-year">2013</span><span class="arc-label">Embedded<br>systems</span></div>
+          <div class="arc-connector"></div>
+          <div class="arc-phase"><div class="arc-dot"></div><span class="arc-year">2015</span><span class="arc-label">Safety-critical<br>ADAS</span></div>
+          <div class="arc-connector"></div>
+          <div class="arc-phase"><div class="arc-dot"></div><span class="arc-year">2020</span><span class="arc-label">Full-stack<br>shipping</span></div>
+          <div class="arc-connector"></div>
+          <div class="arc-phase"><div class="arc-dot"></div><span class="arc-year">2023</span><span class="arc-label">HMI &amp;<br>research</span></div>
+          <div class="arc-connector"></div>
+          <div class="arc-phase arc-phase--active"><div class="arc-dot"></div><span class="arc-year">Now</span><span class="arc-label">PM<br>practice</span></div>
+        </div>
+
+        <div class="story-body">
+          <p>My career began in safety-critical automotive systems — building, testing, and shipping ADAS features where failure isn't an option. Working at that level of consequence gave me something most product people don't start with: a visceral understanding of how software behaves when real users depend on it.</p>
+          <p>But the more I shipped, the more I found myself drawn upstream. Why were we building this feature? What problem were we <em>actually</em> solving? Were we solving the right one? I started stepping into requirement discussions, trade-off conversations, and prioritization calls — especially when user safety and experience were at stake. I wasn't just executing anymore. I was questioning.</p>
+          <p>I discovered I was most engaged when bringing structure to ambiguous problems, aligning stakeholders around a shared direction, and ensuring the thing we were building was worth building. That's product management — and it's where my technical depth, user empathy, and instinct for decision-making finally found a home.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ── Work Experience (white) ───────────────────────────────────── -->
-    <section class="page-section page-section--white" id="experience">
-      <div class="section-inner section-inner--wide fade-section">
-        <p class="section-eye">Work Experience</p>
-        <h2 class="section-heading">A decade of shipping</h2>
-        <div class="timeline">
+  <!-- ══ EDUCATION ══ -->
+  <section class="band band--deep sv" id="education">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Education</p>
+        <h3 class="sec-title">Formal foundations</h3>
+      </div>
+      <div class="timeline">
 
-          <div class="timeline-item timeline-current">
-            <div class="timeline-header">
-              <p class="timeline-role">Product Engineer</p>
-              <span class="timeline-date">07/2023 — Present</span>
-            </div>
-            <p class="timeline-org">FERCHAU · Honda R&amp;D Europe · Frankfurt, Germany</p>
-            <p class="timeline-desc">Led end-to-end product discovery for Honda's Hi-Drive automated lane-merging concept — translating OEM expectations, user needs and EU regulation into structured requirements, feature specs and acceptance criteria. Ran a 3-phase user research programme that fed prioritised features to the design team, and drove iterative validation in an Agile delivery loop.</p>
+        <div class="tl-item">
+          <div class="tl-head"><p class="tl-role">M.Sc. in Information Technology (Informatik)</p><span class="tl-date">11/2020 — 10/2023</span></div>
+          <p class="tl-org">Frankfurt University of Applied Sciences · Frankfurt, Germany</p>
+          <p class="tl-desc">Embedded Systems and Networking focus. Coursework: Machine Learning, Cloud Computing, Image Processing, Software Engineering, IT Security. Master thesis: comparative analysis of OpenAI model architectures, training methods and NLP performance across chatbot, content-generation and translation use cases.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-head"><p class="tl-role">B.E. in Electrical and Electronics Engineering</p><span class="tl-date">09/2009 — 06/2013</span></div>
+          <p class="tl-org">Silicon Institute of Technology · Bhubaneswar, India</p>
+          <p class="tl-desc">Focus on Embedded System development.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ BEYOND WORK ══ -->
+  <section class="band band--hero sv" id="hobbies">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Beyond Work</p>
+        <h3 class="sec-title">Outside the screen</h3>
+      </div>
+      <div class="hobbies-grid">
+        <div class="hobby"><span class="hobby-icon">🤖</span><span class="hobby-label">Tinkering with AI</span></div>
+        <div class="hobby"><span class="hobby-icon">📚</span><span class="hobby-label">Reading</span></div>
+        <div class="hobby"><span class="hobby-icon">✈️</span><span class="hobby-label">Travelling</span></div>
+        <div class="hobby"><span class="hobby-icon">🎨</span><span class="hobby-label">Design Exploration</span></div>
+        <div class="hobby"><span class="hobby-icon">🖌️</span><span class="hobby-label">Painting</span></div>
+        <div class="hobby"><span class="hobby-icon">🥾</span><span class="hobby-label">Hiking</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ══ -->
+  <section class="band band--hero rv" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <p class="eyebrow">Get in Touch</p>
+        <h3 class="contact-title">Let's talk — roles, product problems, or how I think.</h3>
+        <p class="muted">Open to Product Owner / Product Manager conversations, and always happy to trade notes on discovery, ADAS, or building with AI.</p>
+        <a href="mailto:shwetaswain13november@gmail.com" class="contact-mail">shwetaswain13november@gmail.com
+          <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+
+      <div>
+        <div class="capture" id="contact-capture">
+          <p class="capture-label">Building in the open</p>
+          <p class="capture-sub">Drop your email and I'll keep you in the loop on what I ship next.</p>
+          <div class="capture-row">
+            <input type="email" id="contact-email-input" placeholder="your@email.com" autocomplete="email" />
+            <button id="contact-email-btn" class="btn btn-primary">Stay in the loop</button>
           </div>
-
-          <div class="timeline-item">
-            <div class="timeline-header">
-              <p class="timeline-role">Project Engineer</p>
-              <span class="timeline-date">11/2022 — 03/2023</span>
-            </div>
-            <p class="timeline-org">Luxoft · CARIAD (VW Group) · Munich, Germany</p>
-            <p class="timeline-desc">Worked alongside CARIAD product managers and owners in backlog refinement — clarifying change requests for the IVI middleware layer and translating business intent into well-scoped, development-ready work items shipped to VW Group platforms.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-header">
-              <p class="timeline-role">Software Developer (Working Student)</p>
-              <span class="timeline-date">04/2021 — 10/2022</span>
-            </div>
-            <p class="timeline-org">Robert Bosch GmbH · AEB Safety Systems · Leonberg, Germany</p>
-            <p class="timeline-desc">Spotted a gap in AEB test-result visibility, then owned it end-to-end — gathering requirements from engineers, writing user stories, and shipping a full-stack web tool (FastAPI + JS + SQL) that removed manual reporting bottlenecks.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-header">
-              <p class="timeline-role">Senior Software Engineer</p>
-              <span class="timeline-date">09/2015 — 10/2020</span>
-            </div>
-            <p class="timeline-org">Robert Bosch Engineering &amp; Business Solutions · Bengaluru, India</p>
-            <p class="timeline-desc">Drove requirement analysis and feature estimation across 6 OEM programmes (Honda, JLR, Renault, GM, Nissan, Suzuki), owning scope and delivery commitments. Served as Scrum Master — running sprint planning, reviews and retros to improve delivery predictability — and built reusable knowledge assets that cut onboarding time and recurring defects.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-header">
-              <p class="timeline-role">Associate Software Engineer</p>
-              <span class="timeline-date">09/2013 — 09/2015</span>
-            </div>
-            <p class="timeline-org">Wipro Technologies · BMW Automobiles · Bengaluru, India</p>
-            <p class="timeline-desc">Supported BMW navigation feature validation; first exposure to client-facing review sessions and shipped feature cycles with direct stakeholder interaction.</p>
-          </div>
-
+          <p class="capture-error" id="contact-email-error"></p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ── Education (cream) ─────────────────────────────────────────── -->
-    <section class="page-section page-section--cream" id="education">
-      <div class="section-inner section-inner--wide fade-section">
-        <p class="section-eye">Education</p>
-        <h2 class="section-heading">Formal foundations</h2>
-        <div class="timeline">
-
-          <div class="timeline-item">
-            <div class="timeline-header">
-              <p class="timeline-role">M.Sc. in Information Technology (Informatik)</p>
-              <span class="timeline-date">11/2020 — 10/2023</span>
-            </div>
-            <p class="timeline-org">Frankfurt University of Applied Sciences · Frankfurt, Germany</p>
-            <p class="timeline-desc">Embedded Systems and Networking focus. Coursework: Machine Learning, Cloud Computing, Image Processing, Software Engineering, IT Security. Master thesis: comparative analysis of OpenAI model architectures, training methods and NLP performance across chatbot, content-generation and translation use cases.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-header">
-              <p class="timeline-role">B.E. in Electrical and Electronics Engineering</p>
-              <span class="timeline-date">09/2009 — 06/2013</span>
-            </div>
-            <p class="timeline-org">Silicon Institute of Technology · Bhubaneswar, India</p>
-            <p class="timeline-desc">Focus on Embedded System development.</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ── Beyond Work (white) ───────────────────────────────────────── -->
-    <section class="page-section page-section--white" id="hobbies">
-      <div class="section-inner fade-section">
-        <p class="section-eye">Beyond Work</p>
-        <h2 class="section-heading">Outside the screen</h2>
-        <div class="hobbies-grid">
-          <div class="hobby-item"><span class="hobby-icon">🤖</span><span class="hobby-label">Tinkering with AI</span></div>
-          <div class="hobby-item"><span class="hobby-icon">📚</span><span class="hobby-label">Reading</span></div>
-          <div class="hobby-item"><span class="hobby-icon">✈️</span><span class="hobby-label">Travelling</span></div>
-          <div class="hobby-item"><span class="hobby-icon">🎨</span><span class="hobby-label">Design Exploration</span></div>
-          <div class="hobby-item"><span class="hobby-icon">🖌️</span><span class="hobby-label">Painting</span></div>
-          <div class="hobby-item"><span class="hobby-icon">🥾</span><span class="hobby-label">Hiking</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── Get in Touch (cream) ──────────────────────────────────────── -->
-    <section class="page-section page-section--cream" id="contact">
-      <div class="section-inner fade-section">
-        <p class="section-eye">Get in Touch</p>
-        <h2 class="section-heading">Let's talk</h2>
-        <div class="contact-card">
-          <p class="contact-tagline">I'm always open to interesting conversations, collaborations, or just a good chat about product, engineering, or AI.</p>
-
-          <div class="contact-capture" id="contact-capture">
-            <div class="contact-input-row">
-              <input type="email" id="contact-email-input" placeholder="your@email.com" autocomplete="email" />
-              <button id="contact-email-btn" class="btn btn-primary">Stay in the loop</button>
-            </div>
-            <p class="contact-input-error" id="contact-email-error"></p>
-          </div>
-
-          <div class="contact-divider" id="contact-divider"><span>or reach me directly</span></div>
-
-          <p class="contact-email-addr">shwetaswain13november@gmail.com</p>
-          <div class="contact-links">
-            <a href="mailto:shwetaswain13november@gmail.com" class="btn btn-primary">Send an Email</a>
-            <a href="https://www.linkedin.com/in/sweta-swain-611a3a73/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M20.447 20.452H17.01v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.588V9h3.307v1.561h.046c.461-.873 1.588-1.794 3.268-1.794 3.495 0 4.141 2.301 4.141 5.293v6.392zM5.337 7.433a1.917 1.917 0 1 1 0-3.834 1.917 1.917 0 0 1 0 3.834zm1.658 13.019H3.678V9h3.317v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-              LinkedIn
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ── Footer (charcoal) ─────────────────────────────────────────────── -->
-  <footer>
-    <p>Made with care &amp; curiosity &mdash; Sweta Swain</p>
+  <footer class="rv">
+    <div class="foot-dot"></div>
+    <p class="foot-note"><b>Made with care &amp; curiosity</b> — Sweta Swain</p>
+    <div class="foot-socials">
+      <a href="https://www.linkedin.com/in/sweta-swain-611a3a73/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+      <a href="https://github.com/shwey13fra" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.29 0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg></a>
+      <a href="mailto:shwetaswain13november@gmail.com" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></a>
+    </div>
   </footer>
 
-  <script src="script.js" defer></script>
+  <script>
+    // ── Supabase (public anon key, RLS-restricted to INSERT on subscribers) ──
+    const SUPABASE_URL = 'https://vgvhekneuykkxnpotsvr.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZndmhla25ldXlra3hucG90c3ZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwMjc5MjMsImV4cCI6MjA4OTYwMzkyM30.VwGi34BZskgayGcOzcHb1AOuxqn-JzXw6OOFmr45TQg';
+    const STORAGE_KEY = 'sweta_portfolio_access';
+
+    function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+    async function submitEmail(email) {
+      const { createClient } = supabase;
+      const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const { error } = await db.from('subscribers').insert({ email });
+      if (error && error.code !== '23505') throw error; // 23505 = duplicate → treat as success
+    }
+
+    // ── Sticky nav background + active link on scroll ──
+    function initNav() {
+      const nav = document.getElementById('topnav');
+      const links = Array.from(document.querySelectorAll('.navlinks a'));
+      const map = links.map(a => ({ a, sec: document.querySelector(a.getAttribute('href')) })).filter(x => x.sec);
+
+      const onScroll = () => {
+        nav.classList.toggle('stuck', window.scrollY > 20);
+        const y = window.scrollY + window.innerHeight * 0.35;
+        let current = map[0];
+        for (const item of map) { if (item.sec.offsetTop <= y) current = item; }
+        links.forEach(a => a.classList.remove('active'));
+        if (current) current.a.classList.add('active');
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    // ── Contact email capture ──
+    function initCapture() {
+      const capture = document.getElementById('contact-capture');
+      const divider = document.getElementById('contact-divider');
+      if (!capture) return;
+
+      const btn = document.getElementById('contact-email-btn');
+      const input = document.getElementById('contact-email-input');
+      const errorEl = document.getElementById('contact-email-error');
+
+      const showError = m => { errorEl.textContent = m; input.classList.add('input-error'); input.focus(); };
+      const clearError = () => { errorEl.textContent = ''; input.classList.remove('input-error'); };
+
+      input.addEventListener('input', clearError);
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') btn.click(); });
+
+      btn.addEventListener('click', async () => {
+        const email = input.value.trim();
+        if (!isValidEmail(email)) { showError('Please enter a valid email address.'); return; }
+        btn.disabled = true; btn.textContent = 'Just a moment…'; clearError();
+        try { await submitEmail(email); }
+        catch (err) { console.warn('Supabase unavailable (non-blocking):', err); }
+        localStorage.setItem(STORAGE_KEY, '1');
+        btn.textContent = "You're in ✦";
+        setTimeout(() => {
+          capture.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          capture.style.opacity = '0'; capture.style.transform = 'translateY(-8px)';
+          if (divider) { divider.style.transition = 'opacity 0.4s ease'; divider.style.opacity = '0'; }
+          setTimeout(() => { capture.style.display = 'none'; if (divider) divider.style.display = 'none'; }, 400);
+        }, 900);
+      });
+    }
+
+    // ── Theme toggle (dark ⇄ light) ──
+    function initThemeToggle() {
+      const btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      const THEME_KEY = 'sweta_preview_theme';
+
+      const apply = theme => {
+        if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        else document.documentElement.removeAttribute('data-theme');
+        btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+      };
+
+      apply(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+
+      btn.addEventListener('click', () => {
+        const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        apply(next);
+        try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => { initNav(); initCapture(); initThemeToggle(); });
+  </script>
 
 </body>
 </html>

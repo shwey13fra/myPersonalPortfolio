@@ -18,6 +18,11 @@
   --text-muted:   #a8a09a;
   --sage:         #78716c;
 
+  /* ── Theme toggle chip (dark theme defaults) ── */
+  --toggle-bg:     rgba(40, 37, 33, 0.72);
+  --toggle-fg:     #f0ebe2;
+  --toggle-border: rgba(240, 235, 226, 0.22);
+
   /* ── Terracotta accent ── */
   --terra:        #c2714f;
   --terra-soft:   #f7ede8;
@@ -1869,4 +1874,145 @@ footer {
   .cs-hero-actions .btn { flex: 1 1 auto; justify-content: center; }
   .cs-figure { padding: var(--sp-4); }
   .cs-figure pre { font-size: 0.72rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   THEME TOGGLE + LIGHT MODE
+   Dark is the default (no [data-theme] attribute — the design above).
+   Light mode warms the hero + footer to a soft sand and re-colors their
+   text, so the whole page reads cohesively light.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Smooth cross-theme transition on the surfaces that change ───────── */
+body,
+.hero,
+footer {
+  transition: background-color 0.55s ease, color 0.55s ease, border-color 0.55s ease;
+}
+
+.name,
+.location,
+.tagline,
+.intro {
+  transition: color 0.45s ease;
+}
+
+/* ─── Toggle chip (works on both dark hero + light body as it floats) ── */
+.theme-toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 200;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--toggle-bg);
+  color: var(--toggle-fg);
+  border: 1px solid var(--toggle-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+    transform 0.25s ease, box-shadow 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.08) rotate(-10deg);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.22);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+/* Show the moon in dark mode, the sun in light mode */
+.theme-toggle .icon-sun { display: none; }
+
+:root[data-theme="light"] .theme-toggle .icon-sun  { display: block; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+/* ─── Light palette + toggle chip tokens ─────────────────────────────── */
+:root[data-theme="light"] {
+  --bg-hero:       #ece3d4;   /* warm sand — cohesive with cream/white body */
+  --text-on-dark:  #22201d;   /* hero foreground flips to near-black */
+
+  --toggle-bg:     rgba(255, 255, 255, 0.82);
+  --toggle-fg:     #22201d;
+  --toggle-border: rgba(34, 32, 29, 0.14);
+}
+
+/* ─── Hero + text re-coloring for light mode ─────────────────────────── */
+:root[data-theme="light"] .hero {
+  border-bottom: 1px solid rgba(34, 32, 29, 0.08);
+}
+
+:root[data-theme="light"] .location { color: rgba(34, 32, 29, 0.5); }
+:root[data-theme="light"] .tagline  { color: rgba(34, 32, 29, 0.62); }
+:root[data-theme="light"] .intro    { color: rgba(34, 32, 29, 0.78); }
+
+:root[data-theme="light"] .hero .tag {
+  background: rgba(34, 32, 29, 0.06);
+  color: rgba(34, 32, 29, 0.82);
+  border-color: rgba(34, 32, 29, 0.12);
+}
+
+:root[data-theme="light"] .hero .tag:hover {
+  background: rgba(34, 32, 29, 0.12);
+  color: var(--navy);
+  border-color: rgba(34, 32, 29, 0.22);
+}
+
+:root[data-theme="light"] .hero .btn-outline {
+  color: var(--navy);
+  border-color: rgba(34, 32, 29, 0.25);
+}
+
+:root[data-theme="light"] .hero .btn-outline:hover {
+  background: rgba(34, 32, 29, 0.08);
+  color: var(--navy);
+  border-color: rgba(34, 32, 29, 0.45);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Photo ring + initials fallback for light mode ──────────────────── */
+:root[data-theme="light"] .photo,
+:root[data-theme="light"] .initials {
+  box-shadow:
+    0 8px 32px rgba(34, 32, 29, 0.14),
+    0 0 0 3px var(--bg-hero),
+    0 0 0 7px rgba(34, 32, 29, 0.08);
+}
+
+:root[data-theme="light"] .photo-wrapper:hover .photo,
+:root[data-theme="light"] .photo-wrapper:hover .initials {
+  box-shadow:
+    0 12px 44px rgba(34, 32, 29, 0.2),
+    0 0 0 3px var(--bg-hero),
+    0 0 0 9px rgba(194, 113, 79, 0.28);
+}
+
+:root[data-theme="light"] .initials {
+  background: linear-gradient(135deg, #f4ede0 0%, #e6dccb 100%);
+  color: var(--navy);
+}
+
+/* ─── Footer for light mode ──────────────────────────────────────────── */
+:root[data-theme="light"] footer {
+  color: rgba(34, 32, 29, 0.5);
+  border-top: 1px solid rgba(34, 32, 29, 0.08);
+}
+
+/* ─── Mobile: nudge the toggle in from the edge ──────────────────────── */
+@media (max-width: 767px) {
+  .theme-toggle {
+    top: 14px;
+    right: 14px;
+  }
 }
