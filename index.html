@@ -53,7 +53,8 @@
     .eyebrow::before { content:'—  '; }
     .sec-title { font-size:clamp(1.5rem,2.6vw,2.1rem); font-weight:600; line-height:1.3; letter-spacing:-0.01em; }
     .muted { color:var(--ink-soft); line-height:1.75; }
-    .sec-head { max-width:560px; margin-bottom:46px; }
+    .sec-head { max-width:600px; margin-bottom:46px; }
+    .sec-head .muted { margin-top:16px; font-size:15px; }
 
     /* ══ HERO ══ */
     .hero { position:relative; overflow:hidden; background:var(--nav-hero); padding:16px 0 84px; }
@@ -87,6 +88,9 @@
     .location { display:inline-flex; align-items:center; gap:8px; font-size:13px; letter-spacing:0.04em;
       color:var(--ink-soft); margin-bottom:20px; }
     .location .pin { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 10px 1px rgba(194,113,79,0.7); }
+    /* Positioning kicker — tells a recruiter what you target, above the name */
+    .hero-kicker { font-size:12px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase;
+      color:var(--terra-lt); margin-bottom:14px; }
     .name { font-weight:700; font-size:clamp(2.6rem,6vw,4.6rem); line-height:0.98; letter-spacing:-0.03em; color:var(--ink); }
     .name .dot { color:var(--terra); }
     .name-underline { width:64px; height:5px; border-radius:3px; background:var(--terra); margin:22px 0 26px; transform-origin:left; }
@@ -107,13 +111,24 @@
     .htags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; }
     .htag { font-size:11.5px; font-weight:500; padding:6px 14px; border-radius:100px;
       background:rgba(237,238,242,0.06); border:1px solid var(--line); color:var(--ink-soft); }
-    .hero-btns { display:flex; flex-wrap:wrap; gap:14px; }
+    .hero-btns { display:flex; flex-wrap:wrap; gap:14px; margin-bottom:22px; }
     .btn { display:inline-flex; align-items:center; gap:9px; font-size:14px; font-weight:600; padding:13px 22px;
       border-radius:100px; text-decoration:none; cursor:pointer; border:1px solid transparent; transition:all .22s; font-family:inherit; }
     .btn-primary { background:linear-gradient(135deg,var(--terra-lt),var(--terra)); color:#fff; box-shadow:0 10px 26px rgba(194,113,79,0.35); }
     .btn-primary:hover { transform:translateY(-2px); box-shadow:0 16px 34px rgba(194,113,79,0.45); }
     .btn-outline { background:rgba(237,238,242,0.04); border-color:var(--line); color:var(--ink); }
     .btn-outline:hover { border-color:var(--terra); background:rgba(194,113,79,0.12); transform:translateY(-2px); }
+
+    /* ══ Credibility strip — 3 stats, reads before any prose ══ */
+    .cred { background:var(--nav-hero); }
+    .cred-inner { max-width:1180px; margin:0 auto; padding:0 32px; display:grid; grid-template-columns:repeat(3,1fr);
+      border-top:1px solid var(--line); }
+    .cred-item { position:relative; padding:38px 22px; text-align:center; }
+    .cred-item + .cred-item::before { content:''; position:absolute; left:0; top:28px; bottom:28px; width:1px; background:var(--line); }
+    .cred-num { font-size:clamp(1.45rem,2.8vw,2.1rem); font-weight:700; letter-spacing:-0.02em; line-height:1.12;
+      color:var(--ink); margin-bottom:9px; }
+    .cred-num em { color:var(--terra-lt); font-style:normal; }
+    .cred-label { font-size:13px; line-height:1.5; color:var(--ink-soft); }
 
     /* ══ Section bands (alternating dark tones) ══ */
     .band { padding:92px 0; }
@@ -158,7 +173,7 @@
     .btn-sm { font-size:13px; padding:10px 18px; }
 
     /* ══ SKILLS ══ */
-    .skills-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+    .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
     .skill-card { padding:28px; border-radius:18px; background:var(--nav-card); border:1px solid var(--line);
       transition:transform .25s, border-color .25s, box-shadow .25s, background-color .5s ease, color .5s ease; }
     .skill-card:hover { transform:translateY(-4px); border-color:rgba(194,113,79,0.35); box-shadow:0 22px 44px rgba(0,0,0,0.4); }
@@ -206,6 +221,11 @@
     .contact-mail { display:inline-flex; align-items:center; gap:12px; font-size:1.1rem; font-weight:600; color:var(--terra-lt); text-decoration:none; margin-top:14px; }
     .contact-mail .arrow { width:34px; height:34px; border-radius:50%; border:1px solid var(--terra); display:flex; align-items:center; justify-content:center; transition:all .22s; }
     .contact-mail:hover .arrow { background:var(--terra); color:#fff; transform:translateX(4px); }
+    .contact-cta { max-width:640px; margin:0 auto; text-align:center; }
+    .contact-actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; justify-content:center; }
+    .contact-hint { margin-top:20px; font-size:14px; }
+    .contact-hint a { color:var(--ink-soft); text-decoration:none; transition:color .2s; }
+    .contact-hint a:hover { color:var(--terra-lt); }
 
     .capture { padding:30px; border-radius:18px; background:var(--nav-card); border:1px solid var(--line); }
     .capture-label { font-size:14px; font-weight:600; margin-bottom:6px; }
@@ -295,7 +315,7 @@
       .portrait-wrap { order:-1; }
       .name-underline { margin-left:auto; margin-right:auto; }
       .role, .blurb { max-width:100%; }
-      .htags, .hero-social, .location { justify-content:center; }
+      .htags, .hero-social, .hero-btns, .location { justify-content:center; }
       .location { display:inline-flex; }
       .eyebrow::before { content:''; }
       .navlinks { display:none; }
@@ -310,6 +330,9 @@
       .arc-phase { min-width:26%; }
       .capture-row { flex-direction:column; }
       .capture-row .btn { justify-content:center; }
+      .cred-inner { grid-template-columns:1fr; }
+      .cred-item { padding:22px 12px; }
+      .cred-item + .cred-item::before { left:22%; right:22%; top:0; bottom:auto; width:auto; height:1px; }
     }
 
     /* ══════════════════════════════════════════════════════════════════
@@ -394,9 +417,9 @@
     <a href="#top" class="brand an-fade"><span class="brand-dot"></span> Sweta Swain</a>
     <div class="navlinks an-fade">
       <a href="#top" class="active">Home</a>
-      <a href="#work">Work</a>
-      <a href="#case-studies">Case Studies</a>
-      <a href="#skills">Skills</a>
+      <a href="#case-studies">Product Work</a>
+      <a href="#work">Experience</a>
+      <a href="#skills">Capabilities</a>
       <a href="#story">Story</a>
       <a href="#contact">Contact</a>
     </div>
@@ -414,11 +437,16 @@
 
       <div class="lead">
         <p class="location an-right r0"><span class="pin"></span> Frankfurt, Germany</p>
+        <p class="hero-kicker an-right r0">Technical Product · AI · Automotive</p>
         <h1 class="name an-right r1">Sweta Swain<span class="dot">.</span></h1>
         <div class="name-underline an-line"></div>
-        <h2 class="role an-right r2">Product Engineer building at the intersection of <em>engineering and empathy</em>.</h2>
-        <p class="blurb an-right r3">A foundation in safety-critical automotive systems. I turn ambiguous problems into validated requirements, research-backed decisions, and shipped products — now with AI woven into how I work.</p>
-        <div class="hero-social an-right r4">
+        <h2 class="role an-right r2">I build products where the problem is <em>messy</em> and the technology is <em>complex</em>.</h2>
+        <p class="blurb an-right r3">10+ years across automotive software, safety-critical systems and product development — now bringing that technical depth into Product Management and AI. My strength is turning ambiguity into product decisions: understanding the user, challenging assumptions, prioritising what matters, working through technical trade-offs, and shipping products that can be tested against real outcomes.</p>
+        <div class="hero-btns an-right r4">
+          <a href="#case-studies" class="btn btn-primary">View Case Studies
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="hero-social an-right r5">
           <a class="soc" href="https://www.linkedin.com/in/sweta-swain-611a3a73/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
           </a>
@@ -430,55 +458,30 @@
     </div>
   </header>
 
-  <!-- ══ WORK — employer timeline ══ -->
-  <section class="band band--deep sv" id="work">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">Work Experience</p>
-        <h3 class="sec-title">A decade of shipping — ADAS to product.</h3>
+  <!-- ══ CREDIBILITY STRIP ══ -->
+  <section class="cred" aria-label="At a glance">
+    <div class="cred-inner an-fade">
+      <div class="cred-item">
+        <p class="cred-num">10<em>+</em> yrs</p>
+        <p class="cred-label">Software &amp; automotive systems</p>
       </div>
-      <div class="timeline">
-
-        <div class="tl-item tl-item--current">
-          <div class="tl-head"><p class="tl-role">Product Engineer</p><span class="tl-date">07/2023 — Present</span></div>
-          <p class="tl-org">FERCHAU · Honda R&amp;D Europe · Frankfurt, Germany</p>
-          <p class="tl-desc">Led end-to-end product discovery for Honda's Hi-Drive automated lane-merging concept — translating OEM expectations, user needs and EU regulation into structured requirements, feature specs and acceptance criteria. Ran a 3-phase user research programme that fed prioritised features to the design team, and drove iterative validation in an Agile delivery loop.</p>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-head"><p class="tl-role">Project Engineer</p><span class="tl-date">11/2022 — 03/2023</span></div>
-          <p class="tl-org">Luxoft · CARIAD (VW Group) · Munich, Germany</p>
-          <p class="tl-desc">Worked alongside CARIAD product managers and owners in backlog refinement — clarifying change requests for the IVI middleware layer and translating business intent into well-scoped, development-ready work items shipped to VW Group platforms.</p>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-head"><p class="tl-role">Software Developer (Working Student)</p><span class="tl-date">04/2021 — 10/2022</span></div>
-          <p class="tl-org">Robert Bosch GmbH · AEB Safety Systems · Leonberg, Germany</p>
-          <p class="tl-desc">Spotted a gap in AEB test-result visibility, then owned it end-to-end — gathering requirements from engineers, writing user stories, and shipping a full-stack web tool (FastAPI + JS + SQL) that removed manual reporting bottlenecks.</p>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-head"><p class="tl-role">Senior Software Engineer</p><span class="tl-date">09/2015 — 10/2020</span></div>
-          <p class="tl-org">Robert Bosch Engineering &amp; Business Solutions · Bengaluru, India</p>
-          <p class="tl-desc">Drove requirement analysis and feature estimation across 6 OEM programmes (Honda, JLR, Renault, GM, Nissan, Suzuki), owning scope and delivery commitments. Served as Scrum Master — running sprint planning, reviews and retros to improve delivery predictability — and built reusable knowledge assets that cut onboarding time and recurring defects.</p>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-head"><p class="tl-role">Associate Software Engineer</p><span class="tl-date">09/2013 — 09/2015</span></div>
-          <p class="tl-org">Wipro Technologies · BMW Automobiles · Bengaluru, India</p>
-          <p class="tl-desc">Supported BMW navigation feature validation; first exposure to client-facing review sessions and shipped feature cycles with direct stakeholder interaction.</p>
-        </div>
-
+      <div class="cred-item">
+        <p class="cred-num">4 products shipped</p>
+        <p class="cred-label">Discovery through prototype</p>
+      </div>
+      <div class="cred-item">
+        <p class="cred-num">Automotive <em>&rarr;</em> AI</p>
+        <p class="cred-label">Technical product depth</p>
       </div>
     </div>
   </section>
 
-  <!-- ══ CASE STUDIES ══ -->
-  <section class="band band--hero sv" id="case-studies">
+  <!-- ══ PRODUCT WORK (case studies) ══ -->
+  <section class="band band--deep sv" id="case-studies">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">Case Studies</p>
-        <h3 class="sec-title">Work that shows how I think — discovery to shipped.</h3>
+        <p class="eyebrow">Product Work</p>
+        <h3 class="sec-title">From problem discovery to product decisions, experiments and shipped outcomes.</h3>
       </div>
 
       <div class="cs-list">
@@ -542,53 +545,78 @@
     </div>
   </section>
 
+  <!-- ══ WORK — employer timeline ══ -->
+  <section class="band band--hero sv" id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Professional Experience</p>
+        <h3 class="sec-title">A decade across engineering, users and product decisions.</h3>
+        <p class="muted">My product perspective was built through engineering: requirements, stakeholder alignment, feature trade-offs, user research and delivery across safety-critical automotive systems.</p>
+      </div>
+      <div class="timeline">
+
+        <div class="tl-item tl-item--current">
+          <div class="tl-head"><p class="tl-role">Product Engineer</p><span class="tl-date">07/2023 — Present</span></div>
+          <p class="tl-org">FERCHAU · Honda R&amp;D Europe · Frankfurt, Germany</p>
+          <p class="tl-desc">Led end-to-end product discovery for Honda's Hi-Drive automated lane-merging concept — translating OEM expectations, user needs and EU regulation into structured requirements, feature specs and acceptance criteria. Ran a 3-phase user research programme that fed prioritised features to the design team, and drove iterative validation in an Agile delivery loop.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-head"><p class="tl-role">Project Engineer</p><span class="tl-date">11/2022 — 03/2023</span></div>
+          <p class="tl-org">Luxoft · CARIAD (VW Group) · Munich, Germany</p>
+          <p class="tl-desc">Worked alongside CARIAD product managers and owners in backlog refinement — clarifying change requests for the IVI middleware layer and translating business intent into well-scoped, development-ready work items shipped to VW Group platforms.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-head"><p class="tl-role">Software Developer (Working Student)</p><span class="tl-date">04/2021 — 10/2022</span></div>
+          <p class="tl-org">Robert Bosch GmbH · AEB Safety Systems · Leonberg, Germany</p>
+          <p class="tl-desc">Spotted a gap in AEB test-result visibility, then owned it end-to-end — gathering requirements from engineers, writing user stories, and shipping a full-stack web tool (FastAPI + JS + SQL) that removed manual reporting bottlenecks.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-head"><p class="tl-role">Senior Software Engineer</p><span class="tl-date">09/2015 — 10/2020</span></div>
+          <p class="tl-org">Robert Bosch Engineering &amp; Business Solutions · Bengaluru, India</p>
+          <p class="tl-desc">Drove requirement analysis and feature estimation across 6 OEM programmes (Honda, JLR, Renault, GM, Nissan, Suzuki), owning scope and delivery commitments. Served as Scrum Master — running sprint planning, reviews and retros to improve delivery predictability — and built reusable knowledge assets that cut onboarding time and recurring defects.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-head"><p class="tl-role">Associate Software Engineer</p><span class="tl-date">09/2013 — 09/2015</span></div>
+          <p class="tl-org">Wipro Technologies · BMW Automobiles · Bengaluru, India</p>
+          <p class="tl-desc">Supported BMW navigation feature validation; first exposure to client-facing review sessions and shipped feature cycles with direct stakeholder interaction.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ══ SKILLS ══ -->
   <section class="band band--deep sv" id="skills">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">Skills &amp; Tools</p>
+        <p class="eyebrow">Product &amp; Technical Capabilities</p>
         <h3 class="sec-title">What I bring — product thinking, grounded in engineering rigour.</h3>
       </div>
       <div class="skills-grid">
 
         <div class="skill-card">
-          <div class="skill-top"><span class="skill-label">Product &amp; Process</span><span class="skill-depth">Core</span></div>
-          <div class="skill-tier"><span class="tier-label">Core</span><div class="skill-tags">
-            <span class="stag stag--core">Product Management</span><span class="stag stag--core">Technical Product Management</span><span class="stag stag--core">Product Strategy</span><span class="stag stag--core">Product Discovery</span><span class="stag stag--core">Product Requirements</span><span class="stag stag--core">Requirements Engineering</span><span class="stag stag--core">User Research</span><span class="stag stag--core">Stakeholder Management</span><span class="stag stag--core">Backlog Management</span><span class="stag stag--core">Agile Product Development</span>
-          </div></div>
-          <div class="skill-tier"><span class="tier-label">Methods &amp; Tools</span><div class="skill-tags">
-            <span class="stag">Agile / Scrum</span><span class="stag">Kanban</span><span class="stag">Scrum Master</span><span class="stag">JIRA</span><span class="stag">Confluence</span><span class="stag">Azure DevOps</span>
-          </div></div>
+          <div class="skill-top"><span class="skill-label">Product</span></div>
+          <div class="skill-tags">
+            <span class="stag stag--core">Product Discovery</span><span class="stag stag--core">Product Strategy</span><span class="stag">User Research</span><span class="stag">Product Requirements</span><span class="stag stag--core">Prioritisation</span><span class="stag">Roadmapping</span><span class="stag stag--core">Metrics &amp; Experimentation</span><span class="stag">Stakeholder Management</span><span class="stag">Agile Delivery</span>
+          </div>
         </div>
 
         <div class="skill-card">
-          <div class="skill-top"><span class="skill-label">AI &amp; Prototyping</span><span class="skill-depth">Now</span></div>
-          <div class="skill-tier"><span class="tier-label">Core</span><div class="skill-tags">
-            <span class="stag stag--core">Artificial Intelligence (AI)</span><span class="stag stag--core">Claude Code</span><span class="stag stag--core">Prompt Engineering</span><span class="stag stag--core">LLMs &amp; AI Agents</span>
-          </div></div>
-          <div class="skill-tier"><span class="tier-label">Tools</span><div class="skill-tags">
-            <span class="stag">RAG Pipelines</span><span class="stag">Vercel</span><span class="stag">Supabase</span><span class="stag">4 live prototypes shipped</span>
-          </div></div>
+          <div class="skill-top"><span class="skill-label">AI &amp; Technical</span></div>
+          <div class="skill-tags">
+            <span class="stag stag--core">AI Product Development</span><span class="stag">LLMs</span><span class="stag">RAG</span><span class="stag">LLM Orchestration</span><span class="stag">MCP</span><span class="stag">APIs</span><span class="stag">Python</span><span class="stag">SQL</span><span class="stag">System Architecture</span>
+          </div>
         </div>
 
         <div class="skill-card">
-          <div class="skill-top"><span class="skill-label">Software &amp; Full Stack</span><span class="skill-depth">Active</span></div>
-          <div class="skill-tier"><span class="tier-label">Core</span><div class="skill-tags">
-            <span class="stag stag--core">Software Engineering</span><span class="stag stag--core">Python</span><span class="stag stag--core">SQL</span><span class="stag stag--core">FastAPI</span>
-          </div></div>
-          <div class="skill-tier"><span class="tier-label">Tools</span><div class="skill-tags">
-            <span class="stag">C++</span><span class="stag">JavaScript</span><span class="stag">HTML</span><span class="stag">Git</span><span class="stag">Docker</span><span class="stag">Azure</span>
-          </div></div>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-top"><span class="skill-label">Automotive Domain</span><span class="skill-depth">10 years</span></div>
-          <div class="skill-tier"><span class="tier-label">Core</span><div class="skill-tags">
-            <span class="stag stag--core">Automotive Software</span><span class="stag stag--core">ADAS</span><span class="stag stag--core">AEB</span><span class="stag stag--core">HMI</span>
-          </div></div>
-          <div class="skill-tier"><span class="tier-label">Tools</span><div class="skill-tags">
-            <span class="stag">ISO 26262</span><span class="stag">CAN Bus</span><span class="stag">Navigation (NDS)</span><span class="stag">RTMaps (dSpace)</span><span class="stag">MATLAB</span>
-          </div></div>
+          <div class="skill-top"><span class="skill-label">Domain</span></div>
+          <div class="skill-tags">
+            <span class="stag stag--core">Automotive Software</span><span class="stag">ADAS</span><span class="stag">HMI</span><span class="stag">Safety-critical Systems</span><span class="stag">Enterprise Software</span><span class="stag">Process Intelligence</span>
+          </div>
         </div>
 
       </div>
@@ -600,7 +628,7 @@
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">My Story</p>
-        <h3 class="sec-title">Engineering → Product</h3>
+        <h3 class="sec-title">Engineering gave me the how. Product made me question the why.</h3>
       </div>
       <div class="story-card">
         <p class="story-quote">"I didn't set out to become a product manager. The path found me through curiosity."</p>
@@ -638,7 +666,7 @@
         <div class="tl-item">
           <div class="tl-head"><p class="tl-role">M.Sc. in Information Technology (Informatik)</p><span class="tl-date">11/2020 — 10/2023</span></div>
           <p class="tl-org">Frankfurt University of Applied Sciences · Frankfurt, Germany</p>
-          <p class="tl-desc">Embedded Systems and Networking focus. Coursework: Machine Learning, Cloud Computing, Image Processing, Software Engineering, IT Security. Master thesis: comparative analysis of OpenAI model architectures, training methods and NLP performance across chatbot, content-generation and translation use cases.</p>
+          <p class="tl-desc">Focus: ML, cloud and software systems · Thesis on comparative NLP model architectures and performance.</p>
         </div>
 
         <div class="tl-item">
@@ -670,27 +698,18 @@
   </section>
 
   <!-- ══ CONTACT ══ -->
-  <section class="band band--hero rv" id="contact">
-    <div class="wrap contact-grid">
-      <div>
+  <section class="band band--deep rv" id="contact">
+    <div class="wrap">
+      <div class="contact-cta">
         <p class="eyebrow">Get in Touch</p>
-        <h3 class="contact-title">Let's talk — roles, product problems, or how I think.</h3>
-        <p class="muted">Open to Product Owner / Product Manager conversations, and always happy to trade notes on discovery, ADAS, or building with AI.</p>
-        <a href="mailto:shwetaswain13november@gmail.com" class="contact-mail">shwetaswain13november@gmail.com
-          <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </a>
-      </div>
-
-      <div>
-        <div class="capture" id="contact-capture">
-          <p class="capture-label">Building in the open</p>
-          <p class="capture-sub">Drop your email and I'll keep you in the loop on what I ship next.</p>
-          <div class="capture-row">
-            <input type="email" id="contact-email-input" placeholder="your@email.com" autocomplete="email" />
-            <button id="contact-email-btn" class="btn btn-primary">Stay in the loop</button>
-          </div>
-          <p class="capture-error" id="contact-email-error"></p>
+        <h3 class="contact-title">Let's build products that solve difficult problems.</h3>
+        <p class="muted">I'm exploring Technical Product Manager, Product Manager and Product Owner opportunities where my engineering background, product discovery experience and AI fluency can create an advantage.</p>
+        <div class="contact-actions">
+          <a href="mailto:shwetaswain13november@gmail.com" class="btn btn-primary">Email me
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="https://www.linkedin.com/in/sweta-swain-611a3a73/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">LinkedIn &#8599;</a>
         </div>
+        <p class="contact-hint"><a href="mailto:shwetaswain13november@gmail.com">shwetaswain13november@gmail.com</a></p>
       </div>
     </div>
   </section>
